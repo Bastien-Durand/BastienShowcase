@@ -323,13 +323,20 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
 .tri-lo{animation:float 8s 1s ease-in-out infinite}
 @keyframes upT{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
 @keyframes popS{from{opacity:0;scale:.9}to{opacity:1;scale:1}}
-@supports (animation-timeline: view()){
-  .reveal{animation:upT linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
-  .reveal-pop{animation:popS linear both;animation-timeline:view();animation-range:entry 5% entry 45%}
-  .bar .tr i{animation:grow linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
-  .draw{animation:drawLine linear both;animation-timeline:view();animation-range:entry 10% cover 55%}
+/* scroll reveals (JS adds .js to <html>; content stays visible without JS) */
+.js .reveal{opacity:0;translate:0 28px;transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--d,0s),translate .9s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.js .reveal-pop{opacity:0;scale:.82;transition:opacity .8s cubic-bezier(.2,.7,.2,1) var(--d,0s),scale .8s cubic-bezier(.3,1.4,.5,1) var(--d,0s)}
+.js .reveal.in,.js .reveal-pop.in{opacity:1;translate:0 0;scale:1}
+.js [data-stagger]>*{opacity:0;translate:0 18px;transition:opacity .7s cubic-bezier(.2,.7,.2,1),translate .7s cubic-bezier(.2,.7,.2,1),transform .25s,box-shadow .25s,border-color .2s,background .2s}
+.js [data-stagger].in>*{opacity:1;translate:0 0}
+.js .bar .tr i{transform:scaleX(0);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.js .reveal-bars.in .bar:nth-child(1) .tr i{transition-delay:.15s}.js .reveal-bars.in .bar:nth-child(2) .tr i{transition-delay:.3s}.js .reveal-bars.in .bar:nth-child(3) .tr i{transition-delay:.45s}.js .reveal-bars.in .bar:nth-child(4) .tr i{transition-delay:.6s}
+.js .reveal-bars.in .bar .tr i{transform:scaleX(1)}
+.js .draw{stroke-dashoffset:1400;transition:stroke-dashoffset 2.2s cubic-bezier(.4,0,.2,1)}
+.js .draw+.draw{transition-delay:.35s}
+.js .reveal-line.in .draw{stroke-dashoffset:0}
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .reveal,.js .reveal-pop,.js [data-stagger]>*{opacity:1!important;translate:none!important;scale:none!important}.js .bar .tr i{transform:none!important}.js .draw{stroke-dashoffset:0!important}html{scroll-behavior:auto}}
 </style>
 
 </head>
@@ -390,11 +397,11 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
 </section>
 
 <section class="stats" aria-label="At a glance">
-  <div class="wrap">
-    <div class="stat reveal"><b>4</b><span>products shipped solo</span></div>
-    <div class="stat reveal"><b>100<span class="plus">+</span></b><span>discovery conversations</span></div>
-    <div class="stat reveal"><b>685<span class="plus">%</span></b><span>club social growth</span></div>
-    <div class="stat reveal"><b>EN<span class="dot">·</span>RU<span class="dot">·</span>FR</b><span>languages</span></div>
+  <div class="wrap" data-stagger="120">
+    <div class="stat"><b>4</b><span>products shipped solo</span></div>
+    <div class="stat"><b>100<span class="plus">+</span></b><span>discovery conversations</span></div>
+    <div class="stat"><b>685<span class="plus">%</span></b><span>club social growth</span></div>
+    <div class="stat"><b>EN<span class="dot">·</span>RU<span class="dot">·</span>FR</b><span>languages</span></div>
   </div>
 </section>
 
@@ -402,7 +409,7 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
   <div class="wrap">
     <h2 class="reveal">Two tracks became <span class="em">one</span></h2>
     <p class="sub reveal">Years learning how people work. Years learning how to build.</p>
-    <svg class="desk" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="Timeline 2013 to 2026: a people track and a build track merging into CourtDesk in 2026">
+    <svg class="desk reveal-line" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="Timeline 2013 to 2026: a people track and a build track merging into CourtDesk in 2026">
       <text x="400" y="16" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" letter-spacing="2" fill="#18844A">PEOPLE</text>
       <text x="800" y="170" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" letter-spacing="2" fill="#4E9C70">BUILD</text>
       <path class="draw" d="M400 36 V350 C400 410 600 390 600 450 V490" fill="none" stroke="#18844A" stroke-width="3"></path>
@@ -422,7 +429,7 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
       <text x="640" y="508" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="20" fill="#10201A">CourtDesk</text>
       <text x="640" y="528" font-family="Geist Mono, monospace" font-size="11" fill="#18844A">2026 · where they meet</text>
     </svg>
-    <svg class="mob" width="350" height="650" viewBox="0 0 350 650" role="img" aria-label="Timeline 2013 to 2026: a people track and a build track merging into CourtDesk in 2026">
+    <svg class="mob reveal-line" width="350" height="650" viewBox="0 0 350 650" role="img" aria-label="Timeline 2013 to 2026: a people track and a build track merging into CourtDesk in 2026">
       <path class="draw" d="M160 30 V490 C160 520 175 515 175 540 V552" fill="none" stroke="#18844A" stroke-width="3"></path>
       <path class="draw" d="M190 158 V490 C190 520 175 515 175 540" fill="none" stroke="#7FCFA0" stroke-width="3"></path>
       <g font-family="Geist, sans-serif" font-size="13" fill="#10201A">
@@ -439,7 +446,7 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
       <text x="175" y="618" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="20" fill="#10201A">CourtDesk</text>
       <text x="175" y="638" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" fill="#18844A">2026 · where they meet</text>
     </svg>
-    <div class="legend"><span><i style="background:#18844A"></i>People</span><span><i style="background:#7FCFA0"></i>Build</span></div>
+    <div class="legend reveal" style="--d:.6s"><span><i style="background:#18844A"></i>People</span><span><i style="background:#7FCFA0"></i>Build</span></div>
   </div>
 </section>
 
@@ -447,14 +454,14 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
   <div class="wrap">
     <div class="work-head">
       <h2 class="sec-h reveal">Things I’ve <span class="em">shipped</span></h2>
-      <div class="tabs" role="tablist" aria-label="Products">
+      <div class="tabs reveal" style="--d:.15s" role="tablist" aria-label="Products">
         <button class="tab" role="tab" type="button" id="tab-0" data-i="0" aria-selected="true">CourtDesk</button>
         <button class="tab" role="tab" type="button" id="tab-1" data-i="1" aria-selected="false">Tennis Network</button>
         <button class="tab" role="tab" type="button" id="tab-2" data-i="2" aria-selected="false">AI Checker</button>
         <button class="tab" role="tab" type="button" id="tab-3" data-i="3" aria-selected="false">Systema</button>
       </div>
     </div>
-    <div class="product" id="product" role="tabpanel" aria-live="polite">
+    <div class="product reveal" style="--d:.25s" id="product" role="tabpanel" aria-live="polite">
       <div class="p-copy">
         <div class="p-kicker" id="p-kicker">SAAS · 2026</div>
         <h3 class="p-name" id="p-name">CourtDesk</h3>
@@ -474,19 +481,19 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
 
 <section class="built" aria-label="Client work">
   <div class="wrap">
-    <div class="built-head"><span>ALSO DESIGNED AND BUILT · 8 CLIENT SITES</span><a href="https://digitalbuilders.co" target="_blank" rel="noopener">DigitalBuilders.co ↗</a></div>
-    <div class="clients">
-      <a class="client reveal" href="https://cbtennis.com.au" target="_blank" rel="noopener"><b>Coogee Beach Tennis</b><span>cbtennis.com.au · sport</span></a>
-      <a class="client reveal" href="https://sentientpsych.com" target="_blank" rel="noopener"><b>Sentient Psychology</b><span>sentientpsych.com · health</span></a>
-      <a class="client reveal" href="https://youthlivingskills.com.au" target="_blank" rel="noopener"><b>Youth Living Skills</b><span>youthlivingskills.com.au · community</span></a>
-      <a class="client reveal" href="https://modifieddriving.com.au" target="_blank" rel="noopener"><b>Modified Driving</b><span>modifieddriving.com.au · services</span></a>
+    <div class="built-head reveal"><span>ALSO DESIGNED AND BUILT · 8 CLIENT SITES</span><a href="https://digitalbuilders.co" target="_blank" rel="noopener">DigitalBuilders.co ↗</a></div>
+    <div class="clients" data-stagger="110">
+      <a class="client" href="https://cbtennis.com.au" target="_blank" rel="noopener"><b>Coogee Beach Tennis</b><span>cbtennis.com.au · sport</span></a>
+      <a class="client" href="https://sentientpsych.com" target="_blank" rel="noopener"><b>Sentient Psychology</b><span>sentientpsych.com · health</span></a>
+      <a class="client" href="https://youthlivingskills.com.au" target="_blank" rel="noopener"><b>Youth Living Skills</b><span>youthlivingskills.com.au · community</span></a>
+      <a class="client" href="https://modifieddriving.com.au" target="_blank" rel="noopener"><b>Modified Driving</b><span>modifieddriving.com.au · services</span></a>
     </div>
   </div>
 </section>
 
 <section class="how dark" id="how">
   <div class="wrap">
-    <div class="how-head">
+    <div class="how-head" data-stagger="140">
       <div class="eyebrow">How CourtDesk was found</div>
       <h2>How I <span class="em">work</span></h2>
       <p>Each step fills the triangle a little more, until there’s one clear thing to build.</p>
@@ -497,22 +504,22 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
         <path class="march" d="M300 60 H1080 Q1170 60 1170 150 V520 Q1170 610 1080 610 H300" fill="none" stroke="#3E6E53" stroke-width="3" stroke-dasharray="8 7" vector-effect="non-scaling-stroke"></path>
         <path d="M1162 330 L1170 344 L1178 330" fill="none" stroke="#7FE0A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
       </svg>
-      <div class="step s1">
-        <svg class="tri reveal-pop"><use href="#t0"></use></svg>
+      <div class="step s1" data-stagger="130">
+        <svg class="tri"><use href="#t0"></use></svg>
         <div class="step-label"><span>01</span><b>Ask</b></div>
         <div class="big-num">16<span class="plus">+</span></div>
         <div class="cap">conversations with coaches and venue operators</div>
       </div>
-      <div class="step s2">
-        <svg class="tri reveal-pop"><use href="#t1"></use></svg>
+      <div class="step s2" data-stagger="130">
+        <svg class="tri"><use href="#t1"></use></svg>
         <div class="step-label"><span>02</span><b>Map</b></div>
-        <div class="chips"><span>WhatsApp threads</span><span>Email chains</span><span>SMS</span><span>Instagram DMs</span><span>Follow-up threads</span><span>Stripe</span><span>PayID</span><span>Bank app</span><span>Payment chasing</span><span>Spreadsheets</span><span>Timetables</span><span>Make-up lessons</span><span>Rescheduling</span><span>Session tracking</span><span>Outdated sessions</span><span>Wash-outs</span><span>Court bookings</span><span>Venue comms</span></div>
+        <div class="chips" data-stagger="45"><span>WhatsApp threads</span><span>Email chains</span><span>SMS</span><span>Instagram DMs</span><span>Follow-up threads</span><span>Stripe</span><span>PayID</span><span>Bank app</span><span>Payment chasing</span><span>Spreadsheets</span><span>Timetables</span><span>Make-up lessons</span><span>Rescheduling</span><span>Session tracking</span><span>Outdated sessions</span><span>Wash-outs</span><span>Court bookings</span><span>Venue comms</span></div>
         <div class="cap">18 fragmented pieces, all documented</div>
       </div>
-      <div class="step s3">
-        <svg class="tri reveal-pop"><use href="#t2"></use></svg>
+      <div class="step s3" data-stagger="130">
+        <svg class="tri"><use href="#t2"></use></svg>
         <div class="step-label"><span>03</span><b>Filter</b></div>
-        <div class="bars">
+        <div class="bars reveal-bars">
           <div class="bar"><span>Schedule</span><span class="tr"><i style="width:100%"></i></span><small>7</small></div>
           <div class="bar"><span>Messages</span><span class="tr"><i style="width:71%"></i></span><small>5</small></div>
           <div class="bar"><span>Payments</span><span class="tr"><i style="width:57%"></i></span><small>4</small></div>
@@ -520,8 +527,8 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
         </div>
         <div class="cap">Four jobs a coach actually does, every day</div>
       </div>
-      <div class="step s4">
-        <svg class="tri reveal-pop"><use href="#t3"></use></svg>
+      <div class="step s4" data-stagger="130">
+        <svg class="tri"><use href="#t3"></use></svg>
         <div class="step-label"><span>04</span><b>Build</b></div>
         <img class="dash" src="assets/courtdesk.jpg" alt="CourtDesk dashboard">
         <div class="cap">One calm dashboard, only what today needs</div>
@@ -529,42 +536,42 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
     </div>
 
     <div class="how-mob">
-      <div class="mstep"><svg class="tri"><use href="#t0"></use></svg><div class="body"><div class="step-label"><span>01</span><b>Ask</b></div><div class="big-num">16<span class="plus">+</span></div><div class="cap">conversations with coaches and venue operators</div></div></div>
-      <div class="mstep"><svg class="tri"><use href="#t1"></use></svg><div class="body"><div class="step-label"><span>02</span><b>Map</b></div><div class="chips"><span>WhatsApp threads</span><span>Email chains</span><span>SMS</span><span>Instagram DMs</span><span>Follow-up threads</span><span>Stripe</span><span>PayID</span><span>Bank app</span><span>Payment chasing</span><span>Spreadsheets</span><span>Timetables</span><span>Make-up lessons</span><span>Rescheduling</span><span>Session tracking</span><span>Outdated sessions</span><span>Wash-outs</span><span>Court bookings</span><span>Venue comms</span></div><div class="cap">18 fragmented pieces, all documented</div></div></div>
-      <div class="mstep"><svg class="tri"><use href="#t2"></use></svg><div class="body"><div class="step-label"><span>03</span><b>Filter</b></div><div class="bars">
+      <div class="mstep reveal"><svg class="tri"><use href="#t0"></use></svg><div class="body"><div class="step-label"><span>01</span><b>Ask</b></div><div class="big-num">16<span class="plus">+</span></div><div class="cap">conversations with coaches and venue operators</div></div></div>
+      <div class="mstep reveal"><svg class="tri"><use href="#t1"></use></svg><div class="body"><div class="step-label"><span>02</span><b>Map</b></div><div class="chips" data-stagger="45"><span>WhatsApp threads</span><span>Email chains</span><span>SMS</span><span>Instagram DMs</span><span>Follow-up threads</span><span>Stripe</span><span>PayID</span><span>Bank app</span><span>Payment chasing</span><span>Spreadsheets</span><span>Timetables</span><span>Make-up lessons</span><span>Rescheduling</span><span>Session tracking</span><span>Outdated sessions</span><span>Wash-outs</span><span>Court bookings</span><span>Venue comms</span></div><div class="cap">18 fragmented pieces, all documented</div></div></div>
+      <div class="mstep reveal"><svg class="tri"><use href="#t2"></use></svg><div class="body"><div class="step-label"><span>03</span><b>Filter</b></div><div class="bars reveal-bars">
         <div class="bar"><span>Schedule</span><span class="tr"><i style="width:100%"></i></span><small>7</small></div>
         <div class="bar"><span>Messages</span><span class="tr"><i style="width:71%"></i></span><small>5</small></div>
         <div class="bar"><span>Payments</span><span class="tr"><i style="width:57%"></i></span><small>4</small></div>
         <div class="bar"><span>Venues</span><span class="tr"><i style="width:29%"></i></span><small>2</small></div>
       </div><div class="cap">Four jobs a coach actually does, every day</div></div></div>
-      <div class="mstep"><svg class="tri"><use href="#t3"></use></svg><div class="body"><div class="step-label"><span>04</span><b>Build</b></div><img src="assets/courtdesk.jpg" alt="CourtDesk dashboard"><div class="cap">One calm dashboard, only what today needs</div></div></div>
+      <div class="mstep reveal"><svg class="tri"><use href="#t3"></use></svg><div class="body"><div class="step-label"><span>04</span><b>Build</b></div><img src="assets/courtdesk.jpg" alt="CourtDesk dashboard"><div class="cap">One calm dashboard, only what today needs</div></div></div>
     </div>
   </div>
 </section>
 
 <section class="beyond" id="beyond">
   <div class="wrap">
-    <div class="beyond-head"><h2 class="sec-h">Beyond the <span class="em">work</span></h2><span>The person you’ll actually meet.</span></div>
-    <div class="tiles">
-      <div class="tile reveal"><img src="assets/forest.jpg" alt="Bastien pulling a surprised face in a pine forest"><span class="pill">Not always this serious</span></div>
-      <div class="tile tennis reveal">
+    <div class="beyond-head reveal"><h2 class="sec-h">Beyond the <span class="em">work</span></h2><span>The person you’ll actually meet.</span></div>
+    <div class="tiles" data-stagger="120">
+      <div class="tile"><img src="assets/forest.jpg" alt="Bastien pulling a surprised face in a pine forest"><span class="pill">Not always this serious</span></div>
+      <div class="tile tennis">
         <svg width="220" height="130" viewBox="0 0 220 130" aria-hidden="true"><rect x="1" y="1" width="218" height="128" fill="none" stroke="#7FE0A8" stroke-width="2"></rect><line x1="110" y1="1" x2="110" y2="129" stroke="#7FE0A8" stroke-width="2"></line><line x1="1" y1="16" x2="219" y2="16" stroke="#7FE0A8" stroke-width="2"></line><line x1="1" y1="114" x2="219" y2="114" stroke="#7FE0A8" stroke-width="2"></line><line x1="55" y1="16" x2="55" y2="114" stroke="#7FE0A8" stroke-width="2"></line><line x1="165" y1="16" x2="165" y2="114" stroke="#7FE0A8" stroke-width="2"></line><line x1="55" y1="65" x2="165" y2="65" stroke="#7FE0A8" stroke-width="2"></line></svg>
         <b>25<span class="plus">+</span> yrs</b><span>on a tennis court, player first</span>
       </div>
-      <div class="tile reveal"><img src="assets/camera.jpg" alt="Bastien photographing himself in a shop window"><span class="pill">Behind the lens</span></div>
-      <div class="tile soft reveal"><div class="center"><div class="lang"><b>EN</b><b>RU</b></div><div class="lang"><b>FR</b></div></div><h3>Three languages</h3><p>English and Russian fluently, French conversationally</p></div>
+      <div class="tile"><img src="assets/camera.jpg" alt="Bastien photographing himself in a shop window"><span class="pill">Behind the lens</span></div>
+      <div class="tile soft"><div class="center"><div class="lang"><b>EN</b><b>RU</b></div><div class="lang"><b>FR</b></div></div><h3>Three languages</h3><p>English and Russian fluently, French conversationally</p></div>
     </div>
-    <div class="pyr three">
-      <div class="tile reveal"><img src="assets/philosophy.jpg" alt="Portraits of Carl Jung, Friedrich Nietzsche, a bust of Marcus Aurelius and Sun Tzu"><span class="pill">Philosophy &amp; psychology</span></div>
-      <div class="tile soft reveal"><div class="center"><span class="badge" role="img" aria-label="Martial arts uniform">🥋</span></div><h3>Jiu-jitsu</h3><p>On the mats at Capincho</p></div>
-      <div class="tile reveal"><img src="assets/art.jpg" alt="Monet, Klimt, Hokusai and Kandinsky paintings"><span class="pill">Art &amp; poetry</span></div>
+    <div class="pyr three" data-stagger="120">
+      <div class="tile"><img src="assets/philosophy.jpg" alt="Portraits of Carl Jung, Friedrich Nietzsche, a bust of Marcus Aurelius and Sun Tzu"><span class="pill">Philosophy &amp; psychology</span></div>
+      <div class="tile soft"><div class="center"><span class="badge" role="img" aria-label="Martial arts uniform">🥋</span></div><h3>Jiu-jitsu</h3><p>On the mats at Capincho</p></div>
+      <div class="tile"><img src="assets/art.jpg" alt="Monet, Klimt, Hokusai and Kandinsky paintings"><span class="pill">Art &amp; poetry</span></div>
     </div>
-    <div class="pyr">
-      <div class="tile soft reveal"><div class="center"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#18844A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.5 2 5 5.5 5 9.5L15 15H9l-2-2.5C7 8.5 8.5 5 12 3z"></path><circle cx="12" cy="9.5" r="1.8"></circle><path d="M9 15l-2.5 3.5L9 18M15 15l2.5 3.5L15 18M11 18.5l1 2.5 1-2.5"></path></svg></span></div><h3>Startups</h3><p>Founder stories, Spark Festival, giving back</p></div>
-      <div class="tile soft reveal"><div class="center"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#18844A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"></circle><circle cx="5" cy="18" r="2.5"></circle><circle cx="19" cy="18" r="2.5"></circle><path d="M11 7.3L6.2 15.8M13 7.3l4.8 8.5M7.5 18h9"></path></svg></span></div><h3>Agentic orchestration &amp; systems</h3><p>How AI agents work together</p></div>
+    <div class="pyr" data-stagger="120">
+      <div class="tile soft"><div class="center"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#18844A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.5 2 5 5.5 5 9.5L15 15H9l-2-2.5C7 8.5 8.5 5 12 3z"></path><circle cx="12" cy="9.5" r="1.8"></circle><path d="M9 15l-2.5 3.5L9 18M15 15l2.5 3.5L15 18M11 18.5l1 2.5 1-2.5"></path></svg></span></div><h3>Startups</h3><p>Founder stories, Spark Festival, giving back</p></div>
+      <div class="tile soft"><div class="center"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#18844A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"></circle><circle cx="5" cy="18" r="2.5"></circle><circle cx="19" cy="18" r="2.5"></circle><path d="M11 7.3L6.2 15.8M13 7.3l4.8 8.5M7.5 18h9"></path></svg></span></div><h3>Agentic orchestration &amp; systems</h3><p>How AI agents work together</p></div>
     </div>
-    <div class="pyr one">
-      <div class="tile soft dk reveal"><div class="center"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#7FE0A8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 010 7M18.5 14.5c1.5.7 2.5 2.6 3 5.5"></path></svg></span></div><h3>People</h3><p>Connecting with people, the thread through all of it</p></div>
+    <div class="pyr one" data-stagger="0">
+      <div class="tile soft dk"><div class="center"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#7FE0A8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 010 7M18.5 14.5c1.5.7 2.5 2.6 3 5.5"></path></svg></span></div><h3>People</h3><p>Connecting with people, the thread through all of it</p></div>
     </div>
     <div class="shelf reveal">
       <div class="shelf-head"><span class="eyebrow">On my shelf</span><span>Books I keep recommending</span></div>
@@ -575,12 +582,12 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
 
 <section class="contact dark" id="contact">
   <div class="wrap">
-    <div class="c-left">
+    <div class="c-left" data-stagger="140">
       <div class="eyebrow">What I’m looking for</div>
       <h2>A product team that talks to its <span class="em">users</span></h2>
       <div class="tags"><span>Product Manager</span><span>Discovery-led teams</span><span>Sydney</span></div>
     </div>
-    <div class="c-right">
+    <div class="c-right" data-stagger="120">
       <a class="c-card" href="https://wa.me/61451604063" target="_blank" rel="noopener"><span><small>WhatsApp</small><span>0451 604 063</span></span><span class="arrow">→</span></a>
       <a class="c-card" href="mailto:bastien.web3@gmail.com"><span><small>Email</small><span>bastien.web3@gmail.com</span></span><span class="arrow">→</span></a>
       <a class="c-card" href="https://www.linkedin.com/in/bastien-durand1/" target="_blank" rel="noopener"><span><small>LinkedIn</small><span>Bastien Durand</span></span><span class="arrow">→</span></a>
@@ -591,6 +598,22 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
 </main>
 
 <script>
+(function(){
+  var root=document.documentElement;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!('IntersectionObserver' in window)||reduce) return;
+  root.classList.add('js');
+  document.querySelectorAll('[data-stagger]').forEach(function(g){
+    var step=parseInt(g.getAttribute('data-stagger'),10)||0;
+    Array.prototype.forEach.call(g.children,function(c,i){c.style.transitionDelay=(i*step)+'ms'});
+  });
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);
+      // drop stagger delays after reveal so hover stays snappy
+      if(e.target.hasAttribute('data-stagger')){setTimeout(function(){Array.prototype.forEach.call(e.target.children,function(c){c.style.transitionDelay=''})},2500)}}
+  })},{rootMargin:'0px 0px -12% 0px',threshold:0.12});
+  document.querySelectorAll('.reveal,.reveal-pop,.reveal-line,.reveal-bars,[data-stagger]').forEach(function(el){io.observe(el)});
+})();
 (function(){
   var products=[
     {kicker:'SAAS · 2026',name:'CourtDesk',line:'One dashboard for independent coaches, replacing WhatsApp threads and spreadsheets.',
@@ -619,7 +642,8 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
     document.getElementById('p-name').textContent=p.name;
     document.getElementById('p-line').textContent=p.line;
     document.getElementById('p-why').innerHTML='<b>WHY</b>'+esc(p.why);
-    document.getElementById('p-stats').innerHTML=p.stats.map(function(s){return '<div class="p-stat"><span>'+esc(s[0])+'</span><b'+((s[1]+s[2]).length>10?' class="long"':'')+'>'+esc(s[1])+'<em>'+esc(s[2])+'</em>'+(s[3]?'<i>'+esc(s[3])+'</i>':'')+'</b></div>'}).join('');
+    var lng=p.stats.some(function(s){return /[a-z]/i.test(s[1]+s[2])});
+    document.getElementById('p-stats').innerHTML=p.stats.map(function(s){return '<div class="p-stat"><span>'+esc(s[0])+'</span><b'+(lng?' class="long"':'')+'>'+esc(s[1])+'<em>'+esc(s[2])+'</em>'+(s[3]?'<i>'+esc(s[3])+'</i>':'')+'</b></div>'}).join('');
     var link=document.getElementById('p-link');
     if(p.url){link.hidden=false;link.href=p.url}else{link.hidden=true}
     var v=document.getElementById('p-visual');
