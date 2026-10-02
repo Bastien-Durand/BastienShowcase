@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#112B1E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bastien Durand · Product, systems, automation">
+<meta property="og:description" content="Coach turned product builder. I find the problem by talking to the people who have it, then build the fix end to end.">
+<meta property="og:image" content="assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'%3E%3Crect width='120' height='60' rx='10' fill='%23112B1E'/%3E%3Cpath d='M12 50 L32 10 L52 50 Z M68 14 H108 L88 50 Z' fill='none' stroke='%237FE0A8' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E">
+<title>Bastien Durand</title>
+<meta name="description" content="Bastien Durand — coach turned product builder. Product, systems and automation, built end to end. Sydney.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Instrument+Serif:ital@1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap">
+<style>
+/* Single-theme by design: white sections, dark forest bands with a soft grid, green as the only accent. */
+:root{
+  color-scheme: light;
+  --forest:#112B1E; --forest-2:#1A4130; --forest-3:#23553D;
+  --mint:#7FE0A8; --green-hi:#45D98A; --green:#18844A; --green-dk:#0F5E34; --green-soft:#E7F4EC;
+  --ink:#10201A; --muted:#58695F; --line:#E1E9E4; --line-2:#EEF2EF; --surface:#F4F7F5; --card:#FFFFFF;
+  --on-dark:#F2F6F3; --on-dark-muted:#A9BDB1; --dark-line:#3E6E53;
+  --display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --body:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,Menlo,monospace;
+  --grid:linear-gradient(rgba(127,224,168,.07) 1px,transparent 1px) 0 0/64px 64px,linear-gradient(90deg,rgba(127,224,168,.07) 1px,transparent 1px) 0 0/64px 64px;
+  --dark-bg:var(--grid),radial-gradient(900px 500px at 85% 110%,var(--forest-3),transparent 60%),linear-gradient(160deg,var(--forest-2),var(--forest) 60%);
+  --gutter:clamp(20px,5vw,120px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--green-dk)}
+:focus-visible{outline:2px solid var(--green-hi);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:balance}
+.em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--green);letter-spacing:0}
+.dark .em{color:var(--green-hi)}
+.wrap{max-width:1440px;margin:0 auto;padding-inline:var(--gutter)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.dark{background:var(--dark-bg);color:var(--on-dark)}
+.dark .eyebrow{color:var(--mint)}
+.plus{color:var(--green)}
+.dark .plus{color:var(--green-hi)}
+.desk{display:block}.mob{display:none}
+@media (max-width:900px){.desk{display:none!important}.mob{display:block}}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--grid),linear-gradient(160deg,var(--forest-2),var(--forest) 70%);border-bottom:1px solid rgba(127,224,168,.15);color:var(--on-dark)}
+.nav .wrap{height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--on-dark);font:700 21px var(--display)}
+.brand svg{width:40px;height:20px}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none;margin:0;padding:0}
+.nav-links a{color:#C9D8CF;text-decoration:none;font-size:14px}
+.nav-links a:hover{color:#fff}
+.nav-links a.btn-green,.nav-links a.btn-green:hover{color:#10201A}
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:14px 24px;font:600 15px var(--body);text-decoration:none;border:1px solid transparent;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn-green{background:var(--green-hi);color:var(--forest)}
+.btn-green:hover{box-shadow:0 10px 24px -10px rgba(69,217,138,.8)}
+.btn-ghost{border-color:#D5E2DA;color:var(--ink);background:#fff}
+.nav .btn{padding:11px 20px;font-size:14px}
+.menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid rgba(127,224,168,.3);background:rgba(255,255,255,.06);align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}
+.menu-btn span{width:18px;height:2px;border-radius:1px;background:var(--on-dark)}
+.menu-btn span:last-child{width:12px}
+.mobile-menu{display:none;flex-direction:column;padding:8px var(--gutter) 20px;gap:4px}
+.mobile-menu a{color:var(--on-dark);text-decoration:none;padding:12px 0;font-size:16px;border-bottom:1px solid rgba(127,224,168,.12)}
+.mobile-menu.open{display:flex}
+@media (max-width:900px){.nav-links{display:none}.menu-btn{display:flex}.brand{font-size:17px;gap:10px}.brand svg{width:30px;height:15px}.nav .wrap{height:60px}}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;padding-block:110px 60px}
+.hero-text{display:flex;flex-direction:column;gap:32px}
+.hero h1{font-size:clamp(48px,7vw,100px);line-height:.94;letter-spacing:-.04em}
+.hero p{margin:0;font-size:20px;line-height:1.5;color:var(--muted);max-width:30em}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero-visual{position:relative;width:580px;max-width:100%;height:540px;justify-self:end}
+.hero-visual .tri-lo{position:absolute;left:-30px;bottom:50px;width:200px}
+.hero-visual .tri-hi{position:absolute;right:-20px;top:-10px;width:200px}
+.tri-label{position:absolute;width:100px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+.tri-label b{font:700 26px/1 var(--display);letter-spacing:-.02em}
+.tri-label span{font-size:12px;font-weight:500;color:var(--muted);white-space:nowrap}
+.hero-photo{position:absolute;left:130px;top:40px;width:320px;height:440px;object-fit:cover;border-radius:28px;box-shadow:0 30px 60px -30px rgba(17,43,30,.5)}
+.chip-open{position:absolute;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 16px;box-shadow:0 12px 30px -16px rgba(17,43,30,.4);font-size:14px;font-weight:500}
+.chip-open i{width:8px;height:8px;border-radius:50%;background:var(--green-hi);box-shadow:0 0 0 0 rgba(69,217,138,.6);animation:pulse 2.4s infinite}
+.hero-visual .chip-open{right:40px;bottom:26px}
+.hero-mobile{display:none}
+@media (max-width:1360px) and (min-width:901px){.hero-visual{width:580px;max-width:none;transform:scale(.8);transform-origin:top right;margin-bottom:-108px}}
+@media (max-width:1100px) and (min-width:901px){.hero-visual{transform:scale(.66);margin-bottom:-184px}}
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;padding-block:36px 40px;gap:22px}
+  .hero-text{gap:22px}.hero p{font-size:17px}
+  .ctas .btn{flex:1;padding-inline:14px}
+  .hero-visual{display:none}
+  .hero-mobile{display:flex;flex-direction:column;gap:14px}
+  .hero-mobile .photo{position:relative}
+  .hero-mobile img{width:100%;height:380px;object-fit:cover;object-position:center 25%;border-radius:24px}
+  .hero-mobile .chip-open{right:12px;bottom:12px;font-size:12px;padding:8px 13px}
+  .tri-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .tri-pair div{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:16px}
+  .tri-pair b{display:block;font:700 24px/1 var(--display)}
+  .tri-pair span{font-size:12px;color:var(--muted)}
+}
+
+/* stats */
+.stats{border-block:1px solid var(--line-2)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:40px 0 40px 40px;border-right:1px solid var(--line-2)}
+.stat:first-child{padding-left:0}.stat:last-child{border-right:0}
+.stat b{font:700 44px/1 var(--display);letter-spacing:-.03em}
+.stat>span{font-size:14px;color:var(--muted)}
+.dot{color:var(--green);margin:0 .22em}
+@media (max-width:900px){.stats .wrap{grid-template-columns:1fr 1fr;padding-inline:0}.stat{padding:22px 20px;border-bottom:1px solid var(--line-2)}.stat:first-child{padding-left:20px}.stat:nth-child(2){border-right:0}.stat:nth-child(n+3){border-bottom:0}.stat b{font-size:32px}.stat>span{font-size:13px}}
+
+/* story */
+.story{background:var(--surface);padding-block:96px 48px;text-align:center}
+.story h2,.sec-h{font-size:clamp(34px,4vw,52px);line-height:1.05}
+.story .sub{margin:12px 0 20px;font-size:17px;color:var(--muted)}
+.story svg{margin:0 auto;max-width:100%;height:auto}
+.legend{display:flex;justify-content:center;gap:18px;font-size:13px;color:var(--muted);margin-top:8px}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:18px;height:3px;border-radius:2px}
+.draw{stroke-dasharray:1400;stroke-dashoffset:0}
+@media (max-width:900px){.story{padding-block:64px 48px;text-align:left}.story .legend{justify-content:center}}
+
+/* work / switcher */
+.work .wrap{padding-block:96px 40px}
+.work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:40px}
+.tabs{display:flex;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px;overflow-x:auto;max-width:100%}
+.tab{flex:none;border:0;cursor:pointer;border-radius:999px;padding:10px 16px;min-height:44px;font:500 14px var(--body);background:transparent;color:var(--muted);white-space:nowrap;transition:background .25s,color .25s}
+.tab[aria-selected="true"]{background:var(--forest);color:var(--on-dark)}
+.product{display:grid;grid-template-columns:380px 1fr;gap:56px;align-items:stretch}
+.p-copy{display:flex;flex-direction:column;gap:22px;padding-top:24px}
+.p-kicker{font:500 12px var(--mono);letter-spacing:.12em;color:var(--green)}
+.p-name{font-size:44px;line-height:1.05;letter-spacing:-.02em}
+.p-line{margin:0;font-size:18px;color:var(--muted);line-height:1.5}
+.p-why{margin:0;padding:2px 0 2px 14px;border-left:2px solid var(--green-hi);font-size:15px;line-height:1.55;color:var(--muted)}
+.p-why b{display:block;font:600 11px var(--mono);letter-spacing:.14em;color:var(--green);margin-bottom:4px}
+.p-visual.phone{background:var(--surface);display:flex;align-items:center;justify-content:center;padding:40px}
+.phone-frame{border:10px solid #10201A;border-radius:38px;overflow:hidden;background:#10201A;box-shadow:0 30px 50px -28px rgba(17,43,30,.6)}
+.phone-frame img{height:560px;width:auto;display:block}
+.p-stats{border-top:1px solid var(--line);margin-top:8px}
+.p-stat{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)}
+.p-stat span{font-size:14px;color:var(--muted)}
+.p-stat b{font:700 26px var(--display);color:var(--ink)}
+.p-stat b.long{font-size:20px}
+.p-stat b em{font-style:normal;color:var(--green)}
+.p-stat b i{font-style:normal;color:var(--green);font-size:22px;margin-left:6px}
+.p-link{font-weight:600;font-size:15px;color:var(--green-dk)}
+.p-visual{position:relative;height:660px;border-radius:24px;overflow:hidden}
+.p-visual.bare{background:var(--dark-bg);display:flex;align-items:center;justify-content:center;padding:40px}
+.p-visual.bare img{height:560px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 30px 40px rgba(0,0,0,.35))}
+.p-visual.framed{background:var(--surface);padding:40px 40px 0;display:flex;align-items:flex-end}
+.browser{width:100%;border:1px solid var(--line);border-bottom:0;border-radius:14px 14px 0 0;overflow:hidden;background:#fff;box-shadow:0 -10px 50px -30px rgba(17,43,30,.5)}
+.browser-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);font:500 11px var(--mono);color:var(--muted)}
+.browser-bar i{width:9px;height:9px;border-radius:50%;background:#E3B3AC}.browser-bar i:nth-child(2){background:#EAD49A}.browser-bar i:nth-child(3){background:#A9D9BA}
+.browser-bar span{margin-left:8px}
+.browser img{width:100%;height:560px;object-fit:cover;object-position:top}
+.placeholder{height:560px;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,var(--surface) 0 12px,#fff 12px 24px);font:500 13px var(--mono);color:var(--muted);text-align:center;padding:0 20px}
+.product.swap{animation:swapIn .45s ease both}
+@media (max-width:900px){
+  .work .wrap{padding-block:64px 40px}.work-head{margin-bottom:20px;gap:20px}
+  .tabs{border:0;background:none;padding:0;border-radius:0}
+  .tab{border:1px solid var(--line);background:var(--surface)}
+  .tab[aria-selected="true"]{border-color:var(--forest)}
+  .product{grid-template-columns:1fr;gap:20px}
+  .p-visual{order:-1;height:auto;border-radius:20px}
+  .p-visual.bare{height:300px;padding:18px}.p-visual.bare img{height:auto;max-height:100%}
+  .p-visual.framed{padding:0;border:1px solid var(--line);border-radius:16px}
+  .browser{border:0;border-radius:0;box-shadow:none}.browser img,.placeholder{height:220px}
+  .p-visual.phone{height:340px;padding:18px}.phone-frame{border-width:7px;border-radius:28px}.phone-frame img{height:290px}.p-why{font-size:14px}
+  .p-copy{padding-top:0;gap:12px}.p-name{font-size:30px}.p-line{font-size:16px}.p-stat b{font-size:22px}
+}
+
+/* built */
+.built .wrap{padding-bottom:80px}
+.built-head{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line-2);padding-top:40px;margin-bottom:20px;gap:12px}
+.built-head span{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted)}
+.built-head a{font-weight:600;font-size:14px}
+.clients{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.client{min-height:110px;border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--surface);display:flex;flex-direction:column;justify-content:space-between;gap:8px;text-decoration:none;transition:transform .2s,border-color .2s}
+.client:hover{transform:translateY(-3px);border-color:#BFE0CB}
+.client b{font:700 18px var(--display);color:var(--green)}
+.client span{font:500 11px var(--mono);color:var(--muted);overflow-wrap:anywhere}
+@media (max-width:900px){.built-head span{font-size:10px}.clients{grid-template-columns:1fr 1fr;gap:10px}.client{min-height:92px;padding:14px}.client b{font-size:16px}}
+
+/* how */
+.how{padding-block:110px}
+.how-head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:72px}
+.how-head h2{font-size:56px}
+.how-head p{margin:0;font-size:17px;color:var(--on-dark-muted)}
+.how-grid{position:relative;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:550px 590px}
+.how-track{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.how-track .march{animation:march 30s linear infinite}
+.step{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:0 70px}
+.step svg.tri{width:160px;height:137px;position:relative;z-index:1}
+.step-label{display:flex;align-items:baseline;gap:10px}
+.step-label span{font:500 13px var(--mono);letter-spacing:.16em;color:var(--mint)}
+.step-label b{font:700 38px/1 var(--display);letter-spacing:-.02em}
+.big-num{font:700 88px/1 var(--display);letter-spacing:-.04em}
+.cap{font-size:17px;color:var(--on-dark-muted);line-height:1.45}
+.chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+.chips span{font-size:13px;padding:6px 11px;border-radius:999px;border:1px solid var(--dark-line);color:#DCE8E1;transition:border-color .2s,background .2s}
+.chips span:hover{border-color:var(--mint);background:rgba(127,224,168,.08)}
+.bars{display:flex;flex-direction:column;gap:16px;width:100%;max-width:420px;text-align:left;margin-top:8px}
+.bar{display:grid;grid-template-columns:96px 1fr 24px;gap:12px;align-items:center;font-size:17px}
+.bar .tr{height:12px;border-radius:6px;background:#1E3F2D;overflow:hidden}
+.bar .tr i{display:block;height:100%;border-radius:6px;background:var(--green-hi);transform-origin:left}
+.bar small{font:500 13px var(--mono);color:var(--on-dark-muted)}
+.step img.dash{width:360px;border-radius:12px;box-shadow:0 24px 40px -22px rgba(0,0,0,.6)}
+.how-grid .s1{grid-column:1;grid-row:1}.how-grid .s2{grid-column:2;grid-row:1}.how-grid .s3{grid-column:2;grid-row:2}.how-grid .s4{grid-column:1;grid-row:2}
+.how-mob{display:none}
+@media (max-width:1100px){
+  .how{padding-block:72px}.how-head{align-items:flex-start;text-align:left;margin-bottom:40px}.how-head h2{font-size:36px}.how-head p{font-size:15px}
+  .how-grid{display:none}.how-mob{display:flex;flex-direction:column}
+  .mstep{position:relative;display:flex;gap:18px;padding-bottom:72px}
+  .mstep:last-child{padding-bottom:0}
+  .mstep:not(:last-child)::after{content:"";position:absolute;left:38px;top:72px;bottom:0;border-left:2px dashed var(--dark-line)}
+  .mstep svg.tri{flex:none;width:78px;height:67px;position:relative;z-index:1}
+  .mstep .body{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px;padding-top:4px}
+  .mstep .step-label b{font-size:28px}.mstep .big-num{font-size:60px}.mstep .cap{font-size:14px}
+  .mstep .chips{justify-content:flex-start;gap:6px}.mstep .chips span{font-size:12px;padding:5px 9px}
+  .mstep .bars{gap:12px}.mstep .bar{grid-template-columns:78px 1fr 18px;gap:8px;font-size:14px}.mstep .bar .tr{height:10px}
+  .mstep img{width:100%;border-radius:10px}
+}
+
+/* beyond */
+.beyond .wrap{padding-block:100px}
+.beyond-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;gap:16px;flex-wrap:wrap}
+.beyond-head>span{font-size:17px;color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(4,285px);justify-content:center;gap:20px}
+.pyr{display:flex;justify-content:center;gap:20px;margin-top:20px}
+.tile{position:relative;width:285px;height:300px;border-radius:22px;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.tile:hover{transform:translateY(-4px);box-shadow:0 18px 34px -24px rgba(17,43,30,.55)}
+.tile>img{width:100%;height:100%;object-fit:cover}
+.pill{position:absolute;left:14px;bottom:14px;font-size:13px;font-weight:600;color:var(--green);background:rgba(255,255,255,.94);padding:7px 12px;border-radius:999px}
+.tile.tennis{background:var(--dark-bg);color:var(--on-dark);padding:24px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
+.tile.tennis svg{position:absolute;left:50%;top:28px;margin-left:-110px;opacity:.45}
+.tile.tennis b{font:700 44px/1 var(--display);letter-spacing:-.03em}
+.tile.tennis .plus{color:var(--green-hi)}
+.tile.tennis>span{font-size:14px;color:var(--on-dark-muted)}
+.tile.soft{background:var(--surface);border:1px solid var(--line);padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.tile.dk{background:var(--dark-bg);color:var(--on-dark)}
+.tile .center{flex-grow:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.lang{display:flex;gap:10px}
+.lang b{width:76px;height:56px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--forest);color:var(--mint);font:600 22px var(--mono)}
+.tile h3{font-size:24px;line-height:1.15;letter-spacing:-.02em}
+.tile.soft p{margin:0;font-size:14px;color:var(--muted);line-height:1.4}
+.tile.dk p{color:var(--on-dark-muted)}
+.badge{width:104px;height:104px;border-radius:24px;background:var(--green-soft);display:grid;place-items:center;font-size:78px;line-height:1}
+.badge svg{width:88px;height:88px}
+.tile.dk .badge{background:rgba(69,217,138,.16)}
+@media (max-width:1240px){.tiles{grid-template-columns:repeat(2,285px)}.pyr{flex-wrap:wrap}}
+@media (max-width:900px){
+  .beyond .wrap{padding-block:64px}.beyond-head{margin-bottom:22px}.beyond-head>span{font-size:15px}
+  .tiles{grid-template-columns:1fr 1fr;gap:12px}
+  .pyr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .tile{width:auto;height:210px;border-radius:18px}
+  .pyr .tile{height:230px}
+  .pyr.one .tile{grid-column:1/-1}
+  .pyr.three .tile:nth-child(2){grid-column:1/-1;order:3;height:200px}
+  .pill{left:8px;right:8px;bottom:8px;text-align:center;font-size:11px;padding:6px 9px}
+  .tile.tennis{padding:16px}.tile.tennis svg{width:130px;margin-left:-65px;top:20px}.tile.tennis b{font-size:32px}.tile.tennis>span{font-size:12px}
+  .tile.soft{padding:14px;gap:6px}.tile h3{font-size:16px}.tile.soft p{font-size:11px}
+  .lang{gap:8px}.lang b{width:54px;height:40px;font-size:17px}
+  .badge{width:72px;height:72px;border-radius:18px;font-size:54px}.badge svg{width:60px;height:60px}
+}
+
+/* shelf */
+.shelf{margin-top:56px}
+.shelf-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.shelf-head>span:last-child{font-size:15px;color:var(--muted)}
+.shelf-view{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.shelf-track{display:flex;gap:16px;width:max-content;animation:shelf 110s linear infinite}
+.shelf-view:hover .shelf-track{animation-play-state:paused}
+@keyframes shelf{to{transform:translateX(calc(-50% - 8px))}}
+.book{position:relative;overflow:hidden;flex:none;width:150px;height:220px;border-radius:6px 12px 12px 6px;padding:18px 16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 24px -18px rgba(17,43,30,.6);transition:transform .25s}
+.book .cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.book::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;background:linear-gradient(90deg,rgba(0,0,0,.28) 0,rgba(0,0,0,.08) 3%,rgba(255,255,255,.18) 4.5%,rgba(255,255,255,0) 8%,rgba(0,0,0,0) 92%,rgba(0,0,0,.08) 100%)}
+.book:hover{transform:translateY(-6px) rotate(-1deg)}
+.book svg{width:26px;height:22px;margin-bottom:auto}
+.book b{font:700 17px/1.15 var(--display);letter-spacing:-.01em}
+.book span{font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.b-f{background:linear-gradient(160deg,var(--forest-2),var(--forest));color:var(--on-dark)}.b-f svg{color:var(--mint)}
+.b-m{background:var(--green-hi);color:var(--forest)}
+.b-c{background:var(--green-soft);color:var(--ink);border:1px solid #CFE6D7}.b-c svg{color:var(--green)}
+@media (max-width:900px){.shelf{margin-top:36px}.book{width:124px;height:184px;padding:14px 12px}.book b{font-size:15px}.shelf-track{gap:12px;animation-duration:90s}@keyframes shelf{to{transform:translateX(calc(-50% - 6px))}}}
+@media (prefers-reduced-motion:reduce){.shelf-view{overflow-x:auto}.shelf-track .dup{display:none!important}}
+
+/* contact */
+.contact .wrap{padding-block:110px 90px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact h2{font-size:56px;line-height:1.02}
+.c-left{display:flex;flex-direction:column;gap:28px}
+.tags{display:flex;gap:10px;flex-wrap:wrap}
+.tags span{font-size:14px;padding:9px 14px;border-radius:999px;background:rgba(69,217,138,.14);color:var(--mint)}
+.c-right{display:flex;flex-direction:column;gap:14px}
+.c-card{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:22px 24px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid #2A5A40;color:var(--on-dark);text-decoration:none;transition:border-color .2s,transform .2s,background .2s}
+.c-card:hover{border-color:var(--mint);transform:translateX(4px);background:rgba(255,255,255,.08)}
+.c-card small{display:block;font:500 11px var(--mono);letter-spacing:.12em;color:var(--mint);margin-bottom:4px}
+.c-card span{font-size:18px;overflow-wrap:anywhere}
+.c-card .arrow{color:var(--green-hi);font-size:20px;transition:transform .2s}
+.c-card:hover .arrow{transform:translateX(4px)}
+.foot{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(127,224,168,.12);padding-top:24px;font-size:13px;color:var(--on-dark-muted)}
+@media (max-width:900px){.contact .wrap{grid-template-columns:1fr;gap:28px;padding-block:72px 60px}.contact h2{font-size:38px}.c-left{gap:22px}.tags span{font-size:13px;padding:8px 12px}.c-card{padding:18px}.c-card span{font-size:16px}}
+
+/* motion */
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(69,217,138,.6)}70%{box-shadow:0 0 0 10px rgba(69,217,138,0)}100%{box-shadow:0 0 0 0 rgba(69,217,138,0)}}
+@keyframes march{to{stroke-dashoffset:-600}}
+@keyframes swapIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes drawLine{from{stroke-dashoffset:1400}to{stroke-dashoffset:0}}
+.hero-text>*{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+.hero-text>*:nth-child(2){animation-delay:.08s}.hero-text>*:nth-child(3){animation-delay:.16s}.hero-text>*:nth-child(4){animation-delay:.24s}
+.hero-photo,.hero-mobile .photo{animation:pop .9s .15s cubic-bezier(.2,.7,.2,1) both}
+.tri-hi{animation:float 7s ease-in-out infinite}
+.tri-lo{animation:float 8s 1s ease-in-out infinite}
+@keyframes upT{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@keyframes popS{from{opacity:0;scale:.9}to{opacity:1;scale:1}}
+@supports (animation-timeline: view()){
+  .reveal{animation:upT linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+  .reveal-pop{animation:popS linear both;animation-timeline:view();animation-range:entry 5% entry 45%}
+  .bar .tr i{animation:grow linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+  .draw{animation:drawLine linear both;animation-timeline:view();animation-range:entry 10% cover 55%}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 120 60"><path d="M2 56 L28 4 L54 56 Z M9 42 H47" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"></path><path d="M66 12 H118 L92 60 Z M72 24 H112" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"></path></symbol>
+    <clipPath id="c1"><rect x="0" y="80" width="140" height="40"></rect></clipPath>
+    <clipPath id="c2"><rect x="0" y="44" width="140" height="76"></rect></clipPath>
+    <symbol id="t0" viewBox="0 0 140 120"><path d="M8 8 H132 L70 116 Z" fill="#112B1E" stroke="#7FE0A8" stroke-width="3" stroke-linejoin="round"></path></symbol>
+    <symbol id="t1" viewBox="0 0 140 120"><path d="M8 8 H132 L70 116 Z" fill="#112B1E"></path><path d="M8 8 H132 L70 116 Z" fill="#45D98A" clip-path="url(#c1)"></path><path d="M8 8 H132 L70 116 Z" fill="none" stroke="#7FE0A8" stroke-width="3" stroke-linejoin="round"></path></symbol>
+    <symbol id="t2" viewBox="0 0 140 120"><path d="M8 8 H132 L70 116 Z" fill="#112B1E"></path><path d="M8 8 H132 L70 116 Z" fill="#45D98A" clip-path="url(#c2)"></path><path d="M8 8 H132 L70 116 Z" fill="none" stroke="#7FE0A8" stroke-width="3" stroke-linejoin="round"></path></symbol>
+    <symbol id="t3" viewBox="0 0 140 120"><path d="M8 8 H132 L70 116 Z" fill="#45D98A" stroke="#7FE0A8" stroke-width="3" stroke-linejoin="round"></path></symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><svg style="color:#7FE0A8"><use href="#logo"></use></svg>Bastien Durand</a>
+    <ul class="nav-links">
+      <li><a href="#story">Story</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#how">How I work</a></li>
+      <li><a class="btn btn-green" href="#contact">Let’s talk</a></li>
+    </ul>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+    <a href="#story">Story</a><a href="#work">Work</a><a href="#how">How I work</a><a href="#beyond">Beyond the work</a><a href="#contact">Let’s talk</a>
+  </nav>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-text">
+      <div class="eyebrow">Product · Systems · Automation · Sydney</div>
+      <h1>Systems that feel <span class="em">seamless</span></h1>
+      <p>Coach turned product builder. I find the problem by talking to the people who have it, then build the fix end to end.</p>
+      <div class="ctas"><a class="btn btn-green" href="#work">See the work →</a><a class="btn btn-ghost" href="#how">How I work</a></div>
+    </div>
+    <div class="hero-visual" aria-hidden="false">
+      <svg class="tri-lo" viewBox="0 0 300 260" aria-hidden="true"><path d="M10 250 L150 10 L290 250 Z" fill="none" stroke="#18844A" stroke-width="4" stroke-linejoin="round"></path><line x1="45" y1="190" x2="255" y2="190" stroke="#18844A" stroke-width="4"></line></svg>
+      <div class="tri-label" style="left:20px;top:390px"><b>8</b><span>client builds</span></div>
+      <svg class="tri-hi" viewBox="0 0 260 230" aria-hidden="true"><path d="M10 10 H250 L130 220 Z" fill="#E7F4EC" stroke="#18844A" stroke-width="4" stroke-linejoin="round"></path><line x1="36" y1="56" x2="224" y2="56" stroke="#18844A" stroke-width="4"></line></svg>
+      <div class="tri-label" style="left:450px;top:42px"><b>4</b><span>products</span></div>
+      <img class="hero-photo" src="assets/bastien.jpg" alt="Bastien Durand">
+      <div class="chip-open"><i></i>Open to product roles · Sydney</div>
+    </div>
+    <div class="hero-mobile">
+      <div class="photo"><img src="assets/bastien.jpg" alt="Bastien Durand"><div class="chip-open"><i></i>Open to product roles · Sydney</div></div>
+      <div class="tri-pair">
+        <div><svg width="44" height="38" viewBox="0 0 300 260" aria-hidden="true"><path d="M10 250 L150 10 L290 250 Z" fill="none" stroke="#18844A" stroke-width="14" stroke-linejoin="round"></path></svg><span><b>8</b>client builds</span></div>
+        <div><svg width="44" height="38" viewBox="0 0 260 230" aria-hidden="true"><path d="M10 10 H250 L130 220 Z" fill="#E7F4EC" stroke="#18844A" stroke-width="14" stroke-linejoin="round"></path></svg><span><b>4</b>products</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats" aria-label="At a glance">
+  <div class="wrap">
+    <div class="stat reveal"><b>4</b><span>products shipped solo</span></div>
+    <div class="stat reveal"><b>100<span class="plus">+</span></b><span>discovery conversations</span></div>
+    <div class="stat reveal"><b>685<span class="plus">%</span></b><span>club social growth</span></div>
+    <div class="stat reveal"><b>EN<span class="dot">·</span>RU<span class="dot">·</span>FR</b><span>languages</span></div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap">
+    <h2 class="reveal">Two tracks became <span class="em">one</span></h2>
+    <p class="sub reveal">Years learning how people work. Years learning how to build.</p>
+    <svg class="desk" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="Timeline 2013 to 2026: a people track and a build track merging into CourtDesk in 2026">
+      <text x="400" y="16" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" letter-spacing="2" fill="#18844A">PEOPLE</text>
+      <text x="800" y="170" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" letter-spacing="2" fill="#4E9C70">BUILD</text>
+      <path class="draw" d="M400 36 V350 C400 410 600 390 600 450 V490" fill="none" stroke="#18844A" stroke-width="3"></path>
+      <path class="draw" d="M800 190 V350 C800 410 600 390 600 450" fill="none" stroke="#7FCFA0" stroke-width="3"></path>
+      <g font-family="Geist Mono, monospace" font-size="11" fill="#9AABA1" text-anchor="middle"><text x="600" y="40">2013</text><text x="600" y="140">2017</text><text x="600" y="194">2019</text><text x="600" y="244">2021</text><text x="600" y="294">2023</text><text x="600" y="344">2025</text></g>
+      <g font-family="Geist, sans-serif" font-size="15" fill="#10201A">
+        <circle cx="400" cy="36" r="7" fill="#18844A"></circle><text x="376" y="41" text-anchor="end">Holistic coach</text>
+        <circle cx="400" cy="136" r="7" fill="#18844A"></circle><text x="376" y="141" text-anchor="end">Coaching at Coogee</text>
+        <circle cx="400" cy="240" r="7" fill="#18844A"></circle><text x="376" y="245" text-anchor="end">ESTA Operations + Head of Digital</text>
+        <circle cx="400" cy="290" r="7" fill="#18844A"></circle><text x="376" y="295" text-anchor="end">Systema Tennis coaching business</text>
+        <circle cx="800" cy="190" r="7" fill="#4E9C70"></circle><text x="824" y="195">Bootcamp + UTS Hackathon 1st place</text>
+        <circle cx="800" cy="240" r="7" fill="#4E9C70"></circle><text x="824" y="245">Web3 application development</text>
+        <circle cx="800" cy="290" r="7" fill="#4E9C70"></circle><text x="824" y="295">Techstars Hackathon runner-up</text>
+        <circle cx="800" cy="340" r="7" fill="#4E9C70"></circle><text x="824" y="345">Tennis Network data aggregator</text>
+      </g>
+      <circle cx="600" cy="510" r="26" fill="#112B1E"></circle><circle cx="600" cy="510" r="9" fill="#45D98A"></circle>
+      <text x="640" y="508" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="20" fill="#10201A">CourtDesk</text>
+      <text x="640" y="528" font-family="Geist Mono, monospace" font-size="11" fill="#18844A">2026 · where they meet</text>
+    </svg>
+    <svg class="mob" width="350" height="650" viewBox="0 0 350 650" role="img" aria-label="Timeline 2013 to 2026: a people track and a build track merging into CourtDesk in 2026">
+      <path class="draw" d="M160 30 V490 C160 520 175 515 175 540 V552" fill="none" stroke="#18844A" stroke-width="3"></path>
+      <path class="draw" d="M190 158 V490 C190 520 175 515 175 540" fill="none" stroke="#7FCFA0" stroke-width="3"></path>
+      <g font-family="Geist, sans-serif" font-size="13" fill="#10201A">
+        <circle cx="160" cy="30" r="6" fill="#18844A"></circle><text x="144" y="18" text-anchor="end" font-family="Geist Mono, monospace" font-size="10" fill="#9AABA1">2013</text><text x="144" y="35" text-anchor="end">Holistic coach</text>
+        <circle cx="160" cy="94" r="6" fill="#18844A"></circle><text x="144" y="82" text-anchor="end" font-family="Geist Mono, monospace" font-size="10" fill="#9AABA1">2017</text><text x="144" y="99" text-anchor="end">Coaching at Coogee</text>
+        <circle cx="190" cy="158" r="6" fill="#4E9C70"></circle><text x="206" y="146" font-family="Geist Mono, monospace" font-size="10" fill="#9AABA1">2019</text><text x="206" y="163"><tspan x="206">Bootcamp + UTS</tspan><tspan x="206" dy="16">Hackathon 1st place</tspan></text>
+        <circle cx="160" cy="222" r="6" fill="#18844A"></circle><text x="144" y="210" text-anchor="end" font-family="Geist Mono, monospace" font-size="10" fill="#9AABA1">2021</text><text x="144" y="227" text-anchor="end"><tspan x="144">ESTA Operations</tspan><tspan x="144" dy="16">+ Head of Digital</tspan></text>
+        <circle cx="190" cy="286" r="6" fill="#4E9C70"></circle><text x="206" y="274" font-family="Geist Mono, monospace" font-size="10" fill="#9AABA1">2021</text><text x="206" y="291"><tspan x="206">Web3 application</tspan><tspan x="206" dy="16">development</tspan></text>
+        <circle cx="160" cy="350" r="6" fill="#18844A"></circle><text x="144" y="338" text-anchor="end" font-family="Geist Mono, monospace" font-size="10" fill="#9AABA1">2023</text><text x="144" y="355" text-anchor="end"><tspan x="144">Systema Tennis</tspan><tspan x="144" dy="16">coaching business</tspan></text>
+        <circle cx="190" cy="414" r="6" fill="#4E9C70"></circle><text x="206" y="402" font-family="Geist Mono, monospace" font-size="10" fill="#9AABA1">2023</text><text x="206" y="419"><tspan x="206">Techstars Hackathon</tspan><tspan x="206" dy="16">runner-up</tspan></text>
+        <circle cx="190" cy="478" r="6" fill="#4E9C70"></circle><text x="206" y="466" font-family="Geist Mono, monospace" font-size="10" fill="#9AABA1">2025</text><text x="206" y="483"><tspan x="206">Tennis Network</tspan><tspan x="206" dy="16">data aggregator</tspan></text>
+      </g>
+      <circle cx="175" cy="570" r="22" fill="#112B1E"></circle><circle cx="175" cy="570" r="8" fill="#45D98A"></circle>
+      <text x="175" y="618" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="20" fill="#10201A">CourtDesk</text>
+      <text x="175" y="638" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" fill="#18844A">2026 · where they meet</text>
+    </svg>
+    <div class="legend"><span><i style="background:#18844A"></i>People</span><span><i style="background:#7FCFA0"></i>Build</span></div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="work-head">
+      <h2 class="sec-h reveal">Things I’ve <span class="em">shipped</span></h2>
+      <div class="tabs" role="tablist" aria-label="Products">
+        <button class="tab" role="tab" type="button" id="tab-0" data-i="0" aria-selected="true">CourtDesk</button>
+        <button class="tab" role="tab" type="button" id="tab-1" data-i="1" aria-selected="false">Tennis Network</button>
+        <button class="tab" role="tab" type="button" id="tab-2" data-i="2" aria-selected="false">AI Checker</button>
+        <button class="tab" role="tab" type="button" id="tab-3" data-i="3" aria-selected="false">Systema</button>
+      </div>
+    </div>
+    <div class="product" id="product" role="tabpanel" aria-live="polite">
+      <div class="p-copy">
+        <div class="p-kicker" id="p-kicker">SAAS · 2026</div>
+        <h3 class="p-name" id="p-name">CourtDesk</h3>
+        <p class="p-line" id="p-line">One dashboard for independent coaches, replacing WhatsApp threads and spreadsheets.</p>
+        <p class="p-why" id="p-why"><b>WHY</b>Coaches were running their whole business across chats, spreadsheets and bank apps, and losing hours to admin every week.</p>
+        <div class="p-stats" id="p-stats">
+          <div class="p-stat"><span>Discovery interviews</span><b>16<em>+</em></b></div>
+          <div class="p-stat"><span>Founding coaches</span><b><em>8</em><i>↑</i></b></div>
+          <div class="p-stat"><span>Apps replaced</span><b>4 → <em>1</em></b></div>
+        </div>
+        <a class="p-link" id="p-link" href="https://www.tennisnetwork.com.au/courtdesk" target="_blank" rel="noopener">View live ↗</a>
+      </div>
+      <div class="p-visual bare" id="p-visual"><img src="assets/courtdesk.jpg" alt="CourtDesk dashboard"></div>
+    </div>
+  </div>
+</section>
+
+<section class="built" aria-label="Client work">
+  <div class="wrap">
+    <div class="built-head"><span>ALSO DESIGNED AND BUILT · 8 CLIENT SITES</span><a href="https://digitalbuilders.co" target="_blank" rel="noopener">DigitalBuilders.co ↗</a></div>
+    <div class="clients">
+      <a class="client reveal" href="https://cbtennis.com.au" target="_blank" rel="noopener"><b>Coogee Beach Tennis</b><span>cbtennis.com.au · sport</span></a>
+      <a class="client reveal" href="https://sentientpsych.com" target="_blank" rel="noopener"><b>Sentient Psychology</b><span>sentientpsych.com · health</span></a>
+      <a class="client reveal" href="https://youthlivingskills.com.au" target="_blank" rel="noopener"><b>Youth Living Skills</b><span>youthlivingskills.com.au · community</span></a>
+      <a class="client reveal" href="https://modifieddriving.com.au" target="_blank" rel="noopener"><b>Modified Driving</b><span>modifieddriving.com.au · services</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="how dark" id="how">
+  <div class="wrap">
+    <div class="how-head">
+      <div class="eyebrow">How CourtDesk was found</div>
+      <h2>How I <span class="em">work</span></h2>
+      <p>Each step fills the triangle a little more, until there’s one clear thing to build.</p>
+    </div>
+
+    <div class="how-grid">
+      <svg class="how-track" viewBox="0 0 1200 1140" preserveAspectRatio="none" aria-hidden="true">
+        <path class="march" d="M300 60 H1080 Q1170 60 1170 150 V520 Q1170 610 1080 610 H300" fill="none" stroke="#3E6E53" stroke-width="3" stroke-dasharray="8 7" vector-effect="non-scaling-stroke"></path>
+        <path d="M1162 330 L1170 344 L1178 330" fill="none" stroke="#7FE0A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+      </svg>
+      <div class="step s1">
+        <svg class="tri reveal-pop"><use href="#t0"></use></svg>
+        <div class="step-label"><span>01</span><b>Ask</b></div>
+        <div class="big-num">16<span class="plus">+</span></div>
+        <div class="cap">conversations with coaches and venue operators</div>
+      </div>
+      <div class="step s2">
+        <svg class="tri reveal-pop"><use href="#t1"></use></svg>
+        <div class="step-label"><span>02</span><b>Map</b></div>
+        <div class="chips"><span>WhatsApp threads</span><span>Email chains</span><span>SMS</span><span>Instagram DMs</span><span>Follow-up threads</span><span>Stripe</span><span>PayID</span><span>Bank app</span><span>Payment chasing</span><span>Spreadsheets</span><span>Timetables</span><span>Make-up lessons</span><span>Rescheduling</span><span>Session tracking</span><span>Outdated sessions</span><span>Wash-outs</span><span>Court bookings</span><span>Venue comms</span></div>
+        <div class="cap">18 fragmented pieces, all documented</div>
+      </div>
+      <div class="step s3">
+        <svg class="tri reveal-pop"><use href="#t2"></use></svg>
+        <div class="step-label"><span>03</span><b>Filter</b></div>
+        <div class="bars">
+          <div class="bar"><span>Schedule</span><span class="tr"><i style="width:100%"></i></span><small>7</small></div>
+          <div class="bar"><span>Messages</span><span class="tr"><i style="width:71%"></i></span><small>5</small></div>
+          <div class="bar"><span>Payments</span><span class="tr"><i style="width:57%"></i></span><small>4</small></div>
+          <div class="bar"><span>Venues</span><span class="tr"><i style="width:29%"></i></span><small>2</small></div>
+        </div>
+        <div class="cap">Four jobs a coach actually does, every day</div>
+      </div>
+      <div class="step s4">
+        <svg class="tri reveal-pop"><use href="#t3"></use></svg>
+        <div class="step-label"><span>04</span><b>Build</b></div>
+        <img class="dash" src="assets/courtdesk.jpg" alt="CourtDesk dashboard">
+        <div class="cap">One calm dashboard, only what today needs</div>
+      </div>
+    </div>
+
+    <div class="how-mob">
+      <div class="mstep"><svg class="tri"><use href="#t0"></use></svg><div class="body"><div class="step-label"><span>01</span><b>Ask</b></div><div class="big-num">16<span class="plus">+</span></div><div class="cap">conversations with coaches and venue operators</div></div></div>
+      <div class="mstep"><svg class="tri"><use href="#t1"></use></svg><div class="body"><div class="step-label"><span>02</span><b>Map</b></div><div class="chips"><span>WhatsApp threads</span><span>Email chains</span><span>SMS</span><span>Instagram DMs</span><span>Follow-up threads</span><span>Stripe</span><span>PayID</span><span>Bank app</span><span>Payment chasing</span><span>Spreadsheets</span><span>Timetables</span><span>Make-up lessons</span><span>Rescheduling</span><span>Session tracking</span><span>Outdated sessions</span><span>Wash-outs</span><span>Court bookings</span><span>Venue comms</span></div><div class="cap">18 fragmented pieces, all documented</div></div></div>
+      <div class="mstep"><svg class="tri"><use href="#t2"></use></svg><div class="body"><div class="step-label"><span>03</span><b>Filter</b></div><div class="bars">
+        <div class="bar"><span>Schedule</span><span class="tr"><i style="width:100%"></i></span><small>7</small></div>
+        <div class="bar"><span>Messages</span><span class="tr"><i style="width:71%"></i></span><small>5</small></div>
+        <div class="bar"><span>Payments</span><span class="tr"><i style="width:57%"></i></span><small>4</small></div>
+        <div class="bar"><span>Venues</span><span class="tr"><i style="width:29%"></i></span><small>2</small></div>
+      </div><div class="cap">Four jobs a coach actually does, every day</div></div></div>
+      <div class="mstep"><svg class="tri"><use href="#t3"></use></svg><div class="body"><div class="step-label"><span>04</span><b>Build</b></div><img src="assets/courtdesk.jpg" alt="CourtDesk dashboard"><div class="cap">One calm dashboard, only what today needs</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="beyond" id="beyond">
+  <div class="wrap">
+    <div class="beyond-head"><h2 class="sec-h">Beyond the <span class="em">work</span></h2><span>The person you’ll actually meet.</span></div>
+    <div class="tiles">
+      <div class="tile reveal"><img src="assets/forest.jpg" alt="Bastien pulling a surprised face in a pine forest"><span class="pill">Not always this serious</span></div>
+      <div class="tile tennis reveal">
+        <svg width="220" height="130" viewBox="0 0 220 130" aria-hidden="true"><rect x="1" y="1" width="218" height="128" fill="none" stroke="#7FE0A8" stroke-width="2"></rect><line x1="110" y1="1" x2="110" y2="129" stroke="#7FE0A8" stroke-width="2"></line><line x1="1" y1="16" x2="219" y2="16" stroke="#7FE0A8" stroke-width="2"></line><line x1="1" y1="114" x2="219" y2="114" stroke="#7FE0A8" stroke-width="2"></line><line x1="55" y1="16" x2="55" y2="114" stroke="#7FE0A8" stroke-width="2"></line><line x1="165" y1="16" x2="165" y2="114" stroke="#7FE0A8" stroke-width="2"></line><line x1="55" y1="65" x2="165" y2="65" stroke="#7FE0A8" stroke-width="2"></line></svg>
+        <b>25<span class="plus">+</span> yrs</b><span>on a tennis court, player first</span>
+      </div>
+      <div class="tile reveal"><img src="assets/camera.jpg" alt="Bastien photographing himself in a shop window"><span class="pill">Behind the lens</span></div>
+      <div class="tile soft reveal"><div class="center"><div class="lang"><b>EN</b><b>RU</b></div><div class="lang"><b>FR</b></div></div><h3>Three languages</h3><p>English and Russian fluently, French conversationally</p></div>
+    </div>
+    <div class="pyr three">
+      <div class="tile reveal"><img src="assets/philosophy.jpg" alt="Portraits of Carl Jung, Friedrich Nietzsche, a bust of Marcus Aurelius and Sun Tzu"><span class="pill">Philosophy &amp; psychology</span></div>
+      <div class="tile soft reveal"><div class="center"><span class="badge" role="img" aria-label="Martial arts uniform">🥋</span></div><h3>Jiu-jitsu</h3><p>On the mats at Capincho</p></div>
+      <div class="tile reveal"><img src="assets/art.jpg" alt="Monet, Klimt, Hokusai and Kandinsky paintings"><span class="pill">Art &amp; poetry</span></div>
+    </div>
+    <div class="pyr">
+      <div class="tile soft reveal"><div class="center"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#18844A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.5 2 5 5.5 5 9.5L15 15H9l-2-2.5C7 8.5 8.5 5 12 3z"></path><circle cx="12" cy="9.5" r="1.8"></circle><path d="M9 15l-2.5 3.5L9 18M15 15l2.5 3.5L15 18M11 18.5l1 2.5 1-2.5"></path></svg></span></div><h3>Startups</h3><p>Founder stories, Spark Festival, giving back</p></div>
+      <div class="tile soft reveal"><div class="center"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#18844A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"></circle><circle cx="5" cy="18" r="2.5"></circle><circle cx="19" cy="18" r="2.5"></circle><path d="M11 7.3L6.2 15.8M13 7.3l4.8 8.5M7.5 18h9"></path></svg></span></div><h3>Agentic orchestration &amp; systems</h3><p>How AI agents work together</p></div>
+    </div>
+    <div class="pyr one">
+      <div class="tile soft dk reveal"><div class="center"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#7FE0A8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c1-3.5 3.5-5.5 6.5-5.5s5.5 2 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 010 7M18.5 14.5c1.5.7 2.5 2.6 3 5.5"></path></svg></span></div><h3>People</h3><p>Connecting with people, the thread through all of it</p></div>
+    </div>
+    <div class="shelf reveal">
+      <div class="shelf-head"><span class="eyebrow">On my shelf</span><span>Books I keep recommending</span></div>
+      <div class="shelf-view"><div class="shelf-track"><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Super Communicators</b><span>Charles Duhigg</span><img class="cover" src="https://covers.openlibrary.org/b/isbn/9780593243916-L.jpg?default=false" alt="Super Communicators by Charles Duhigg" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Negotiating the Impossible</b><span>Deepak Malhotra</span><img class="cover" src="https://covers.openlibrary.org/b/id/8813974-L.jpg?default=false" alt="Negotiating the Impossible by Deepak Malhotra" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Design of Everyday Things</b><span>Don Norman</span><img class="cover" src="https://covers.openlibrary.org/b/isbn/9780465050659-L.jpg?default=false" alt="The Design of Everyday Things by Don Norman" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The 6 Disciplines of Strategic Thinking</b><span>Michael D. Watkins</span><img class="cover" src="assets/books/the-6-disciplines-of-strategic-thinking.jpg" alt="The 6 Disciplines of Strategic Thinking by Michael D. Watkins" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Courage to Be Disliked</b><span>Kishimi &amp; Koga</span><img class="cover" src="https://covers.openlibrary.org/b/isbn/9781501197277-L.jpg?default=false" alt="The Courage to Be Disliked by Kishimi &amp; Koga" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>No Bad Parts</b><span>Richard C. Schwartz</span><img class="cover" src="https://covers.openlibrary.org/b/id/10881934-L.jpg?default=false" alt="No Bad Parts by Richard C. Schwartz" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Myth of Normal</b><span>Gabor Maté</span><img class="cover" src="https://covers.openlibrary.org/b/isbn/9780593083888-L.jpg?default=false" alt="The Myth of Normal by Gabor Maté" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Continuous Discovery Habits</b><span>Teresa Torres</span><img class="cover" src="https://covers.openlibrary.org/b/id/11136152-L.jpg?default=false" alt="Continuous Discovery Habits by Teresa Torres" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Man’s Search for Meaning</b><span>Viktor E. Frankl</span><img class="cover" src="https://covers.openlibrary.org/b/isbn/9780807014295-L.jpg?default=false" alt="Man’s Search for Meaning by Viktor E. Frankl" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Never Split the Difference</b><span>Chris Voss</span><img class="cover" src="https://covers.openlibrary.org/b/id/8365942-L.jpg?default=false" alt="Never Split the Difference by Chris Voss" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Lean Startup</b><span>Eric Ries</span><img class="cover" src="https://covers.openlibrary.org/b/id/7104760-L.jpg?default=false" alt="The Lean Startup by Eric Ries" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Obstacle Is the Way</b><span>Ryan Holiday</span><img class="cover" src="https://covers.openlibrary.org/b/id/14428233-L.jpg?default=false" alt="The Obstacle Is the Way by Ryan Holiday" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Ego Is the Enemy</b><span>Ryan Holiday</span><img class="cover" src="https://covers.openlibrary.org/b/id/12447129-L.jpg?default=false" alt="Ego Is the Enemy by Ryan Holiday" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Artist’s Way</b><span>Julia Cameron</span><img class="cover" src="https://covers.openlibrary.org/b/id/10840008-L.jpg?default=false" alt="The Artist’s Way by Julia Cameron" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Body Keeps the Score</b><span>Bessel van der Kolk</span><img class="cover" src="https://covers.openlibrary.org/b/id/8315367-L.jpg?default=false" alt="The Body Keeps the Score by Bessel van der Kolk" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Leaders Eat Last</b><span>Simon Sinek</span><img class="cover" src="https://covers.openlibrary.org/b/id/8246311-L.jpg?default=false" alt="Leaders Eat Last by Simon Sinek" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Winning the Brain Game</b><span>Matthew E. May</span><img class="cover" src="https://covers.openlibrary.org/b/id/12859129-L.jpg?default=false" alt="Winning the Brain Game by Matthew E. May" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Don’t Make Me Think</b><span>Steve Krug</span><img class="cover" src="https://covers.openlibrary.org/b/id/554640-L.jpg?default=false" alt="Don’t Make Me Think by Steve Krug" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Art of War</b><span>Sun Tzu</span><img class="cover" src="https://covers.openlibrary.org/b/id/4849549-L.jpg?default=false" alt="The Art of War by Sun Tzu" loading="lazy" onerror="this.remove()"></div><div class="dup" aria-hidden="true" style="display:contents"><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Super Communicators</b><span>Charles Duhigg</span><img class="cover" src="https://covers.openlibrary.org/b/isbn/9780593243916-L.jpg?default=false" alt="Super Communicators by Charles Duhigg" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Negotiating the Impossible</b><span>Deepak Malhotra</span><img class="cover" src="https://covers.openlibrary.org/b/id/8813974-L.jpg?default=false" alt="Negotiating the Impossible by Deepak Malhotra" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Design of Everyday Things</b><span>Don Norman</span><img class="cover" src="https://covers.openlibrary.org/b/isbn/9780465050659-L.jpg?default=false" alt="The Design of Everyday Things by Don Norman" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The 6 Disciplines of Strategic Thinking</b><span>Michael D. Watkins</span><img class="cover" src="assets/books/the-6-disciplines-of-strategic-thinking.jpg" alt="The 6 Disciplines of Strategic Thinking by Michael D. Watkins" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Courage to Be Disliked</b><span>Kishimi &amp; Koga</span><img class="cover" src="https://covers.openlibrary.org/b/isbn/9781501197277-L.jpg?default=false" alt="The Courage to Be Disliked by Kishimi &amp; Koga" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>No Bad Parts</b><span>Richard C. Schwartz</span><img class="cover" src="https://covers.openlibrary.org/b/id/10881934-L.jpg?default=false" alt="No Bad Parts by Richard C. Schwartz" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Myth of Normal</b><span>Gabor Maté</span><img class="cover" src="https://covers.openlibrary.org/b/isbn/9780593083888-L.jpg?default=false" alt="The Myth of Normal by Gabor Maté" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Continuous Discovery Habits</b><span>Teresa Torres</span><img class="cover" src="https://covers.openlibrary.org/b/id/11136152-L.jpg?default=false" alt="Continuous Discovery Habits by Teresa Torres" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Man’s Search for Meaning</b><span>Viktor E. Frankl</span><img class="cover" src="https://covers.openlibrary.org/b/isbn/9780807014295-L.jpg?default=false" alt="Man’s Search for Meaning by Viktor E. Frankl" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Never Split the Difference</b><span>Chris Voss</span><img class="cover" src="https://covers.openlibrary.org/b/id/8365942-L.jpg?default=false" alt="Never Split the Difference by Chris Voss" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Lean Startup</b><span>Eric Ries</span><img class="cover" src="https://covers.openlibrary.org/b/id/7104760-L.jpg?default=false" alt="The Lean Startup by Eric Ries" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Obstacle Is the Way</b><span>Ryan Holiday</span><img class="cover" src="https://covers.openlibrary.org/b/id/14428233-L.jpg?default=false" alt="The Obstacle Is the Way by Ryan Holiday" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Ego Is the Enemy</b><span>Ryan Holiday</span><img class="cover" src="https://covers.openlibrary.org/b/id/12447129-L.jpg?default=false" alt="Ego Is the Enemy by Ryan Holiday" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Artist’s Way</b><span>Julia Cameron</span><img class="cover" src="https://covers.openlibrary.org/b/id/10840008-L.jpg?default=false" alt="The Artist’s Way by Julia Cameron" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Body Keeps the Score</b><span>Bessel van der Kolk</span><img class="cover" src="https://covers.openlibrary.org/b/id/8315367-L.jpg?default=false" alt="The Body Keeps the Score by Bessel van der Kolk" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Leaders Eat Last</b><span>Simon Sinek</span><img class="cover" src="https://covers.openlibrary.org/b/id/8246311-L.jpg?default=false" alt="Leaders Eat Last by Simon Sinek" loading="lazy" onerror="this.remove()"></div><div class="book b-m"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Winning the Brain Game</b><span>Matthew E. May</span><img class="cover" src="https://covers.openlibrary.org/b/id/12859129-L.jpg?default=false" alt="Winning the Brain Game by Matthew E. May" loading="lazy" onerror="this.remove()"></div><div class="book b-c"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>Don’t Make Me Think</b><span>Steve Krug</span><img class="cover" src="https://covers.openlibrary.org/b/id/554640-L.jpg?default=false" alt="Don’t Make Me Think by Steve Krug" loading="lazy" onerror="this.remove()"></div><div class="book b-f"><svg viewBox="0 0 40 34" aria-hidden="true"><path d="M3 3 H37 L20 31 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"></path></svg><b>The Art of War</b><span>Sun Tzu</span><img class="cover" src="https://covers.openlibrary.org/b/id/4849549-L.jpg?default=false" alt="The Art of War by Sun Tzu" loading="lazy" onerror="this.remove()"></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact dark" id="contact">
+  <div class="wrap">
+    <div class="c-left">
+      <div class="eyebrow">What I’m looking for</div>
+      <h2>A product team that talks to its <span class="em">users</span></h2>
+      <div class="tags"><span>Product Manager</span><span>Discovery-led teams</span><span>Sydney</span></div>
+    </div>
+    <div class="c-right">
+      <a class="c-card" href="https://wa.me/61451604063" target="_blank" rel="noopener"><span><small>WhatsApp</small><span>0451 604 063</span></span><span class="arrow">→</span></a>
+      <a class="c-card" href="mailto:bastien.web3@gmail.com"><span><small>Email</small><span>bastien.web3@gmail.com</span></span><span class="arrow">→</span></a>
+      <a class="c-card" href="https://www.linkedin.com/in/bastien-durand1/" target="_blank" rel="noopener"><span><small>LinkedIn</small><span>Bastien Durand</span></span><span class="arrow">→</span></a>
+    </div>
+    <div class="foot"><span>© 2026 Bastien Durand · Sydney</span><a href="#top" style="color:inherit">Back to top ↑</a></div>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+  var products=[
+    {kicker:'SAAS · 2026',name:'CourtDesk',line:'One dashboard for independent coaches, replacing WhatsApp threads and spreadsheets.',
+      why:'Coaches were running their whole business across chats, spreadsheets and bank apps, and losing hours to admin every week.',
+      url:'https://www.tennisnetwork.com.au/courtdesk',host:'tennisnetwork.com.au/courtdesk',img:'assets/courtdesk.jpg',bare:true,
+      stats:[['Discovery interviews','16','+',''],['Founding coaches','','8','↑'],['Apps replaced','4 → ','1','']]},
+    {kicker:'PLATFORM · 2025',name:'Tennis Network',line:'Courts, coaches and clubs across Sydney’s East, with real-time court availability.',
+      why:'Finding a free court meant checking 20+ separate booking pages. Now it’s one search.',
+      url:'https://www.tennisnetwork.com.au',host:'tennisnetwork.com.au',img:'assets/tennis-network.jpg',
+      stats:[['Clicks to find a court','20+ → ','2',''],['Venues','','12',''],['Courts','','73+','']]},
+    {kicker:'AI PROTOTYPE · 2026',name:'AI Compliance Checker',line:'Checks business documents against compliance checklists in minutes instead of hours.',
+      why:'Internal teams spend a large share of their week manually reviewing documents. I built a prototype to test a faster, private way to free up that time.',
+      url:'',host:'compliance-checker · prototype',img:'assets/ai-checker.jpg',
+      stats:[['Model','','Claude Haiku',''],['Privacy','','Redacted + chunked',''],['Human in the loop','','Every flag','']]},
+    {kicker:'COACHING BUSINESS · 2023',name:'Systema Tennis',line:'Biomechanics-led coaching, run like a product, with reports so players can see their progress.',
+      why:'Players had no source of truth to track progress, and most clubs had no digital strategy. I built SEO front doors with Tennis Network that fill my programs and pass extra leads to independent coaches for a finder’s fee.',
+      url:'https://systematennis.com.au',host:'systematennis.com.au',img:'assets/systema.jpg',phone:true,
+      stats:[['Programs','','5',''],['Google ranking','','Page 2 in 3 mo',''],['Overflow leads','','Referred to coaches','']]}
+  ];
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+  var tabs=document.querySelectorAll('.tab'),panel=document.getElementById('product');
+  function show(i){
+    var p=products[i];
+    tabs.forEach(function(t){t.setAttribute('aria-selected',String(+t.dataset.i===i))});
+    document.getElementById('p-kicker').textContent=p.kicker;
+    document.getElementById('p-name').textContent=p.name;
+    document.getElementById('p-line').textContent=p.line;
+    document.getElementById('p-why').innerHTML='<b>WHY</b>'+esc(p.why);
+    document.getElementById('p-stats').innerHTML=p.stats.map(function(s){return '<div class="p-stat"><span>'+esc(s[0])+'</span><b'+((s[1]+s[2]).length>10?' class="long"':'')+'>'+esc(s[1])+'<em>'+esc(s[2])+'</em>'+(s[3]?'<i>'+esc(s[3])+'</i>':'')+'</b></div>'}).join('');
+    var link=document.getElementById('p-link');
+    if(p.url){link.hidden=false;link.href=p.url}else{link.hidden=true}
+    var v=document.getElementById('p-visual');
+    if(p.phone){v.className='p-visual phone';v.innerHTML='<div class="phone-frame"><img src="'+p.img+'" alt="'+esc(p.name)+' website on mobile"></div>'}
+    else if(p.bare){v.className='p-visual bare';v.innerHTML='<img src="'+p.img+'" alt="'+esc(p.name)+' dashboard">'}
+    else{v.className='p-visual framed';v.innerHTML='<div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>'+esc(p.host)+'</span></div>'+(p.img?'<img src="'+p.img+'" alt="'+esc(p.name)+' screenshot">':'<div class="placeholder">'+esc(p.placeholder)+'</div>')+'</div>'}
+    panel.classList.remove('swap');void panel.offsetWidth;panel.classList.add('swap');
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(+t.dataset.i)})});
+  var btn=document.getElementById('menu-btn'),menu=document.getElementById('mobile-menu');
+  btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.setAttribute('aria-expanded',String(o));btn.setAttribute('aria-label',o?'Close menu':'Open menu')});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false')})});
+})();
+</script>
+
+</body>
+</html>
