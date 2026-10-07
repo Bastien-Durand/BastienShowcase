@@ -159,12 +159,12 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
 .p-visual{position:relative;height:660px;border-radius:24px;overflow:hidden}
 .p-visual.bare{background:var(--dark-bg);display:flex;align-items:center;justify-content:center;padding:40px}
 .p-visual.bare img{height:560px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 30px 40px rgba(0,0,0,.35))}
-.p-visual.framed{background:var(--surface);padding:40px 40px 0;display:flex;align-items:flex-end}
-.browser{width:100%;border:1px solid var(--line);border-bottom:0;border-radius:14px 14px 0 0;overflow:hidden;background:#fff;box-shadow:0 -10px 50px -30px rgba(17,43,30,.5)}
+.p-visual.framed{background:var(--surface);padding:40px;display:flex;align-items:center}
+.browser{width:100%;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 -10px 50px -30px rgba(17,43,30,.5)}
 .browser-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);font:500 11px var(--mono);color:var(--muted)}
 .browser-bar i{width:9px;height:9px;border-radius:50%;background:#E3B3AC}.browser-bar i:nth-child(2){background:#EAD49A}.browser-bar i:nth-child(3){background:#A9D9BA}
 .browser-bar span{margin-left:8px}
-.browser img{width:100%;height:560px;object-fit:cover;object-position:top}
+.browser img{width:100%;height:auto;display:block}
 .placeholder{height:560px;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,var(--surface) 0 12px,#fff 12px 24px);font:500 13px var(--mono);color:var(--muted);text-align:center;padding:0 20px}
 .product.swap{animation:swapIn .45s ease both}
 @media (max-width:900px){
@@ -176,7 +176,7 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
   .p-visual{order:-1;height:auto;border-radius:20px}
   .p-visual.bare{height:300px;padding:18px}.p-visual.bare img{height:auto;max-height:100%}
   .p-visual.framed{padding:0;border:1px solid var(--line);border-radius:16px}
-  .browser{border:0;border-radius:0;box-shadow:none}.browser img,.placeholder{height:220px}
+  .browser{border:0;border-radius:0;box-shadow:none}.placeholder{height:220px}
   .p-visual.phone{height:340px;padding:18px}.phone-frame{border-width:7px;border-radius:28px}.phone-frame img{height:290px}.p-why{font-size:14px}
   .p-copy{padding-top:0;gap:12px}.p-name{font-size:30px}.p-line{font-size:16px}.p-stat b{font-size:22px}
 }
