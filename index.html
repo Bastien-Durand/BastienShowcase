@@ -401,9 +401,17 @@ a.client:hover .c-url{color:var(--green-dk)}
 .ns-fig{position:relative;width:min(720px,100%)}
 .ns-fig svg{display:block;width:100%;height:auto;overflow:visible}
 .ns-svg-lbl{display:none}
-.ns-next{position:absolute;left:50%;top:76%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 18px;border-radius:14px;background:rgba(17,43,30,.85);border:1px solid #2A5A40;text-align:center;white-space:nowrap}
-.ns-next span{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-muted)}
-.ns-next b{font:700 17px var(--display);color:var(--on-dark)}
+.ns-ms{position:absolute;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 14px;border-radius:12px;background:#112B1E;border:1px solid #2A5A40;text-align:center;outline:none;cursor:default}
+.ns-ms1{top:76%;border-color:var(--mint)}.ns-ms2{top:54%}.ns-ms3{top:33%;max-width:190px}
+.ns-ms span{font:500 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-muted)}
+.ns-ms1 span{color:var(--mint)}
+.ns-ms b{font:700 15px/1.25 var(--display);color:var(--on-dark)}
+.ns-ms em{position:absolute;left:calc(100% + 14px);top:50%;transform:translateY(-50%);width:220px;font:400 13px/1.45 var(--body);font-style:normal;text-align:left;color:var(--on-dark-muted);background:#0F241A;border:1px solid #2A5A40;border-radius:10px;padding:10px 12px;opacity:0;pointer-events:none;transition:opacity .2s}
+.ns-ms:hover em,.ns-ms:focus em{opacity:1}
+.ns-list{display:none}
+.ns-lbl p a{color:var(--mint);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.ns-cta{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;max-width:560px;margin:44px auto 0}
+.ns-cta p{margin:0;font-size:16px;line-height:1.55;color:var(--on-dark-muted)}
 .ns-base{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:20px}
 .ns-base .t-tech{text-align:left;max-width:360px}
 .ns-base .t-health{text-align:right;align-items:flex-end;max-width:360px;justify-self:end}
@@ -423,10 +431,18 @@ a.client:hover .c-url{color:var(--green-dk)}
   .north-head p{font-size:16px}
   .ns-fig{width:260px;margin:24px auto 8px}
   .ns-svg-lbl{display:inline}
-  .ns-next{top:76%;padding:6px 9px;border-radius:9px;gap:2px}
-  .ns-next span{font-size:8px;letter-spacing:.1em}.ns-next b{font-size:11px}
+  .ns-ms{display:none}
+  .ns-list{display:flex;flex-direction:column;order:3;list-style:none;margin:14px 0 0;padding:0;border-top:1px solid #2A5A40}
+  .ns-list li{display:grid;grid-template-columns:52px 1fr;column-gap:12px;row-gap:2px;padding:12px 0;border-bottom:1px solid #2A5A40}
+  .ns-list span{grid-row:span 2;font:500 10px/1.9 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark-muted);}
+  .ns-list li:first-child span{color:var(--mint)}
+  .ns-list b{font:700 16px/1.3 var(--display);color:var(--on-dark)}
+  .ns-list p{margin:0;font-size:13px;line-height:1.45;color:var(--on-dark-muted)}
+  .ns-cta{order:5;align-items:stretch;text-align:left;margin-top:26px;gap:14px}
+  .ns-cta p{font-size:15px}
+  .ns-cta .btn{white-space:normal;text-align:center}
   .ns-stage{align-items:stretch}
-  .ns-north{order:3;text-align:left;align-items:flex-start;max-width:none;margin:0;padding-top:18px;border-top:1px solid #2A5A40}
+  .ns-north{order:4;text-align:left;align-items:flex-start;max-width:none;margin:0;padding-top:18px;border-top:1px solid #2A5A40}
   .ns-fig{order:1}
   .ns-base{order:2;grid-template-columns:1fr;gap:18px;margin:16px 0 18px}
   .ns-base .t-tech,.ns-base .t-health{text-align:left;align-items:flex-start;justify-self:start;max-width:none;padding-top:18px;border-top:1px solid #2A5A40}
@@ -608,7 +624,7 @@ a.client:hover .c-url{color:var(--green-dk)}
   </div>
 </section>
 
-<section class="built" aria-label="Client work">
+<section class="built" id="clients" aria-label="Client work">
   <div class="wrap">
     <div class="built-head reveal"><span>CLIENT WORK</span><a href="https://digitalbuilders.co" target="_blank" rel="noopener">DigitalBuilders.co ↗</a></div>
     <h2 class="sec-h built-title reveal">What I’ve built for <span class="em">clients</span></h2>
@@ -712,13 +728,13 @@ a.client:hover .c-url{color:var(--green-dk)}
     <div class="north-head reveal">
       <div class="eyebrow">Where I’m going</div>
       <h2 class="sec-h">Two foundations, one north <span class="em">star</span></h2>
-      <p>Health tech is where both foundations meet. I’m joining a team to learn how great health organisations use data, protect it and build products, on the way to the north star.</p>
+      <p>The front door to care is now digital. People search, compare and book long before they walk in, and most never do. I want to understand that journey inside out, then build the places it leads to.</p>
     </div>
     <div class="ns-stage reveal-tri">
       <div class="ns-lbl ns-north t-north">
         <span class="ns-k">North star</span>
-        <h3>Health &amp; performance centres around the world</h3>
-        <p>Doctors, dietitians, coaches and athletes under one roof, helping people become the best versions of themselves.</p>
+        <h3>Community health centres</h3>
+        <p>Physios, psychologists, coaches, courts, classes and events under one roof, so no one has to figure out their health alone.</p>
       </div>
       <div class="ns-fig">
         <svg viewBox="0 0 800 620" role="img" aria-label="Triangle: Tech and Health at the base lead up to the north star at the apex">
@@ -727,7 +743,8 @@ a.client:hover .c-url{color:var(--green-dk)}
             <radialGradient id="nsGlow"><stop offset="0" stop-color="#45D98A" stop-opacity=".55"></stop><stop offset="1" stop-color="#45D98A" stop-opacity="0"></stop></radialGradient>
           </defs>
           <path class="ns-fill" d="M80 560 L400 48 L720 560 Z" fill="url(#nsFill)"></path>
-          <path class="ns-tier" d="M180 400 H620" stroke="#3E6E53" stroke-width="2" stroke-dasharray="6 8" fill="none"></path>
+          <path class="ns-tier" d="M400 470 V70" stroke="#3E6E53" stroke-width="2" stroke-dasharray="6 8" fill="none"></path>
+          <g class="ns-dots t-next" fill="#112B1E" stroke="#7FE0A8" stroke-width="3"><circle cx="400" cy="470" r="9" fill="#7FE0A8"></circle><circle cx="400" cy="335" r="8"></circle><circle cx="400" cy="205" r="8"></circle></g>
           <path class="ns-edge ns-base-line" pathLength="1" d="M80 560 L720 560" stroke="#7FE0A8" stroke-width="3" fill="none" stroke-linecap="round"></path>
           <path class="ns-edge ns-side-l" pathLength="1" d="M80 560 L400 48" stroke="#7FE0A8" stroke-width="3" fill="none" stroke-linecap="round"></path>
           <path class="ns-edge ns-side-r" pathLength="1" d="M720 560 L400 48" stroke="#7FE0A8" stroke-width="3" fill="none" stroke-linecap="round"></path>
@@ -740,20 +757,22 @@ a.client:hover .c-url{color:var(--green-dk)}
             <text class="t-health" x="720" y="612" text-anchor="middle">HEALTH</text>
           </g>
         </svg>
-        <div class="ns-next t-next"><span>Next step</span><b>Product in health tech</b></div>
+        <div class="ns-ms ns-ms1 t-next" tabindex="0"><span>Now · Step 1</span><b>Product manager, health tech</b><em>Learn how health organisations work, and how they use and protect data.</em></div><div class="ns-ms ns-ms2 t-next" tabindex="0"><span>Step 2</span><b>Senior AI product manager</b><em>AI features built on health data, with privacy built in from the start.</em></div><div class="ns-ms ns-ms3 t-next" tabindex="0"><span>Step 3</span><b>Lead product, preventative health</b><em>Lead the products that keep people well before they need treatment.</em></div>
       </div>
       <div class="ns-base">
         <div class="ns-lbl t-tech">
           <span class="ns-k">Tech</span>
           <h3>Product, data &amp; engineering</h3>
-          <p>Four products shipped end to end. Discovery, data, AI and systems that feel seamless.</p>
+          <p>Four products shipped end to end. Discovery, data, AI and systems that feel seamless. <a href="#work">See them ↗</a></p>
         </div>
         <div class="ns-lbl t-health">
           <span class="ns-k">Health</span>
           <h3>15 years in health &amp; performance</h3>
-          <p>Coaching movement, strength &amp; conditioning, nutrition, breathwork and mindset, plus digital work for physio, psychology and wellness clinics.</p>
+          <p>Coaching movement, strength &amp; conditioning, nutrition, breathwork and mindset, plus digital work for physio, psychology and wellness clinics. <a href="#clients">See clients ↗</a></p>
         </div>
       </div>
+      <ol class="ns-list t-next" aria-label="Path to the north star"><li><span>Step 1<br>Now</span><b>Product manager, health tech</b><p>Learn how health organisations work, and how they use and protect data.</p></li><li><span>Step 2</span><b>Senior AI product manager</b><p>AI features built on health data, with privacy built in from the start.</p></li><li><span>Step 3</span><b>Lead product, preventative health</b><p>Lead the products that keep people well before they need treatment.</p></li></ol>
+      <div class="ns-cta t-north"><p>I’ve built a lot on my own. Now I want a team that will challenge me, show me my blind spots and help me build better products for the people who use them.</p><a class="btn btn-green" href="#contact">Hiring in health tech? Let’s talk →</a></div>
     </div>
   </div>
 </section>
