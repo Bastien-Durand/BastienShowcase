@@ -412,6 +412,10 @@ a.client:hover .c-url{color:var(--green-dk)}
 .ns-list li{display:flex;flex-direction:column;gap:6px}
 .ns-list span{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-muted)}
 .ns-list li:first-child span{color:var(--mint)}
+.ns-list span i{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;border:1.5px solid currentColor;font:600 14px/1 var(--mono);font-style:normal;letter-spacing:0}
+.ns-list li:first-child span i{background:rgba(127,224,168,.12)}
+.ns-list span em{font:600 13px/1 var(--mono);font-style:normal;letter-spacing:.14em;color:var(--mint)}
+.ns-list span{display:flex;align-items:center;gap:10px}
 .ns-list b{font:700 17px/1.3 var(--display);color:var(--on-dark)}
 .ns-list p{margin:0;font-size:14px;line-height:1.5;color:var(--on-dark-muted)}
 .ns-lbl p a{color:var(--mint);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
@@ -453,6 +457,9 @@ a.client:hover .c-url{color:var(--green-dk)}
   .ns-base .t-tech,.ns-base .t-health{text-align:left;align-items:flex-start;justify-self:start;max-width:none;padding-top:18px;border-top:1px solid #2A5A40}
   .ns-lbl h3{font-size:19px}.ns-lbl p{font-size:14px}
   /* north section: text +15% on mobile */
+  .north .ns-list span{display:flex;flex-direction:column;align-items:center;gap:6px;align-self:start}
+  .north .ns-list span i{font-size:15px}
+  .north .ns-list span em{font-size:13.5px}
   .north .eyebrow{font-size:13.8px}
   .north .north-head .sec-h{font-size:39px}
   .north .north-head p{font-size:18.4px}
@@ -790,7 +797,7 @@ a.client:hover .c-url{color:var(--green-dk)}
           <p>Coaching movement, strength &amp; conditioning, nutrition, breathwork and mindset, plus digital work for physio, psychology and wellness clinics. <a href="#clients">See clients ↗</a></p>
         </div>
       </div>
-      <ol class="ns-list t-next" aria-label="Path to the north star"><li><span>Next · Step 1</span><b>Product manager, health tech</b><p>Learn how health organisations work, and how they use and protect data.</p></li><li><span>Step 2</span><b>Senior AI product manager</b><p>AI features built on health data, with privacy built in from the start.</p></li><li><span>Step 3</span><b>Lead product, preventative health</b><p>Lead the products that keep people well before they need treatment.</p></li></ol>
+      <ol class="ns-list t-next" aria-label="Path to the north star"><li><span><i>1</i><em>Next</em></span><b>Product manager, health tech</b><p>Learn how health organisations work, and how they use and protect data.</p></li><li><span><i>2</i></span><b>Senior AI product manager</b><p>AI features built on health data, with privacy built in from the start.</p></li><li><span><i>3</i></span><b>Lead product, preventative health</b><p>Lead the products that keep people well before they need treatment.</p></li></ol>
       <div class="ns-cta t-north"><p>I’ve built a lot on my own. Now I want a team that will challenge me, show me my blind spots and help me build better products for the people who use them.</p><a class="btn btn-green" href="#contact">Hiring in health tech? Let’s talk →</a></div>
     </div>
   </div>
