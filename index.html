@@ -1346,7 +1346,7 @@ a.client:hover .c-shot img{transform:scale(1.04)}
     <div class="brain-copy reveal">
       <div class="eyebrow">Ask my Business Brain</div>
       <h2 class="sec-h">Tell me what’s slowing you <span class="em">down</span></h2>
-      <div class="nbrain" aria-hidden="true"><canvas id="nbrain"></canvas><span class="nb-lbl">NEURAL NET · <b id="nb-n">0</b> SIGNALS</span></div>
+      <div class="nbrain" aria-hidden="true"><canvas id="nbrain"></canvas></div>
     </div>
     <div class="term reveal" style="--d:.15s">
       <div class="term-bar"><i></i><i></i><i></i><span>business-brain · bastienbuilds</span></div>
@@ -2188,7 +2188,7 @@ a.client:hover .c-shot img{transform:scale(1.04)}
   function spawn(from){var e=from!=null?adj[from][Math.random()*adj[from].length|0]:Math.random()*E.length|0;if(e==null)return;var ed=E[e],dir=from==null?(Math.random()<.5):(ed.a===from);P.push({e:e,s:dir?ed.a:ed.b,d:dir?ed.b:ed.a,k:0,v:1.1+Math.random()*.9,hops:from==null?0:1})}
   window.brainBurst=function(){var c=N.length*.47|0;for(var i=0;i<26;i++)spawn(Math.random()*N.length|0)};
   function draw(now){var t=(now-t0)/1000,dt=Math.min(.05,(now-(last||now))/1000);last=now;cx.clearRect(0,0,W,H);
-    cx.globalAlpha=.55;cx.drawImage(sil,0,0,W,H);cx.globalAlpha=1;var grow=reduce?1:Math.min(1,t/2.2),pts=N.map(function(n){return pos(n,reduce?0:t)});
+    var grow=reduce?1:Math.min(1,t/2.2),pts=N.map(function(n){return pos(n,reduce?0:t)});
     // edges, slowly re-weighting so the net looks like it is learning
     E.forEach(function(e){var A=N[e.a],B=N[e.b];if(A.born>grow*.75||B.born>grow*.75)return;var w=.5+.5*Math.sin(t*e.f+e.w*6.28);
       cx.strokeStyle='rgba(127,224,168,'+(.05+.22*w)+')';cx.lineWidth=.6+w*.7;cx.beginPath();cx.moveTo(pts[e.a][0],pts[e.a][1]);cx.lineTo(pts[e.b][0],pts[e.b][1]);cx.stroke()});
