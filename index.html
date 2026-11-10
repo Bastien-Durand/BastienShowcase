@@ -1071,6 +1071,30 @@ a.client:hover .c-shot img{transform:scale(1.04)}
 @media (prefers-reduced-motion:reduce){.bob-up,.bob-down{animation:none}}
 .tchips div{text-align:center}
 
+
+/* ===== mobile UX pass ===== */
+.term-chips button{min-height:40px}
+.term-form button{min-height:44px;padding-inline:20px}
+.case-txt a,.svc2-proof a,.ob a,.built-head a,.ns-lbl a,.foot a{display:inline-flex;align-items:center;min-height:44px;align-self:flex-start}
+.js .vsticky,.js .open-sticky{height:calc(100svh - 72px)}
+@media (max-width:1000px){
+  .svc2-list li.has-panel .svc2-panel{padding:4px 0 22px}
+  .svc2-list li.has-panel button{border-bottom:0}
+  .svc2-list li.has-panel{border-bottom:1px solid var(--line)}
+  .svc2-art{aspect-ratio:16/10}
+}
+@media (max-width:900px){
+  .hero .eyebrow{letter-spacing:.08em;line-height:1.5}
+  .c-card span{font-size:16px;overflow-wrap:normal;word-break:normal}
+  .c-card>span{min-width:0}
+  .c-card span span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .js .open-scroll{height:240vh}.js .vscroll{height:280vh}
+  .js .vsticky,.js .open-sticky{height:calc(100svh - 60px)}
+  .svc2-list button{padding:14px 0;min-height:56px}
+  .faq summary{min-height:48px}
+  .cform .acts .btn{flex:1}
+}
+@media (max-width:380px){.c-card span span{font-size:15px}.hero h1{font-size:44px}}
 </style>
 
 </head>
@@ -1570,7 +1594,7 @@ a.client:hover .c-shot img{transform:scale(1.04)}
      prob:'You want AI in the business, but not your customers’ details inside someone else’s model.',
      does:['Map where your data goes, and who can see it','Strip sensitive details before anything reaches an AI','Give each person their own login with only the access they need','Keep a human reviewing every decision that matters'],
      who:'Health · finance · anyone holding personal data',
-     proof:{k:'CASE · AI COMPLIANCE CHECKER',b:'Document review for financial services',p:'An AI prototype that checks documents against compliance checklists, with page-level evidence.',n:[['Redacted','before data reaches AI'],['Every flag','reviewed by a person']],a:['See it in my work ↑','#work']}},
+     proof:{k:'CASE · AI COMPLIANCE CHECKER',b:'Document review for financial services',p:'An AI prototype that checks documents against compliance checklists, with page-level evidence.',n:[['Redacted','before data reaches AI'],['Every flag','reviewed by a person']],a:['Talk about AI safety →','#contact']}},
     {id:'ai',name:'AI-native',sub:'Modernise and optimise',
      title:'Bring your business up to speed with AI',
      prob:'You feel behind on AI, and your team loses hours every week to admin.',
@@ -1580,7 +1604,7 @@ a.client:hover .c-shot img{transform:scale(1.04)}
   ];
   var list=document.getElementById('svc-list'),panel=document.getElementById('svc-panel');
   var ART={product:'many voices → one focus',search:'you, found first',web:'blocks become a page',software:'tools, connected',security:'scanned, locked, safe',ai:'busywork → flow'};
-  var mode='product';
+  var mode='product',sz=null;
   if(list&&panel){
     list.innerHTML=SVC.map(function(s,i){return '<li><button role="tab" type="button" id="svc-'+s.id+'" data-i="'+i+'" aria-selected="'+(i===0)+'"><span class="i">0'+(i+1)+'</span><span class="n">'+esc(s.name)+'</span><span class="s">'+esc(s.sub)+'</span></button></li>'}).join('');
     var btns=list.querySelectorAll('button');
@@ -1589,6 +1613,9 @@ a.client:hover .c-shot img{transform:scale(1.04)}
       document.getElementById('svc-art-lbl').textContent=ART[s.id].toUpperCase();
       var ext=/^http/.test(s.proof.a[1]);
       panel.innerHTML='<h3>'+esc(s.title)+'</h3><p class="prob">'+esc(s.prob)+'</p><ol>'+s.does.map(function(d){return '<li>'+esc(d)+'</li>'}).join('')+'</ol><div class="svc2-proof"><b>PROOF</b>'+s.proof.n.slice(0,2).map(function(n){return '<span><strong>'+esc(n[0])+'</strong>'+esc(n[1])+'</span>'}).join('')+'<a href="'+s.proof.a[1]+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+esc(s.proof.a[0])+'</a></div>';
+      var pw=document.querySelector('.svc2-panel'),home=document.querySelector('.svc2');
+      if(window.matchMedia('(max-width:1000px)').matches){var li=btns[i].parentNode;list.querySelectorAll('li.has-panel').forEach(function(x){x.classList.remove('has-panel')});li.classList.add('has-panel');li.appendChild(pw);if(sz)setTimeout(sz,0)}
+      else if(pw.parentNode!==home){list.querySelectorAll('li.has-panel').forEach(function(x){x.classList.remove('has-panel')});home.appendChild(pw);if(sz)setTimeout(sz,0)}
       panel.classList.remove('swap');void panel.offsetWidth;panel.classList.add('swap');
       if(scroll){document.getElementById('services').scrollIntoView({behavior:reduce?'auto':'smooth'})}
     };
@@ -1596,8 +1623,8 @@ a.client:hover .c-shot img{transform:scale(1.04)}
     showService(0);
     /* generative art */
     var cv=document.getElementById('svc-art'),cx=cv.getContext('2d'),W=0,Hh=0,t0=performance.now();
-    function sz(){var r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);cv.width=r.width*d;cv.height=r.height*d;cx.setTransform(d,0,0,d,0,0);W=r.width;Hh=r.height}
-    sz();addEventListener('resize',sz);
+    sz=function(){var r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);cv.width=r.width*d;cv.height=r.height*d;cx.setTransform(d,0,0,d,0,0);W=r.width;Hh=r.height};
+    sz();var mqS=window.matchMedia('(max-width:1000px)').matches;addEventListener('resize',function(){sz();var m=window.matchMedia('(max-width:1000px)').matches;if(m!==mqS){mqS=m;var a=list.querySelector('[aria-selected="true"]');if(a)showService(+a.dataset.i)}});
     var R=[];for(var k=0;k<90;k++)R.push([Math.random(),Math.random(),Math.random()]);
     var G='#45D98A',M='#7FE0A8',D='rgba(127,224,168,.22)';
     function dot(x,y,r,c){cx.fillStyle=c;cx.beginPath();cx.arc(x,y,r,0,7);cx.fill()}
