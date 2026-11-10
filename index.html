@@ -1176,8 +1176,7 @@ a.client:hover .c-shot img{transform:scale(1.04)}
 .case-big.sm{font-size:clamp(26px,2.6vw,38px)}
 /* lanes interaction */
 .lanes .lane{transition:opacity .35s}
-.lanes svg:hover .lane{opacity:.22}
-.lanes svg .lane:hover{opacity:1}
+.lanes svg:has(.lane:hover) .lane:not(:hover){opacity:.22}
 .lanes .lane circle{transform-box:fill-box;transform-origin:center}
 .lanes .lane:hover circle{animation:lp 1.1s ease-in-out infinite}
 @keyframes lp{0%,100%{scale:1}50%{scale:1.45}}
