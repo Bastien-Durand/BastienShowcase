@@ -1159,7 +1159,9 @@ a.client:hover .c-shot img{transform:scale(1.04)}
 .hero-mobile .photo.ph{position:relative;left:auto;top:auto;width:100%;height:320px;border-radius:24px}
 .hero-mobile .photo.ph img{object-position:center 25%}
 .hero-mobile .photo.ph .gl{background-position:center 25%}
-.ph-hint{position:absolute;right:14px;bottom:14px;font:500 10px var(--mono);letter-spacing:.12em;color:#E8F7EE;background:rgba(12,32,23,.7);padding:6px 10px;border-radius:999px;pointer-events:none;transition:opacity .3s}
+.ph-hint{position:absolute;right:14px;bottom:14px;font:600 11px var(--mono);letter-spacing:.12em;color:var(--forest);background:var(--green-hi);padding:7px 12px;border-radius:999px;pointer-events:none;transition:opacity .3s;transform-origin:center;animation:phBreathe 2.8s ease-in-out infinite}
+@keyframes phBreathe{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(61,220,132,.45)}50%{transform:scale(1.07);box-shadow:0 0 0 8px rgba(61,220,132,0)}}
+@media (prefers-reduced-motion:reduce){.ph-hint{animation:none}}
 .ph.broken .ph-hint{opacity:0}
 @media (prefers-reduced-motion:reduce){.ph .gl,.ph.glitching img{animation:none}}
 /* case study browser frames */
@@ -1275,10 +1277,10 @@ a.client:hover .c-shot img{transform:scale(1.04)}
       <div class="ctas"><a class="btn btn-green" href="https://wa.me/61451604063?text=Hi%20Bastien%2C%20I%27d%20like%20to%20book%20a%20free%2030-minute%20call." target="_blank" rel="noopener">Book a free call →</a><a class="btn btn-ghost" href="#services">What I do</a></div>
     </div>
     <div class="hero-visual" aria-hidden="false">
-      <div class="ph glitching" title="Tap me"><img src="assets/bastien.jpg" alt="Bastien Durand"><span class="gl a"></span><span class="gl b"></span><canvas class="shat" aria-hidden="true"></canvas><span class="ph-hint">TAP ME</span></div>
+      <div class="ph glitching" title="Click me"><img src="assets/bastien.jpg" alt="Bastien Durand"><span class="gl a"></span><span class="gl b"></span><canvas class="shat" aria-hidden="true"></canvas><span class="ph-hint">CLICK ME</span></div>
     </div>
     <div class="hero-mobile">
-      <div class="photo ph glitching"><img src="assets/bastien.jpg" alt="Bastien Durand"><span class="gl a"></span><span class="gl b"></span><canvas class="shat" aria-hidden="true"></canvas><span class="ph-hint">TAP ME</span></div>
+      <div class="photo ph glitching"><img src="assets/bastien.jpg" alt="Bastien Durand"><span class="gl a"></span><span class="gl b"></span><canvas class="shat" aria-hidden="true"></canvas><span class="ph-hint">CLICK ME</span></div>
     </div>
   </div>
 </section>
