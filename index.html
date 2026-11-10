@@ -113,6 +113,7 @@ h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.03em;text-wrap:bal
 /* stats */
 .stats{border-block:1px solid var(--line-2)}
 .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.stats .stat{justify-content:flex-start}.stats .stat:nth-child(4n){border-right:0}.stats .stat:nth-child(4n+1){padding-left:0}.stats .stat:nth-child(-n+4){border-bottom:1px solid var(--line-2)}
 .stat{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:40px 0 40px 40px;border-right:1px solid var(--line-2)}
 .stat:first-child{padding-left:0}.stat:last-child{border-right:0}
 .stat b{font:700 44px/1 var(--display);letter-spacing:-.03em}
@@ -238,7 +239,7 @@ a.client:hover .c-url{color:var(--green-dk)}
 .chips span{font-size:13px;padding:6px 11px;border-radius:999px;border:1px solid var(--dark-line);color:#DCE8E1;transition:border-color .2s,background .2s}
 .chips span:hover{border-color:var(--mint);background:rgba(127,224,168,.08)}
 .bars{display:flex;flex-direction:column;gap:16px;width:100%;max-width:420px;text-align:left;margin-top:8px}
-.bar{display:grid;grid-template-columns:96px 1fr 24px;gap:12px;align-items:center;font-size:17px}
+.bar{display:grid;grid-template-columns:120px 1fr 24px;gap:12px;align-items:center;font-size:17px}
 .bar .tr{height:12px;border-radius:6px;background:#1E3F2D;overflow:hidden}
 .bar .tr i{display:block;height:100%;border-radius:6px;background:var(--green-hi);transform-origin:left}
 .bar small{font:500 13px var(--mono);color:var(--on-dark-muted)}
@@ -711,6 +712,365 @@ a.client:hover .c-url{color:var(--green-dk)}
   .contact .c-card span{font-size:20.2px}
   .contact .c-card .arrow{font-size:25.3px}
 }
+
+/* ===== Consultant additions (Nov 2026) ===== */
+:root{--matrix:#050E09;--matrix-2:#0A1A11;--code:#45D98A;--code-dim:#2C8A57}
+.mx{position:relative;background:radial-gradient(900px 420px at 15% 0%,rgba(69,217,138,.10),transparent 60%),var(--matrix);color:var(--on-dark);overflow:hidden}
+.mx .eyebrow{color:var(--code)}
+.mx .em{color:var(--green-hi)}
+.mx canvas.rain{position:absolute;inset:0;width:100%;height:100%;opacity:.22;pointer-events:none}
+.mx>.wrap{position:relative;z-index:1}
+.mono{font-family:var(--mono)}
+
+/* business brain */
+.brain .eyebrow{color:var(--mint)}.brain .em{color:var(--green-hi)}
+.brain .wrap{padding-block:96px;display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.brain-copy{display:flex;flex-direction:column;gap:18px}
+.brain-copy p{margin:0;font-size:18px;line-height:1.55;color:var(--on-dark-muted);max-width:30em}
+.term{border:1px solid #1F4A31;border-radius:18px;background:rgba(3,10,6,.86);box-shadow:0 40px 80px -40px rgba(0,0,0,.9),0 0 0 1px rgba(69,217,138,.06) inset;overflow:hidden}
+.term-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid #16351F;font:500 12px var(--mono);color:var(--code-dim)}
+.term-bar i{width:10px;height:10px;border-radius:50%;background:#1F4A31}
+.term-bar span{margin-left:8px}
+.term-body{padding:20px 20px 8px;min-height:250px;max-height:340px;overflow:auto;font:500 14px/1.6 var(--mono);color:#BFEBD0}
+.term-body .q{color:var(--code)}
+.term-body .q::before{content:"> ";color:var(--code-dim)}
+.term-body .a{margin:6px 0 16px;color:#D8EFE1;font-family:var(--body);font-size:15px;line-height:1.55}
+.term-body .a a{color:var(--code);font-family:var(--mono);font-size:13px;text-decoration:none;border-bottom:1px dashed var(--code-dim)}
+.cursor{display:inline-block;width:8px;height:16px;background:var(--code);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.term-form{display:flex;gap:10px;padding:14px 16px;border-top:1px solid #16351F}
+.term-form label{flex:1;display:flex;align-items:center;gap:8px;font:500 14px var(--mono);color:var(--code-dim)}
+.term-form input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#E8F7EE;font:500 15px var(--mono);caret-color:var(--code)}
+.term-form input::placeholder{color:#3F6F52}
+.term-form button{border:0;border-radius:10px;padding:10px 16px;background:var(--code);color:var(--matrix);font:600 13px var(--mono);cursor:pointer}
+.term-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
+.term-chips button{border:1px solid #1F4A31;background:rgba(69,217,138,.06);color:#BFEBD0;border-radius:999px;padding:8px 12px;font:500 12px var(--mono);cursor:pointer;transition:border-color .2s,background .2s}
+.term-chips button:hover{border-color:var(--code);background:rgba(69,217,138,.14)}
+@media (max-width:1000px){.brain .wrap{grid-template-columns:1fr;gap:32px;padding-block:64px}.brain-copy p{font-size:16px}.term-body{min-height:200px;font-size:13px}}
+
+/* services */
+.services .wrap{padding-block:100px 80px}
+.svc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.svc-head p{margin:0;max-width:34em;font-size:17px;color:var(--muted)}
+.svc{display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:stretch}
+.svc-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.svc-btn{width:100%;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left;font:600 17px var(--display);color:var(--ink);transition:border-color .2s,background .2s,transform .2s}
+.svc-btn:hover{border-color:#A9D6B9;transform:translateX(3px)}
+.svc-btn .ic{flex:none;width:44px;height:44px;border-radius:12px;background:var(--green-soft);display:grid;place-items:center}
+.svc-btn .ic svg{width:38px;height:38px}
+.svc-btn small{display:block;font:500 11px var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.svc-btn[aria-selected="true"]{background:var(--forest);border-color:var(--forest);color:var(--on-dark)}
+.svc-btn[aria-selected="true"] small{color:var(--mint)}
+.svc-btn[aria-selected="true"] .ic{background:rgba(127,224,168,.16)}
+.svc-btn[aria-selected="true"] .ic svg{color:var(--mint)}
+.svc-btn .ic svg{color:var(--green)}
+.svc-panel{border:1px solid var(--line);border-radius:24px;background:var(--surface);padding:36px;display:grid;grid-template-columns:1.1fr .9fr;gap:36px}
+.svc-panel.swap{animation:swapIn .4s ease both}
+.svc-main{display:flex;flex-direction:column;gap:18px}
+.svc-main h3{font-size:36px;line-height:1.05}
+.svc-prob{margin:0;padding:2px 0 2px 14px;border-left:2px solid var(--green-hi);font-size:16px;line-height:1.55;color:var(--muted)}
+.svc-prob b{display:block;font:600 11px var(--mono);letter-spacing:.14em;color:var(--green);margin-bottom:4px}
+.svc-main ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.svc-main li{display:flex;gap:10px;font-size:16px;line-height:1.45}
+.svc-main li::before{content:"";flex:none;width:10px;height:9px;margin-top:6px;background:var(--green);clip-path:polygon(0 0,100% 0,50% 100%)}
+.svc-for{font:500 12px var(--mono);letter-spacing:.06em;color:var(--muted)}
+.svc-proof{display:flex;flex-direction:column;gap:14px;padding:24px;border-radius:18px;background:var(--dark-bg);color:var(--on-dark)}
+.svc-proof .k{font:600 11px var(--mono);letter-spacing:.14em;color:var(--mint)}
+.svc-proof b{font:700 22px/1.2 var(--display)}
+.svc-proof p{margin:0;font-size:14px;line-height:1.5;color:var(--on-dark-muted)}
+.svc-nums{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.svc-nums div{padding:12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid #2A5A40}
+.svc-nums strong{display:block;font:700 24px/1 var(--display);color:var(--green-hi)}
+.svc-nums span{font-size:12px;color:var(--on-dark-muted)}
+.svc-proof a{color:var(--mint);font-weight:600;font-size:14px}
+@media (max-width:1100px){.svc{grid-template-columns:1fr}.svc-list{flex-direction:row;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1*var(--gutter));padding:2px var(--gutter)}.svc-list::-webkit-scrollbar{display:none}.svc-list li{flex:none}.svc-btn{font-size:15px;padding:10px 14px}.svc-btn small{display:none}.svc-btn .ic{width:34px;height:34px}.svc-btn .ic svg{width:28px;height:28px}}
+@media (max-width:900px){.services .wrap{padding-block:64px 48px}.svc-head{margin-bottom:24px}.svc-head p{font-size:15px}.svc-panel{grid-template-columns:1fr;padding:22px;gap:22px;border-radius:20px}.svc-main h3{font-size:28px}.svc-main li{font-size:15px}}
+
+/* built in the open */
+.open .wrap{padding-block:96px}
+.open-head{display:flex;flex-direction:column;gap:14px;max-width:760px;margin-bottom:44px}
+.open-head p{margin:0;font-size:18px;line-height:1.55;color:var(--on-dark-muted)}
+.open-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ob{position:relative;display:flex;flex-direction:column;gap:10px;padding:22px;border-radius:16px;border:1px solid #1F4A31;background:rgba(3,10,6,.7);min-height:200px}
+.ob .tag{font:500 11px var(--mono);letter-spacing:.12em;color:var(--code-dim)}
+.ob b{font:700 20px/1.2 var(--display);color:#E8F7EE}
+.ob p{margin:0;font-size:14px;line-height:1.5;color:var(--on-dark-muted)}
+.ob .yr{margin-top:auto;font:600 28px/1 var(--mono);color:var(--code)}
+.ob.hl{border-color:var(--code);box-shadow:0 0 40px -18px rgba(69,217,138,.6)}
+.ob a{color:var(--code);text-decoration:none;font:500 13px var(--mono)}
+.open-loop{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font:500 13px var(--mono);color:#BFEBD0}
+.open-loop span{padding:8px 12px;border-radius:999px;border:1px solid #1F4A31}
+.open-loop i{font-style:normal;color:var(--code-dim)}
+@media (max-width:1100px){.open-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.open .wrap{padding-block:64px}.open-head p{font-size:16px}.open-grid{grid-template-columns:1fr;gap:10px}.ob{min-height:0;padding:18px}}
+
+/* decks vs done */
+.vs .wrap{padding-block:96px}
+.vs-head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:40px}
+.vs-head p{margin:0;font-size:17px;color:var(--muted)}
+.vs-table{max-width:1000px;margin:0 auto;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.vs-row{display:grid;grid-template-columns:200px 1fr 1fr;border-bottom:1px solid var(--line)}
+.vs-row:last-child{border-bottom:0}
+.vs-row>*{padding:18px 22px;font-size:15px;line-height:1.45}
+.vs-row .lbl{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center}
+.vs-row .old{color:var(--muted);background:#FAFBFA}
+.vs-row .new{background:var(--green-soft);color:var(--ink);font-weight:500;display:flex;gap:10px}
+.vs-row .new::before{content:"";flex:none;width:10px;height:9px;margin-top:6px;background:var(--green);clip-path:polygon(0 0,100% 0,50% 100%)}
+.vs-row.th>*{font:600 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;padding-block:14px}
+.vs-row.th .new{background:var(--forest);color:var(--mint)}
+.vs-row.th .new::before{display:none}
+@media (max-width:900px){.vs .wrap{padding-block:64px}.vs-head{align-items:flex-start;text-align:left}.vs-row{grid-template-columns:1fr 1fr}.vs-row .lbl{grid-column:1/-1;padding-bottom:0;background:#fff}.vs-row.th .lbl{display:none}.vs-row>*{padding:12px 14px;font-size:14px}}
+
+/* faq */
+.faq .wrap{padding-block:40px 100px;display:grid;grid-template-columns:.8fr 1.2fr;gap:64px}
+.faq-l{display:flex;flex-direction:column;gap:14px}
+.faq-l p{margin:0;font-size:17px;color:var(--muted)}
+.faq-list{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font:600 19px/1.3 var(--display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:14px;height:12px;background:var(--green);clip-path:polygon(0 0,100% 0,50% 100%);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(180deg)}
+.faq details p{margin:0 0 22px;font-size:16px;line-height:1.6;color:var(--muted);max-width:44em}
+@media (max-width:900px){.faq .wrap{grid-template-columns:1fr;gap:16px;padding-block:24px 64px}.faq summary{font-size:17px;padding:18px 0}.faq details p{font-size:15px}}
+
+/* hiring divider */
+.hire-div{border-top:1px solid var(--line-2)}
+.hire-div .wrap{padding-block:56px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hire-div h2{font-size:28px}
+.hire-div p{margin:0;font-size:15px;color:var(--muted)}
+.hire-div .pill-k{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px;background:var(--green-soft);color:var(--green-dk)}
+@media (max-width:900px){.hire-div .wrap{padding-block:40px 0}.hire-div h2{font-size:22px}}
+
+/* contact paths + green pill */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.path{display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:16px;border:1px solid #2A5A40;background:rgba(255,255,255,.04)}
+.path small{font:500 11px var(--mono);letter-spacing:.12em;color:var(--mint)}
+.path b{font:700 18px/1.25 var(--display)}
+.path span{font-size:14px;color:var(--on-dark-muted);line-height:1.45}
+.path .btn{margin-top:8px;align-self:flex-start;padding:11px 18px;font-size:14px}
+.btn-pill{background:var(--green-hi);color:var(--forest);position:relative;overflow:hidden}
+.btn-pill::before{content:"";width:22px;height:12px;border-radius:999px;background:linear-gradient(90deg,#0F5E34 50%,#7FE0A8 50%);box-shadow:0 0 0 2px rgba(17,43,30,.25)}
+.btn-ghost-dk{border:1px solid #2A5A40;color:var(--on-dark);background:transparent}
+.btn-ghost-dk:hover{border-color:var(--mint)}
+@media (max-width:900px){.paths{grid-template-columns:1fr}.svc-nums strong{font-size:19px}}
+
+
+/* ===== v2: clients with snapshots, CTAs, value, trust, lanes, pill, form ===== */
+.clients.shots{grid-template-columns:repeat(3,1fr);gap:20px}
+.clients.shots .client{flex-direction:column;background:#fff;border-color:var(--line)}
+.clients.shots a.client:hover{background:#fff;border-color:#A9D6B9;box-shadow:0 22px 40px -28px rgba(17,43,30,.55)}
+.c-shot{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;background:var(--surface);border-bottom:1px solid var(--line)}
+.c-shot img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s}
+a.client:hover .c-shot img{transform:scale(1.04)}
+.c-shot.logo{display:grid;place-items:center;background:var(--dark-bg)}
+.c-shot.logo img{width:120px;height:120px;object-fit:contain;border-radius:22px;background:#fff;padding:10px}
+.c-shot.logo i{width:96px;height:96px;border-radius:22px;background:var(--green-soft);display:grid;place-items:center;color:var(--green-dk)}
+.c-shot .bar{position:absolute;left:10px;top:10px;display:flex;gap:5px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.9)}
+.c-shot .bar i{width:7px;height:7px;border-radius:50%;background:#C9D5CD}
+.clients.shots .c-body{padding:18px 20px 18px}
+@media (max-width:1300px){.clients.shots{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.clients.shots{display:flex}.clients.shots .client{flex:0 0 82%}}
+
+.p-visual.result{background:var(--dark-bg);display:flex;align-items:center;justify-content:center;padding:40px}
+.res-card{width:min(520px,100%);display:flex;flex-direction:column;gap:14px;padding:28px;border-radius:20px;background:rgba(3,10,6,.5);border:1px solid #2A5A40;color:var(--on-dark)}
+.res-card .k{font:600 11px var(--mono);letter-spacing:.14em;color:var(--mint)}
+.res-card b{font:700 26px/1.15 var(--display)}
+.res-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.05);font-size:15px}
+.res-row em{font-style:normal;font:600 13px var(--mono);color:var(--green-hi)}
+.res-row em.wip{color:#E8C46A}
+
+.cta-band .wrap{padding-block:0 72px}
+.cta-in{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:22px 26px;border-radius:20px;background:var(--green-soft);border:1px solid #CFE6D7}
+.cta-in p{margin:0;font:600 19px/1.35 var(--display);color:var(--ink)}
+.cta-in p span{display:block;font:400 15px var(--body);color:var(--muted);margin-top:4px}
+.cta-in .ctas{gap:10px}
+@media (max-width:900px){.cta-band .wrap{padding-bottom:48px}.cta-in{padding:18px}.cta-in p{font-size:17px}.cta-in .btn{flex:1}}
+
+.value .wrap{padding-block:96px}
+.value-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.value-head p{margin:0;max-width:30em;font-size:17px;color:var(--muted)}
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.vcard{display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:20px;border:1px solid var(--line);background:#fff}
+.vcard .n{font:600 12px var(--mono);letter-spacing:.14em;color:var(--green)}
+.vcard .badge2{width:52px;height:52px;border-radius:14px;background:var(--green-soft);display:grid;place-items:center}
+.vcard .badge2 svg{width:44px;height:44px;color:var(--green)}
+.vcard h3{font-size:22px;line-height:1.2}
+.vcard p{margin:0;font-size:15px;line-height:1.5;color:var(--muted)}
+.vcard .eg{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);font:500 12px/1.5 var(--mono);color:var(--green-dk)}
+.why{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.why div{display:flex;gap:12px;align-items:flex-start;padding:18px 20px;border-radius:16px;background:var(--forest);color:var(--on-dark)}
+.why b{display:block;font:700 16px var(--display);color:var(--mint);margin-bottom:2px}
+.why span{font-size:14px;color:var(--on-dark-muted);line-height:1.45}
+.why i{flex:none;width:12px;height:11px;margin-top:5px;background:var(--green-hi);clip-path:polygon(0 0,100% 0,50% 100%)}
+@media (max-width:1100px){.vgrid{grid-template-columns:1fr 1fr}.why{grid-template-columns:1fr}}
+@media (max-width:900px){.value .wrap{padding-block:64px}.vgrid{grid-template-columns:1fr;gap:12px}.vcard{padding:18px}.value-head p{font-size:15px}}
+
+.trust{background:var(--surface)}
+.trust .wrap{padding-block:88px;display:grid;grid-template-columns:420px 1fr;gap:56px;align-items:center}
+.trust-photo{position:relative;border-radius:26px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 60px -30px rgba(17,43,30,.5)}
+.trust-photo img{width:100%;height:100%;object-fit:cover}
+.trust-photo .cap2{position:absolute;left:14px;right:14px;bottom:14px;padding:10px 14px;border-radius:14px;background:rgba(17,43,30,.88);color:var(--on-dark);font:500 13px var(--body)}
+.trust-photo .cap2 b{display:block;font:600 11px var(--mono);letter-spacing:.12em;color:var(--mint)}
+.trust-r{display:flex;flex-direction:column;gap:22px;min-width:0}
+.trust-r>p{margin:0;font-size:18px;line-height:1.55;color:var(--muted);max-width:34em}
+.tchips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tchips div{padding:16px;border-radius:16px;background:#fff;border:1px solid var(--line)}
+.tchips b{display:block;font:700 30px/1 var(--display);letter-spacing:-.02em}
+.tchips span{font-size:13px;color:var(--muted)}
+.logos{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.logos-track{display:flex;gap:14px;width:max-content;animation:shelf 60s linear infinite}
+.logos-track span{flex:none;width:88px;height:88px;border-radius:18px;background:#fff;border:1px solid var(--line);display:grid;place-items:center}
+.logos-track img{width:70px;height:70px;object-fit:contain}
+@media (max-width:1000px){.trust .wrap{grid-template-columns:1fr;gap:28px;padding-block:64px}.trust-photo{aspect-ratio:4/3}.trust-r>p{font-size:16px}.tchips b{font-size:24px}}
+
+.lanes{max-width:1200px;margin:0 auto}
+.lanes svg{width:100%;height:auto;display:block}
+.lane-mob{display:none}
+@media (max-width:900px){.lanes svg{display:none}.lane-mob{display:flex;flex-direction:column;gap:18px;margin-top:12px;text-align:left}
+  .lane-mob div{padding-left:16px;border-left:3px solid var(--c)}
+  .lane-mob b{font:600 12px var(--mono);letter-spacing:.12em;color:var(--c)}
+  .lane-mob ul{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-size:15px}
+  .lane-mob .end{border:0;padding:14px 16px;border-radius:16px;background:var(--forest);color:var(--on-dark)}
+  .lane-mob .end b{color:var(--mint)}}
+
+.pill-cta{text-align:center}
+.pill-cta .wrap{padding-block:110px;display:flex;flex-direction:column;align-items:center;gap:20px}
+.pill-cta h2{font-size:clamp(40px,6vw,84px);line-height:.98;letter-spacing:-.04em}
+.pill-cta p{margin:0;max-width:34em;font-size:19px;line-height:1.5;color:var(--on-dark-muted)}
+.pill-cta .btn{font-size:17px;padding:16px 28px}
+.pill-cta .small{font:500 12px var(--mono);letter-spacing:.1em;color:var(--code-dim)}
+@media (max-width:900px){.pill-cta .wrap{padding-block:72px}.pill-cta p{font-size:16px}}
+
+.cform{display:flex;flex-direction:column;gap:12px;width:100%;padding:22px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid #2A5A40}
+.cform .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cform label{display:flex;flex-direction:column;gap:6px;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mint)}
+.cform input,.cform select,.cform textarea{font:400 16px var(--body);color:var(--on-dark);background:rgba(3,10,6,.45);border:1px solid #2A5A40;border-radius:12px;padding:12px 14px;outline:0;letter-spacing:0;text-transform:none}
+.cform select option{color:#10201A}
+.cform input:focus,.cform select:focus,.cform textarea:focus{border-color:var(--mint)}
+.cform textarea{min-height:110px;resize:vertical}
+.cform .acts{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.cform .note{font-size:13px;color:var(--on-dark-muted)}
+.cform .ok{display:none;padding:12px 14px;border-radius:12px;background:rgba(69,217,138,.14);color:var(--on-dark);font-size:14px}
+.cform .ok a{color:var(--mint)}
+@media (max-width:900px){.cform .row{grid-template-columns:1fr}.cform{padding:16px}}
+
+
+/* ===== v3 ===== */
+/* hero: matrix, floating triangles */
+.hero.mx h1{color:#F2F6F3}
+.hero.mx .eyebrow{color:var(--code)}
+.hero.mx p{color:var(--on-dark-muted)}
+.hero.mx .btn-ghost{background:transparent;border-color:#2A5A40;color:var(--on-dark)}
+.hero.mx .btn-ghost:hover{border-color:var(--mint)}
+.hero.mx .tri-label b{color:#F2F6F3}
+.hero.mx .tri-label span{color:var(--on-dark-muted)}
+.hero.mx .tri-lo path,.hero.mx .tri-lo line{stroke:#45D98A}
+.hero.mx .tri-hi path{fill:rgba(69,217,138,.14);stroke:#45D98A}.hero.mx .tri-hi line{stroke:#45D98A}
+.hero.mx .hero-photo{box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+.hero.mx canvas.rain{opacity:.28}
+@keyframes bobUp{0%,100%{translate:0 0}50%{translate:0 -16px}}
+@keyframes bobDown{0%,100%{translate:0 0}50%{translate:0 16px}}
+.bob-up{animation:bobUp 7s ease-in-out infinite}
+.bob-down{animation:bobDown 8s ease-in-out infinite}
+
+/* services: big type + generative art */
+.svc2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.svc2-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.svc2-list button{width:100%;display:grid;grid-template-columns:44px 1fr auto;align-items:baseline;gap:12px;padding:18px 0;border:0;border-bottom:1px solid var(--line);background:none;cursor:pointer;text-align:left;color:var(--ink)}
+.svc2-list .i{font:500 12px var(--mono);color:var(--muted);letter-spacing:.08em}
+.svc2-list .n{font:600 clamp(28px,3.4vw,48px)/1 var(--display);letter-spacing:-.035em;color:#B9C7BF;transition:color .3s,transform .3s}
+.svc2-list .s{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .3s}
+.svc2-list button:hover .n{color:var(--ink)}
+.svc2-list button[aria-selected="true"] .n{color:var(--ink);transform:translateX(6px)}
+.svc2-list button[aria-selected="true"] .s{opacity:1;color:var(--green)}
+.svc2-list button[aria-selected="true"] .i{color:var(--green)}
+.svc2-panel{position:sticky;top:96px;display:flex;flex-direction:column;gap:20px}
+.svc2-art{position:relative;aspect-ratio:16/11;border-radius:24px;overflow:hidden;background:var(--dark-bg)}
+.svc2-art canvas{position:absolute;inset:0;width:100%;height:100%}
+.svc2-art .lbl{position:absolute;left:18px;bottom:16px;font:500 11px var(--mono);letter-spacing:.14em;color:var(--mint)}
+.svc2-detail{display:flex;flex-direction:column;gap:14px}
+.svc2-detail.swap{animation:swapIn .4s ease both}
+.svc2-detail h3{font-size:28px;line-height:1.15}
+.svc2-detail .prob{margin:0;font-size:16px;line-height:1.55;color:var(--muted)}
+.svc2-detail ol{margin:0;padding:0;list-style:none;counter-reset:d;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
+.svc2-detail li{counter-increment:d;display:flex;gap:10px;font-size:14px;line-height:1.45}
+.svc2-detail li::before{content:counter(d,decimal-leading-zero);font:500 11px/1.9 var(--mono);color:var(--green)}
+.svc2-proof{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.svc2-proof b{font:600 11px var(--mono);letter-spacing:.12em;color:var(--green)}
+.svc2-proof strong{font:700 20px var(--display);color:var(--ink);margin-right:4px}
+.svc2-proof a{margin-left:auto;font-weight:600;color:var(--green-dk)}
+@media (max-width:1000px){.svc2{grid-template-columns:1fr;gap:24px}.svc2-panel{position:static}.svc2-list .s{display:none}.svc2-detail ol{grid-template-columns:1fr}.svc2-proof a{margin-left:0}}
+
+/* case studies: editorial rows */
+.cases .wrap{padding-block:96px 40px}
+.cases-head{margin-bottom:56px}
+.case{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;padding:48px 0;border-top:1px solid var(--line)}
+.case:nth-of-type(even) .case-img{order:2}
+.case-img{position:relative;display:block;border-radius:22px;overflow:hidden;aspect-ratio:16/10;background:var(--surface);box-shadow:0 30px 60px -36px rgba(17,43,30,.55)}
+.case-img img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s}
+.case-img:hover img{transform:scale(1.03)}
+.case-img.type{background:var(--dark-bg);display:flex;flex-direction:column;justify-content:flex-end;padding:32px;color:var(--on-dark)}
+.case-img.type span{font:600 clamp(34px,4vw,56px)/1.02 var(--display);letter-spacing:-.035em}
+.case-img.type span em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--green-hi)}
+.case-img.type small{margin-top:14px;font:500 11px var(--mono);letter-spacing:.14em;color:var(--mint)}
+.case-txt{display:flex;flex-direction:column;gap:12px}
+.case-k{font:500 12px var(--mono);letter-spacing:.12em;color:var(--green)}
+.case-txt h3{font-size:clamp(26px,2.6vw,36px);line-height:1.1}
+.case-big{font:700 clamp(56px,7vw,104px)/.95 var(--display);letter-spacing:-.05em;color:var(--ink)}
+.case-big em{font-style:normal;color:var(--green)}
+.case-big.sm{font-size:clamp(36px,4vw,56px)}
+.case-lbl{font-size:15px;color:var(--muted);margin-top:-4px}
+.case-txt p{margin:6px 0 0;font-size:16px;line-height:1.55;color:var(--muted);max-width:32em}
+.case-sub{display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.case-sub b{display:block;font:700 22px var(--display);color:var(--ink)}
+.case-txt a{font-weight:600;font-size:15px;color:var(--green-dk);margin-top:4px}
+@media (max-width:900px){.cases .wrap{padding-block:64px 24px}.cases-head{margin-bottom:24px}.case{grid-template-columns:1fr;gap:20px;padding:32px 0}.case:nth-of-type(even) .case-img{order:0}.case-img.type{padding:22px}}
+
+/* built in the open: scroll highlight */
+.open .wrap{padding-block:0}
+.open.mx{overflow:clip}.open-scroll{position:relative}.open-sticky{position:relative;overflow:hidden}.open-sticky>.wrap{position:relative;z-index:1;width:100%}
+.open-sticky{padding-block:96px}
+.js .open-scroll{height:340vh}
+.js .open-sticky{position:sticky;top:72px;height:calc(100vh - 72px);display:flex;flex-direction:column;justify-content:center;padding-block:24px}
+.js .open .ob{opacity:0;translate:0 30px;transition:opacity .6s,translate .6s,scale .6s,border-color .6s,box-shadow .6s}
+.js .open .ob.seen{opacity:.28;translate:0 0}
+.js .open .ob.active{opacity:1;scale:1.04;border-color:var(--code);box-shadow:0 0 50px -16px rgba(69,217,138,.65)}
+.ob .big{font:700 34px/1 var(--display);letter-spacing:-.03em;color:#E8F7EE}
+.open-dots{display:flex;gap:8px;margin-top:22px}
+.open-dots i{width:28px;height:3px;border-radius:2px;background:#1F4A31;transition:background .4s}
+.open-dots i.on{background:var(--code)}
+.js .open .open-loop{opacity:0;transition:opacity .6s}
+.js .open .open-loop.on{opacity:1}
+@media (max-width:900px){.js .open-scroll{height:300vh}.js .open-sticky{top:60px;height:calc(100vh - 60px)}
+  .js .open .open-grid{display:grid;grid-template-columns:1fr}.js .open .ob{grid-area:1/1;min-height:200px}
+  .js .open .ob.seen:not(.active){opacity:0}.js .open .ob.active{scale:1}.open-head p{display:none}}
+
+/* what you get: scroll morph */
+.value .wrap{padding-block:0}
+.vscroll{position:relative}
+.vsticky{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;padding-block:96px}
+.js .vscroll{height:360vh}
+.js .vsticky{position:sticky;top:72px;height:calc(100vh - 72px);padding-block:24px}
+.vsteps{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-direction:column}
+.vsteps li{display:grid;grid-template-columns:44px 1fr;gap:4px 12px;padding:16px 0;border-top:1px solid var(--line)}
+.vsteps .i{font:500 12px/2.2 var(--mono);color:var(--muted)}
+.vsteps b{font:600 26px/1.15 var(--display);letter-spacing:-.02em;color:#B9C7BF;transition:color .4s}
+.vsteps p{grid-column:2;margin:0;font-size:15px;line-height:1.5;color:var(--muted)}
+.js .vsteps p{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s,opacity .5s}
+.vsteps li.on b{color:var(--ink)}
+.vsteps li.on .i{color:var(--green)}
+.js .vsteps li.on p{max-height:120px;opacity:1}
+.vart{position:relative;aspect-ratio:1;max-height:calc(100vh - 200px);margin-inline:auto;width:100%;border-radius:28px;background:var(--surface);border:1px solid var(--line)}
+.vart svg{position:absolute;inset:0;width:100%;height:100%}
+.vart circle{transition:transform 1s cubic-bezier(.6,0,.2,1),fill .6s,r .6s}
+.vart .cap3{position:absolute;left:20px;bottom:18px;font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.vart .ln{transition:opacity .6s}
+@media (max-width:900px){.vsticky{grid-template-columns:1fr;gap:16px}.js .vsticky{top:60px;height:calc(100vh - 60px);align-content:center}
+  .vart{max-width:300px;max-height:none}.vsteps{margin-top:12px}.vsteps li{padding:10px 0}.vsteps b{font-size:20px}.js .vsteps li:not(.on){display:none}.value .sec-h{font-size:30px}}
+@media (prefers-reduced-motion:reduce){.bob-up,.bob-down{animation:none}}
+.tchips div{text-align:center}
+
 </style>
 
 </head>
@@ -731,32 +1091,34 @@ a.client:hover .c-url{color:var(--green-dk)}
   <div class="wrap">
     <a class="brand" href="#top"><svg style="color:#7FE0A8"><use href="#logo"></use></svg>Bastien Durand</a>
     <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#how">How I work</a></li>
-      <li><a href="#north">Story</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#clients">Clients</a></li>
+      <li><a href="#how">How we work</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a class="btn btn-green" href="#contact">Let’s talk</a></li>
     </ul>
     <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
   <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
-    <a href="#work">Work</a><a href="#how">How I work</a><a href="#north">Story</a><a href="#beyond">Beyond the work</a><a href="#contact">Let’s talk</a>
+    <a href="#services">Services</a><a href="#brain">Ask my Business Brain</a><a href="#clients">Clients</a><a href="#work">Case studies</a><a href="#how">How we work</a><a href="#faq">FAQ</a><a href="#contact">Let’s talk</a>
   </nav>
 </header>
 
 <main id="top">
-<section class="hero">
+<section class="hero mx">
+  <canvas class="rain" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="hero-text">
-      <div class="eyebrow">Product + Engineering · Sydney</div>
-      <h1>Systems that feel <span class="em">seamless</span></h1>
-      <p>I spent 15 years working with customers before I started building products for them. Now moving into health tech: I find the problem by talking to the people who have it, then build the fix end to end.</p>
-      <div class="ctas"><a class="btn btn-green" href="#work">See the work →</a><a class="btn btn-ghost" href="#how">How I work</a></div>
+      <div class="eyebrow">Consultant · Product, AI &amp; Build · Sydney</div>
+      <h1>Digital <span class="em">consultant</span></h1>
+      <p>15 years with customers, then I learned to build for them. I help businesses get ahead of the AI wave: I find the problem by talking to the people who have it, then build the fix end to end.</p>
+      <div class="ctas"><a class="btn btn-green" href="#brain">Ask my Business Brain →</a><a class="btn btn-ghost" href="#services">What I do</a></div>
     </div>
     <div class="hero-visual" aria-hidden="false">
-      <svg class="tri-lo" viewBox="0 0 300 260" aria-hidden="true"><path d="M10 250 L150 10 L290 250 Z" fill="none" stroke="#18844A" stroke-width="4" stroke-linejoin="round"></path><line x1="45" y1="190" x2="255" y2="190" stroke="#18844A" stroke-width="4"></line></svg>
-      <div class="tri-label" style="left:20px;top:390px"><b>11</b><span>client builds</span></div>
-      <svg class="tri-hi" viewBox="0 0 260 230" aria-hidden="true"><path d="M10 10 H250 L130 220 Z" fill="#E7F4EC" stroke="#18844A" stroke-width="4" stroke-linejoin="round"></path><line x1="36" y1="56" x2="224" y2="56" stroke="#18844A" stroke-width="4"></line></svg>
-      <div class="tri-label" style="left:450px;top:42px"><b>4</b><span>products</span></div>
+      <svg class="tri-lo bob-up" viewBox="0 0 300 260" aria-hidden="true"><path d="M10 250 L150 10 L290 250 Z" fill="none" stroke="#18844A" stroke-width="4" stroke-linejoin="round"></path><line x1="45" y1="190" x2="255" y2="190" stroke="#18844A" stroke-width="4"></line></svg>
+      <div class="tri-label bob-up" style="left:20px;top:390px"><b>11</b><span>client builds</span></div>
+      <svg class="tri-hi bob-down" viewBox="0 0 260 230" aria-hidden="true"><path d="M10 10 H250 L130 220 Z" fill="#E7F4EC" stroke="#18844A" stroke-width="4" stroke-linejoin="round"></path><line x1="36" y1="56" x2="224" y2="56" stroke="#18844A" stroke-width="4"></line></svg>
+      <div class="tri-label bob-down" style="left:450px;top:42px"><b>4</b><span>products</span></div>
       <img class="hero-photo" src="assets/bastien.jpg" alt="Bastien Durand">
     </div>
     <div class="hero-mobile">
@@ -769,79 +1131,117 @@ a.client:hover .c-url{color:var(--green-dk)}
   </div>
 </section>
 
-<section class="stats" aria-label="At a glance">
-  <div class="wrap" data-stagger="120">
-    <div class="stat"><b>100<span class="plus">+</span></b><span>customer conversations</span></div>
+<section class="stats" aria-label="Results at a glance">
+  <div class="wrap" data-stagger="90">
+    <div class="stat"><b>200<span class="plus">+</span></b><span>customer conversations</span></div>
     <div class="stat"><b>80<span class="plus">%</span></b><span>fewer enquiry emails after one UX rebuild</span></div>
-    <div class="stat"><b>85<span class="plus">%+</span></b><span>fewer clicks to find availability</span></div>
-    <div class="stat"><b>11</b><span>person team led</span></div>
+    <div class="stat"><b>85<span class="plus">%+</span></b><span>fewer clicks to find a free court</span></div>
+    <div class="stat"><b>11<span class="plus"></span></b><span>person team led</span></div>
+    <div class="stat"><b>685<span class="plus">%</span></b><span>social following growth for a tennis club</span></div>
+    <div class="stat"><b>450<span class="plus"></span></b><span>new customers onboarded across 8 venues</span></div>
+    <div class="stat"><b>300<span class="plus">%</span></b><span>more search traffic to one redesigned page</span></div>
+    <div class="stat"><b>~50<span class="plus">%</span></b><span>ad-spend cut targeted for a physio clinic</span></div>
   </div>
 </section>
 
-<section class="seeking" id="seeking">
+<section class="brain dark" id="brain" aria-label="Ask my Business Brain">
   <div class="wrap">
-    <div class="seek-l reveal">
-      <div class="eyebrow">What I’m looking for</div>
-      <h2 class="sec-h">A product team that talks to its <span class="em">users</span></h2>
+    <div class="brain-copy reveal">
+      <div class="eyebrow">Ask my Business Brain</div>
+      <h2 class="sec-h">Tell me what’s slowing you <span class="em">down</span></h2>
+      <p>Type the problem in your own words, or tap one below. You’ll get a straight answer and where I’d start.</p>
     </div>
-    <div class="seek-r reveal" style="--d:.15s">
-      <p>Product and engineering in one. I talk to the people with the problem, decide what matters, then ship the fix myself.</p>
-      <ul class="roles" data-stagger="90">
-        <li><b>Product Manager</b><span>Primary focus</span></li>
-        <li><b>Technical PM / Product Owner</b><span>Close to engineering</span></li>
-        <li><b>Product Engineer</b><span>Product-minded teams</span></li>
-      </ul>
-      <div class="seek-meta"><span>Health tech focus</span><span>Sydney</span><span>Discovery-led teams</span></div>
+    <div class="term reveal" style="--d:.15s">
+      <div class="term-bar"><i></i><i></i><i></i><span>business-brain · bastienbuilds</span></div>
+      <div class="term-body" id="term-body" aria-live="polite"><div class="a">Hi, I’m Bastien’s Business Brain. What’s the problem you want gone? <span class="cursor"></span></div></div>
+      <form class="term-form" id="term-form" autocomplete="off">
+        <label><span aria-hidden="true">&gt;</span><input id="term-in" type="text" placeholder="e.g. my team drowns in admin" aria-label="Describe your problem"></label>
+        <button type="submit">Run</button>
+      </form>
+      <div class="term-chips">
+        <button type="button">I want to get found by AI</button>
+        <button type="button">My team drowns in admin</button>
+        <button type="button">My website doesn’t convert</button>
+        <button type="button">I have an app idea</button>
+        <button type="button">Is AI safe with our data?</button>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="work" id="work">
+<section class="services" id="services">
   <div class="wrap">
-    <div class="work-head">
-      <h2 class="sec-h reveal">Things I’ve <span class="em">shipped</span></h2>
-      <div class="tabs reveal" style="--d:.15s" role="tablist" aria-label="Products">
-        <button class="tab" role="tab" type="button" id="tab-0" data-i="0" aria-selected="true">CourtDesk</button>
-        <button class="tab" role="tab" type="button" id="tab-1" data-i="1" aria-selected="false">Tennis Network</button>
-        <button class="tab" role="tab" type="button" id="tab-2" data-i="2" aria-selected="false">AI Checker</button>
-        <button class="tab" role="tab" type="button" id="tab-3" data-i="3" aria-selected="false">Systema</button>
-      </div>
+    <div class="svc-head">
+      <div class="reveal"><div class="eyebrow">What I do</div><h2 class="sec-h" style="margin-top:14px">Six ways I get you ahead of the <span class="em">AI wave</span></h2></div>
+      <p class="reveal" style="--d:.1s">One person from first conversation to live product. Strategy, build and handover, so your team can run it after I leave.</p>
     </div>
-    <div class="product reveal" style="--d:.25s" id="product" role="tabpanel" aria-live="polite">
-      <div class="p-copy">
-        <div class="p-kicker" id="p-kicker">SAAS · 2026</div>
-        <h3 class="p-name" id="p-name">CourtDesk</h3>
-        <p class="p-line" id="p-line">One dashboard for independent coaches, replacing WhatsApp threads and spreadsheets.</p>
-        <p class="p-why" id="p-why"><b>WHY</b>Coaches were running their whole business across chats, spreadsheets and bank apps, and losing hours to admin every week.</p>
-        <div class="p-stats" id="p-stats">
-          <div class="p-stat"><span>Discovery interviews</span><b>16<em>+</em></b></div>
-          <div class="p-stat"><span>Founding coaches</span><b><em>8</em><i>↑</i></b></div>
-          <div class="p-stat"><span>Apps replaced</span><b>4 → <em>1</em></b></div>
-        </div>
-        <a class="p-link" id="p-link" href="https://www.tennisnetwork.com.au/courtdesk" target="_blank" rel="noopener">View live ↗</a>
-      </div>
-      <div class="p-visual bare" id="p-visual"><img src="assets/courtdesk.jpg" alt="CourtDesk dashboard"></div>
+    <div class="svc2 reveal" style="--d:.15s">
+      <ol class="svc2-list" role="tablist" aria-label="Services" id="svc-list"></ol>
+      <div class="svc2-panel"><div class="svc2-art"><canvas id="svc-art" aria-hidden="true"></canvas><span class="lbl" id="svc-art-lbl"></span></div><div class="svc2-detail" id="svc-panel" role="tabpanel" aria-live="polite"></div></div>
     </div>
   </div>
+</section>
+
+<section class="cta-band" aria-label="Get started">
+  <div class="wrap"><div class="cta-in reveal"><p>Not sure where to start?<span>Ask the Business Brain, or book a free 30-minute call.</span></p><div class="ctas"><a class="btn btn-ghost" href="#brain">Ask the Brain</a><a class="btn btn-green" href="#contact">Book a free call →</a></div></div></div>
 </section>
 
 <section class="built" id="clients" aria-label="Client work">
   <div class="wrap">
-    <div class="built-head reveal"><span>CLIENT WORK</span><a href="https://digitalbuilders.co" target="_blank" rel="noopener">DigitalBuilders.co ↗</a></div>
+    <div class="built-head reveal"><span>CLIENT WORK</span><a href="#work">Read the case studies ↓</a></div>
     <h2 class="sec-h built-title reveal">What I’ve built for <span class="em">clients</span></h2>
     <p class="built-sub reveal" style="--d:.1s">Strategy, UX and build for 11 businesses, from local clinics to tennis programs.</p>
     <div class="ct-legend reveal" style="--d:.15s" aria-label="Type of work"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span><span class="ct ct-systems">Systems</span><span class="ct ct-brand">Brand</span></div>
-    <div class="clients" data-stagger="110"><a class="client" href="https://healingflow.care" target="_blank" rel="noopener"><span class="c-logo"><i aria-hidden="true">HF</i><img src="assets/clients/healing-flow.png" alt="Healing Flow logo" loading="lazy" onerror="this.remove()"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span><span class="ct ct-brand">Brand</span></span><b>Healing Flow</b><p>Brand identity and website build, plus ongoing SEO and care to keep the practice growing.</p><span class="c-url">Live · ongoing SEO · healingflow.care ↗</span></span></a><!-- HIDDEN (temp) Sentient Psychology: <a class="client" href="https://sentientpsych.com" target="_blank" rel="noopener"><span class="c-logo"><i aria-hidden="true">SP</i><img src="assets/clients/sentient-psychology.png" alt="Sentient Psychology logo" loading="lazy" onerror="this.remove()"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span><span class="ct ct-brand">Brand</span></span><b>Sentient Psychology</b><p>Rebrand and new site built around a clearer niche and SEO-led conversion.</p><span class="c-url">sentientpsych.com ↗</span></span></a> --><a class="client" href="https://kimtennis.com" target="_blank" rel="noopener"><span class="c-logo"><i aria-hidden="true">KF</i><img src="assets/clients/kim-freebairn-tennis.png" alt="Kim Freebairn Tennis logo" loading="lazy" onerror="this.remove()"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span><span class="ct ct-brand">Brand</span></span><b>Kim Freebairn Tennis</b><p>Brand, website, Google profile, socials and a roadmap the coach runs herself.</p><span class="c-url">kimtennis.com ↗</span></span></a><a class="client" href="https://cbtennis.com.au" target="_blank" rel="noopener"><span class="c-logo"><i aria-hidden="true">CB</i><img src="assets/clients/coogee-beach-tennis.png" alt="Coogee Beach Tennis logo" loading="lazy" onerror="this.remove()"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span><span class="ct ct-systems">Systems</span></span><b>Coogee Beach Tennis</b><p>Junior program redesign, enquiry-to-enrolment funnels, social content and admin workflows.</p><span class="c-url">cbtennis.com.au ↗</span></span></a><a class="client" href="https://getactivephysio.com.au/" target="_blank" rel="noopener"><span class="c-logo"><i aria-hidden="true">GA</i><img src="assets/clients/get-active-physio.svg" alt="Get Active Physiotherapy logo" loading="lazy" onerror="this.remove()"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span></span><b>Get Active Physiotherapy</b><p>Ad-spend audit, trust-led redesign and injury-specific local content, plus a playbook the in-house team can run.</p><span class="c-url">In progress · getactivephysio.com.au ↗</span></span></a><a class="client" href="https://youthlivingskills.com.au" target="_blank" rel="noopener"><span class="c-logo"><i aria-hidden="true">YL</i><img src="assets/clients/youth-living-skills.png" alt="Youth Living Skills logo" loading="lazy" onerror="this.remove()"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span></span><b>Youth Living Skills</b><p>Website build, full UX redesign and ongoing care, plus content that reaches more of their niche.</p><span class="c-url">youthlivingskills.com.au ↗</span></span></a><a class="client" href="https://modifieddriving.com.au" target="_blank" rel="noopener"><span class="c-logo"><i aria-hidden="true">MD</i><img src="assets/clients/modified-driving.png" alt="Modified Driving logo" loading="lazy" onerror="this.remove()"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span></span><b>Modified Driving</b><p>Competitor gaps, rich content and smoother flows from first visit to booking.</p><span class="c-url">modifieddriving.com.au ↗</span></span></a><a class="client" href="https://easternsuburbstennis.com.au" target="_blank" rel="noopener"><span class="c-logo"><i aria-hidden="true">ES</i><img src="assets/clients/esta-junior.png" alt="ESTA Junior Competition logo" loading="lazy" onerror="this.remove()"></span><span class="c-body"><span class="c-tags"><span class="ct ct-systems">Systems</span><span class="ct ct-brand">Brand</span></span><b>ESTA Junior Competition</b><p>248 juniors, 9 venues, 2 days. Scheduling, reserves and escalations, automated.</p><span class="c-url">easternsuburbstennis.com.au ↗</span></span></a><a class="client" href="https://sisterhoodclub.com.au" target="_blank" rel="noopener"><span class="c-logo"><i aria-hidden="true">SC</i><img src="assets/clients/sisterhood-club.png" alt="Sisterhood Club logo" loading="lazy" onerror="this.remove()"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span></span><b>Sisterhood Club</b><p>Members-only talks, workshops and mentorship for women in tech.</p><span class="c-url">sisterhoodclub.com.au ↗</span></span></a><a class="client" href="https://jrny.club" target="_blank" rel="noopener"><span class="c-logo"><i aria-hidden="true">JC</i><img src="assets/clients/jrny-club.svg" alt="JRNY Club logo" loading="lazy" onerror="this.remove()"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span></span><b>JRNY Club</b><p>NFT-gated network for builders, with rewards for taking part.</p><span class="c-url">jrny.club ↗</span></span></a><div class="client soon"><span class="c-logo"><i aria-hidden="true"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.5" cy="14" r="3.5"/><circle cx="17.5" cy="14" r="3.5"/><path d="M10 14c1.2-1 2.8-1 4 0M3 14l1-6.5h2M21 14l-1-6.5h-2"/></svg></i></span><span class="c-body"><span class="c-tags"><span class="ct ct-brand">Brand</span></span><b>Eyewear brand</b><p>Logo, identity and design direction to carry across web and social.</p><span class="c-url">Private client · in progress</span></span></div></div>
-    <div class="swipe-hint">Swipe for all 11 →</div>
+    <div class="clients shots" data-stagger="90"><a class="client" href="https://healingflow.care" target="_blank" rel="noopener"><span class="c-shot"><img src="assets/sites/healing-flow.jpg" alt="Healing Flow website" loading="lazy"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span><span class="ct ct-brand">Brand</span></span><b>Healing Flow</b><p>Brand identity and website build, plus ongoing SEO and care to keep the practice growing.</p><span class="c-url">Live · ongoing SEO · healingflow.care ↗</span></span></a><a class="client" href="https://getactivephysio.com.au/" target="_blank" rel="noopener"><span class="c-shot logo"><img src="assets/clients/get-active-physio.svg" alt="Get Active Physiotherapy logo" loading="lazy"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span></span><b>Get Active Physiotherapy</b><p>Ad-spend audit, trust-led redesign and injury-specific local content, plus a playbook the in-house team can run.</p><span class="c-url">In progress · getactivephysio.com.au ↗</span></span></a><a class="client" href="https://cbtennis.com.au" target="_blank" rel="noopener"><span class="c-shot"><img src="assets/sites/coogee-beach-tennis.jpg" alt="Coogee Beach Tennis website" loading="lazy"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span><span class="ct ct-systems">Systems</span></span><b>Coogee Beach Tennis</b><p>Junior program redesign, enquiry-to-enrolment funnels, social content and admin workflows.</p><span class="c-url">685% social growth · cbtennis.com.au ↗</span></span></a><a class="client" href="https://kimtennis.com" target="_blank" rel="noopener"><span class="c-shot"><img src="assets/sites/kim-freebairn-tennis.jpg" alt="Kim Freebairn Tennis website" loading="lazy"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span><span class="ct ct-brand">Brand</span></span><b>Kim Freebairn Tennis</b><p>Brand, website, Google profile, socials and a roadmap the coach runs herself.</p><span class="c-url">kimtennis.com ↗</span></span></a><a class="client" href="https://modifieddriving.com.au" target="_blank" rel="noopener"><span class="c-shot"><img src="assets/sites/modified-driving.jpg" alt="Modified Driving website" loading="lazy"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span></span><b>Modified Driving</b><p>Competitor gaps, rich content and smoother flows from first visit to booking.</p><span class="c-url">modifieddriving.com.au ↗</span></span></a><a class="client" href="https://youthlivingskills.com.au" target="_blank" rel="noopener"><span class="c-shot"><img src="assets/sites/youth-living-skills.jpg" alt="Youth Living Skills website" loading="lazy"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span><span class="ct ct-growth">Growth</span></span><b>Youth Living Skills</b><p>Website build, full UX redesign and ongoing care, plus content that reaches more of their niche.</p><span class="c-url">youthlivingskills.com.au ↗</span></span></a><a class="client" href="https://easternsuburbstennis.com.au" target="_blank" rel="noopener"><span class="c-shot logo"><img src="assets/clients/esta-junior.png" alt="ESTA Junior Competition logo" loading="lazy"></span><span class="c-body"><span class="c-tags"><span class="ct ct-systems">Systems</span><span class="ct ct-brand">Brand</span></span><b>ESTA Junior Competition</b><p>248 juniors, 9 venues, 2 days. Scheduling, reserves and escalations, automated.</p><span class="c-url">easternsuburbstennis.com.au ↗</span></span></a><a class="client" href="https://sisterhoodclub.com.au" target="_blank" rel="noopener"><span class="c-shot"><img src="assets/sites/sisterhood-club.jpg" alt="Sisterhood Club website" loading="lazy"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span></span><b>Sisterhood Club</b><p>Members-only talks, workshops and mentorship for women in tech.</p><span class="c-url">sisterhoodclub.com.au ↗</span></span></a><a class="client" href="https://jrny.club" target="_blank" rel="noopener"><span class="c-shot"><img src="assets/sites/jrny-club.jpg" alt="JRNY Club website" loading="lazy"></span><span class="c-body"><span class="c-tags"><span class="ct ct-web">Web</span></span><b>JRNY Club</b><p>NFT-gated network for builders, with rewards for taking part.</p><span class="c-url">jrny.club ↗</span></span></a><div class="client soon"><span class="c-shot logo"><i aria-hidden="true"><svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6.5" cy="14" r="3.5"/><circle cx="17.5" cy="14" r="3.5"/><path d="M10 14c1.2-1 2.8-1 4 0M3 14l1-6.5h2M21 14l-1-6.5h-2"/></svg></i></span><span class="c-body"><span class="c-tags"><span class="ct ct-brand">Brand</span></span><b>Eyewear brand</b><p>Logo, identity and design direction to carry across web and social.</p><span class="c-url">Private client · in progress</span></span></div></div>
+    <div class="swipe-hint">Swipe for more →</div>
   </div>
+</section>
+
+<section class="cases" id="work">
+  <div class="wrap">
+    <div class="cases-head reveal"><div class="eyebrow">Case studies</div><h2 class="sec-h" style="margin-top:14px">The story behind the <span class="em">results</span></h2></div>
+    <article class="case reveal"><a class="case-img" href="https://cbtennis.com.au" target="_blank" rel="noopener"><img src="assets/sites/coogee-beach-tennis.jpg" alt="Coogee Beach Tennis website" loading="lazy"></a>
+      <div class="case-txt"><span class="case-k">CLUB GROWTH · COOGEE BEACH TENNIS</span><div class="case-big">300 → <em>60</em></div><span class="case-lbl">enquiry emails per term, after one page redesign</span><p>A busy club with no digital engine. I rebuilt the junior program page, set up enquiry-to-enrolment funnels and ran the social content.</p><div class="case-sub"><span><b>685%</b>social growth</span><span><b>450</b>new customers</span><span><b>8</b>venues</span></div><a href="https://cbtennis.com.au" target="_blank" rel="noopener">See the site ↗</a></div></article>
+    <article class="case reveal"><div class="case-img type"><span>Own the data.<br>Cut the waste.<br><em>Get found.</em></span><small>ENGAGEMENT · IN PROGRESS</small></div>
+      <div class="case-txt"><span class="case-k">CONSULTING · GET ACTIVE PHYSIOTHERAPY</span><div class="case-big">~50<em>%</em></div><span class="case-lbl">ad-spend cut targeted</span><p>A two-clinic physio practice. A six-week turnaround across Google Ads, tracking, the website and injury-specific AI search pages.</p><div class="case-sub"><span><b>2</b>clinics</span><span><b>6</b>weeks</span></div><a href="https://getactivephysio.com.au/" target="_blank" rel="noopener">See the clinic ↗</a></div></article>
+    <article class="case reveal"><a class="case-img" href="https://healingflow.care" target="_blank" rel="noopener"><img src="assets/sites/healing-flow.jpg" alt="Healing Flow website" loading="lazy"></a>
+      <div class="case-txt"><span class="case-k">BRAND + WEB · HEALING FLOW</span><div class="case-big sm">Brand, site <em>&amp; SEO</em></div><span class="case-lbl">built from zero, still cared for</span><p>A new energy-healing practice with no brand or site. Calm, credible from the first screen, and one tap to get in touch.</p><a href="https://healingflow.care" target="_blank" rel="noopener">See the site ↗</a></div></article>
+    <article class="case reveal"><a class="case-img" href="https://www.tennisnetwork.com.au/courtdesk" target="_blank" rel="noopener" style="background:var(--dark-bg);display:grid;place-items:center;padding:24px"><img src="assets/courtdesk.jpg" alt="CourtDesk dashboard" loading="lazy" style="object-fit:contain"></a>
+      <div class="case-txt"><span class="case-k">MY PRODUCT · COURTDESK</span><div class="case-big">4 → <em>1</em></div><span class="case-lbl">apps replaced for independent coaches</span><p>Coaches ran their business across chats, spreadsheets and bank apps. 16+ interviews found the four jobs that mattered.</p><div class="case-sub"><span><b>16+</b>interviews</span><span><b>8</b>founding coaches</span></div><a href="https://www.tennisnetwork.com.au/courtdesk" target="_blank" rel="noopener">See CourtDesk ↗</a></div></article>
+  </div>
+</section>
+
+<section class="cta-band" aria-label="Work with me">
+  <div class="wrap"><div class="cta-in reveal"><p>Want results like these for your business?<span>Every project starts with a free 30-minute call.</span></p><div class="ctas"><a class="btn btn-green" href="#contact">Take the green pill →</a></div></div></div>
+</section>
+
+
+
+
+<section class="open mx" id="open" aria-label="Built in the open">
+  <div class="open-scroll" id="open-scroll"><div class="open-sticky"><canvas class="rain" aria-hidden="true"></canvas><div class="wrap">
+    <div class="open-head">
+      <div class="eyebrow">Built in the open</div>
+      <h2 class="sec-h">I stay ahead of the wave, so you don’t have <span class="em">to</span></h2>
+      <p>Hackathons, open source and Sydney’s startup scene are where I test new tools first.</p>
+    </div>
+    <div class="open-grid">
+      <div class="ob"><span class="tag">AI ON APPLE HACKATHON</span><span class="big">Lookout</span><p>Offline object finder for blind users.</p><span class="yr">2026</span></div>
+      <div class="ob"><span class="tag">TECHSTARS HACKATHON</span><span class="big">Runner-up</span><p>Built and pitched in a weekend.</p><span class="yr">2023</span></div>
+      <div class="ob"><span class="tag">UTS HACKATHON</span><span class="big">1st place</span><p>Ship something real, fast.</p><span class="yr">2019</span></div>
+      <div class="ob"><span class="tag">OPEN SOURCE</span><span class="big">In public</span><p>AI, React and Web3 experiments.</p><a href="https://github.com/Bastien-Durand" target="_blank" rel="noopener">GitHub ↗</a></div>
+    </div>
+    <div class="open-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="open-loop"><span>Hackathons &amp; meetups</span><i>→</i><span>Test in my own products</span><i>→</i><span>Proven in client work</span></div>
+  </div></div></div>
 </section>
 
 <section class="how dark" id="how">
   <div class="wrap">
     <div class="how-head" data-stagger="140">
-      <div class="eyebrow">How CourtDesk was found</div>
-      <h2>How I <span class="em">work</span></h2>
-      <p>Each step fills the triangle a little more, until there’s one clear thing to build.</p>
+      <div class="eyebrow">How we’ll work together</div>
+      <h2>From first call to <span class="em">running</span></h2>
+      <p>Four steps. Each one fills the triangle a little more, until you have one clear thing worth building, and it’s live.</p>
     </div>
 
     <div class="how-grid">
@@ -852,93 +1252,102 @@ a.client:hover .c-url{color:var(--green-dk)}
       <div class="step s1" data-stagger="130">
         <svg class="tri"><use href="#t0"></use></svg>
         <div class="step-label"><span>01</span><b>Ask</b></div>
-        <div class="big-num">16<span class="plus">+</span></div>
-        <div class="cap">conversations with coaches and venue operators</div>
+        <div class="big-num">30<span class="plus">min</span></div>
+        <div class="cap">Free call. Then I talk to you, your team and a few of your customers</div>
       </div>
       <div class="step s2" data-stagger="130">
         <svg class="tri"><use href="#t1"></use></svg>
         <div class="step-label"><span>02</span><b>Map</b></div>
-        <div class="chips" data-stagger="45"><span>WhatsApp threads</span><span>Email chains</span><span>SMS</span><span>Instagram DMs</span><span>Follow-up threads</span><span>Stripe</span><span>PayID</span><span>Bank app</span><span>Payment chasing</span><span>Spreadsheets</span><span>Timetables</span><span>Make-up lessons</span><span>Rescheduling</span><span>Session tracking</span><span>Outdated sessions</span><span>Wash-outs</span><span>Court bookings</span><span>Venue comms</span></div>
-        <div class="cap">18 fragmented pieces, all documented</div>
+        <div class="chips" data-stagger="45"><span>Website</span><span>Google Ads</span><span>Booking system</span><span>Customer funnel</span><span>Discovery</span><span>Google Business Profile</span><span>Reviews</span><span>Inbox</span><span>AI</span><span>Spreadsheets</span></div>
+        <div class="cap">I map every tool, cost and pain point, so nothing gets missed</div>
       </div>
       <div class="step s3" data-stagger="130">
         <svg class="tri"><use href="#t2"></use></svg>
         <div class="step-label"><span>03</span><b>Filter</b></div>
         <div class="bars reveal-bars">
-          <div class="bar"><span>Schedule</span><span class="tr"><i style="width:100%"></i></span><small>7</small></div>
-          <div class="bar"><span>Messages</span><span class="tr"><i style="width:71%"></i></span><small>5</small></div>
-          <div class="bar"><span>Payments</span><span class="tr"><i style="width:57%"></i></span><small>4</small></div>
-          <div class="bar"><span>Venues</span><span class="tr"><i style="width:29%"></i></span><small>2</small></div>
+          <div class="bar"><span>AI search</span><span class="tr"><i style="width:100%"></i></span><small>1</small></div>
+          <div class="bar"><span>Ads</span><span class="tr"><i style="width:78%"></i></span><small>2</small></div>
+          <div class="bar"><span>Security</span><span class="tr"><i style="width:56%"></i></span><small>3</small></div>
+          <div class="bar"><span>Infrastructure</span><span class="tr"><i style="width:34%"></i></span><small>4</small></div>
         </div>
-        <div class="cap">Four jobs a coach actually does, every day</div>
+        <div class="cap">We rank it by impact together, and start where it pays back first</div>
       </div>
       <div class="step s4" data-stagger="130">
         <svg class="tri"><use href="#t3"></use></svg>
         <div class="step-label"><span>04</span><b>Build</b></div>
-        <img class="dash" src="assets/courtdesk.jpg" alt="CourtDesk dashboard">
-        <div class="cap">One calm dashboard, only what today needs</div>
+        <img class="dash" src="assets/sites/healing-flow.jpg" alt="Example: the Healing Flow website, live">
+        <div class="cap">I build it, launch it and hand over a playbook your team can run</div>
       </div>
     </div>
 
     <div class="how-mob">
-      <div class="mstep reveal"><svg class="tri"><use href="#t0"></use></svg><div class="body"><div class="step-label"><span>01</span><b>Ask</b></div><div class="big-num">16<span class="plus">+</span></div><div class="cap">conversations with coaches and venue operators</div></div></div>
-      <div class="mstep reveal"><svg class="tri"><use href="#t1"></use></svg><div class="body"><div class="step-label"><span>02</span><b>Map</b></div><div class="chips" data-stagger="45"><span>WhatsApp threads</span><span>Email chains</span><span>SMS</span><span>Instagram DMs</span><span>Follow-up threads</span><span>Stripe</span><span>PayID</span><span>Bank app</span><span class="more">+10 more</span></div><div class="cap">18 fragmented pieces, all documented</div></div></div>
+      <div class="mstep reveal"><svg class="tri"><use href="#t0"></use></svg><div class="body"><div class="step-label"><span>01</span><b>Ask</b></div><div class="big-num">30<span class="plus">min</span></div><div class="cap">Free call. Then I talk to you, your team and a few of your customers</div></div></div>
+      <div class="mstep reveal"><svg class="tri"><use href="#t1"></use></svg><div class="body"><div class="step-label"><span>02</span><b>Map</b></div><div class="chips" data-stagger="45"><span>Website</span><span>Google Ads</span><span>Booking system</span><span>Customer funnel</span><span>Discovery</span><span class="more">+5 more</span></div><div class="cap">I map every tool, cost and pain point, so nothing gets missed</div></div></div>
       <div class="mstep reveal"><svg class="tri"><use href="#t2"></use></svg><div class="body"><div class="step-label"><span>03</span><b>Filter</b></div><div class="bars reveal-bars">
-        <div class="bar"><span>Schedule</span><span class="tr"><i style="width:100%"></i></span><small>7</small></div>
-        <div class="bar"><span>Messages</span><span class="tr"><i style="width:71%"></i></span><small>5</small></div>
-        <div class="bar"><span>Payments</span><span class="tr"><i style="width:57%"></i></span><small>4</small></div>
-        <div class="bar"><span>Venues</span><span class="tr"><i style="width:29%"></i></span><small>2</small></div>
-      </div><div class="cap">Four jobs a coach actually does, every day</div></div></div>
-      <div class="mstep reveal"><svg class="tri"><use href="#t3"></use></svg><div class="body"><div class="step-label"><span>04</span><b>Build</b></div><div class="cap">One calm dashboard, only what today needs</div></div></div>
+        <div class="bar"><span>AI search</span><span class="tr"><i style="width:100%"></i></span><small>1</small></div>
+          <div class="bar"><span>Ads</span><span class="tr"><i style="width:78%"></i></span><small>2</small></div>
+          <div class="bar"><span>Security</span><span class="tr"><i style="width:56%"></i></span><small>3</small></div>
+          <div class="bar"><span>Infrastructure</span><span class="tr"><i style="width:34%"></i></span><small>4</small></div>
+      </div><div class="cap">We rank it by impact together, and start where it pays back first</div></div></div>
+      <div class="mstep reveal"><svg class="tri"><use href="#t3"></use></svg><div class="body"><div class="step-label"><span>04</span><b>Build</b></div><div class="cap">I build it, launch it and hand over a playbook your team can run</div></div></div>
     </div>
   </div>
 </section>
 
-<section class="story" id="story">
+<section class="value" id="value">
+  <div class="vscroll" id="vscroll"><div class="wrap vsticky">
+    <div>
+      <div class="eyebrow">What you get</div>
+      <h2 class="sec-h" style="margin-top:14px">What you walk away <span class="em">with</span></h2>
+      <ol class="vsteps" id="vsteps">
+        <li class="on"><span class="i">01</span><b>Clarity</b><p>A plain-English audit: what’s working, what’s wasting money, what’s missing.</p></li>
+        <li><span class="i">02</span><b>A ranked plan</b><p>The few moves that matter most, with a fixed price you sign off first.</p></li>
+        <li><span class="i">03</span><b>The build, live</b><p>Site, pages, automations or app, launched. Not a deck.</p></li>
+        <li><span class="i">04</span><b>You, in control</b><p>Tracking you can read and a playbook to run it. You own every account.</p></li>
+      </ol>
+    </div>
+    <div class="vart"><svg id="vart" viewBox="0 0 480 480" aria-hidden="true"><rect class="ln" id="v-frame" x="80" y="80" width="320" height="320" rx="14" fill="none" stroke="#CFE6D7" stroke-width="1.5" opacity="0"></rect><path class="ln" id="v-line" d="" fill="none" stroke="#45D98A" stroke-width="2.5" opacity="0"></path></svg><span class="cap3" id="vcap">the mess, mapped</span></div>
+  </div></div>
+</section>
+
+<section class="trust" id="trust" aria-label="Who you’ll work with">
   <div class="wrap">
-    <h2 class="reveal">Two tracks became <span class="em">one</span></h2>
-    <p class="sub reveal">Years learning how people work. Years learning how to build.</p>
-    <svg class="desk reveal-line" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="Timeline 2013 to 2026: a people track and a build track merging into CourtDesk in 2026">
-      <text x="400" y="16" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" letter-spacing="2" fill="#18844A">PEOPLE</text>
-      <text x="800" y="170" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" letter-spacing="2" fill="#4E9C70">BUILD</text>
-      <path class="draw" d="M400 36 V350 C400 410 600 390 600 450 V490" fill="none" stroke="#18844A" stroke-width="3"></path>
-      <path class="draw" d="M800 190 V350 C800 410 600 390 600 450" fill="none" stroke="#7FCFA0" stroke-width="3"></path>
-      <g font-family="Geist Mono, monospace" font-size="11" fill="#9AABA1" text-anchor="middle"><text x="600" y="40">2013</text><text x="600" y="140">2017</text><text x="600" y="194">2019</text><text x="600" y="244">2021</text><text x="600" y="294">2023</text><text x="600" y="344">2025</text></g>
-      <g font-family="Geist, sans-serif" font-size="15" fill="#10201A">
-        <circle cx="400" cy="36" r="7" fill="#18844A"></circle><text x="376" y="41" text-anchor="end">Facility Supervisor · team of 11</text>
-        <circle cx="400" cy="136" r="7" fill="#18844A"></circle><text x="376" y="141" text-anchor="end">Coaching at Coogee</text>
-        <circle cx="400" cy="172" r="7" fill="#18844A"></circle><text x="376" y="177" text-anchor="end">Physio clinic admin · rehab + prehab</text>
-        <circle cx="400" cy="240" r="7" fill="#18844A"></circle><text x="376" y="245" text-anchor="end">ESTA Operations + Head of Digital</text>
-        <circle cx="400" cy="290" r="7" fill="#18844A"></circle><text x="376" y="295" text-anchor="end">Systema Tennis coaching business</text>
-        <circle cx="800" cy="190" r="7" fill="#4E9C70"></circle><text x="824" y="195">Bootcamp + UTS Hackathon 1st place</text>
-        <circle cx="800" cy="240" r="7" fill="#4E9C70"></circle><text x="824" y="245">Web3 application development</text>
-        <circle cx="800" cy="290" r="7" fill="#4E9C70"></circle><text x="824" y="295">Techstars Hackathon runner-up</text>
-        <circle cx="800" cy="340" r="7" fill="#4E9C70"></circle><text x="824" y="345">Tennis Network · court aggregator + booking</text>
-      </g>
-      <circle cx="600" cy="510" r="26" fill="#112B1E"></circle><circle cx="600" cy="510" r="9" fill="#45D98A"></circle>
-      <text x="640" y="508" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="20" fill="#10201A">CourtDesk</text>
-      <text x="640" y="528" font-family="Geist Mono, monospace" font-size="11" fill="#18844A">2026 · where they meet</text>
-    </svg>
-    <ol class="tl-mob" data-stagger="70"><li class="t-p"><span class="y">2013</span><span class="l">Facility Supervisor · team of 11</span></li><li class="t-p"><span class="y">2017</span><span class="l">Coaching at Coogee</span></li><li class="t-p"><span class="y">2018</span><span class="l">Physio clinic admin · rehab + prehab</span></li><li class="t-b"><span class="y">2019</span><span class="l">Bootcamp + UTS Hackathon 1st place</span></li><li class="t-p"><span class="y">2021</span><span class="l">ESTA Operations + Head of Digital</span></li><li class="t-b"><span class="y">2021</span><span class="l">Web3 application development</span></li><li class="t-p"><span class="y">2023</span><span class="l">Systema Tennis coaching business</span></li><li class="t-b"><span class="y">2023</span><span class="l">Techstars Hackathon runner-up</span></li><li class="t-b"><span class="y">2025</span><span class="l">Tennis Network · court aggregator + booking</span></li><li class="t-end"><span class="y">2026</span><span class="l"><b>CourtDesk</b>where they meet</span></li></ol>
-    <div class="legend reveal" style="--d:.6s"><span><i style="background:#18844A"></i>People</span><span><i style="background:#7FCFA0"></i>Build</span></div>
+    <div class="trust-photo reveal"><img src="assets/bastien.jpg" alt="Bastien Durand"><span class="cap2"><b>THE PERSON YOU’LL WORK WITH</b>Bastien Durand · Sydney</span></div>
+    <div class="trust-r">
+      <div class="reveal"><div class="eyebrow">Why people trust me</div><h2 class="sec-h" style="margin-top:14px">15 years with customers. Now I build for <span class="em">them</span></h2></div>
+      <p class="reveal" style="--d:.1s">Coaching taught me to listen, explain things simply and stay accountable to results. Building taught me to ship. You get both, on WhatsApp, from one person.</p>
+      <div class="tchips" data-stagger="100"><div><b>11</b><span>businesses built for</span></div><div><b>4</b><span>products shipped</span></div><div><b>3</b><span>hackathon builds</span></div></div>
+      <div class="logos reveal" style="--d:.2s" aria-label="Clients"><div class="logos-track"><span><img src="assets/clients/healing-flow.png" alt="" loading="lazy"></span><span><img src="assets/clients/kim-freebairn-tennis.png" alt="" loading="lazy"></span><span><img src="assets/clients/coogee-beach-tennis.png" alt="" loading="lazy"></span><span><img src="assets/clients/get-active-physio.svg" alt="" loading="lazy"></span><span><img src="assets/clients/youth-living-skills.png" alt="" loading="lazy"></span><span><img src="assets/clients/modified-driving.png" alt="" loading="lazy"></span><span><img src="assets/clients/esta-junior.png" alt="" loading="lazy"></span><span><img src="assets/clients/sisterhood-club.png" alt="" loading="lazy"></span><span><img src="assets/clients/jrny-club.svg" alt="" loading="lazy"></span><span><img src="assets/clients/healing-flow.png" alt="" loading="lazy"></span><span><img src="assets/clients/kim-freebairn-tennis.png" alt="" loading="lazy"></span><span><img src="assets/clients/coogee-beach-tennis.png" alt="" loading="lazy"></span><span><img src="assets/clients/get-active-physio.svg" alt="" loading="lazy"></span><span><img src="assets/clients/youth-living-skills.png" alt="" loading="lazy"></span><span><img src="assets/clients/modified-driving.png" alt="" loading="lazy"></span><span><img src="assets/clients/esta-junior.png" alt="" loading="lazy"></span><span><img src="assets/clients/sisterhood-club.png" alt="" loading="lazy"></span><span><img src="assets/clients/jrny-club.svg" alt="" loading="lazy"></span></div></div>
+    </div>
   </div>
 </section>
+
+
+<section class="story" id="story">
+  <div class="wrap">
+    <h2 class="reveal">Five lanes became <span class="em">one</span></h2>
+    <p class="sub reveal">Engineering, communication, AI, security and design. You get all five in one person.</p>
+    <div class="lanes"><svg class="reveal-line" viewBox="0 0 1200 620" role="img" aria-label="Five lanes, engineering, communication, AI, security and design, merging into Bastien"><text x="150" y="75" text-anchor="end" font-family="Geist Mono, monospace" font-size="12" letter-spacing="2" fill="#2F6FD6">ENGINEERING</text><path class="draw" d="M170 70 H800 C900 70 930 300 1026 300" fill="none" stroke="#2F6FD6" stroke-width="3" opacity=".9"></path><circle cx="270" cy="70" r="7" fill="#2F6FD6"></circle><text x="270" y="54" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">GA software bootcamp</text><circle cx="505" cy="70" r="7" fill="#2F6FD6"></circle><text x="505" y="54" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">Hazumi co-founder</text><circle cx="740" cy="70" r="7" fill="#2F6FD6"></circle><text x="740" y="54" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">Tennis Network + CourtDesk</text><text x="150" y="190" text-anchor="end" font-family="Geist Mono, monospace" font-size="12" letter-spacing="2" fill="#18844A">COMMUNICATION</text><path class="draw" d="M170 185 H800 C900 185 930 300 1026 300" fill="none" stroke="#18844A" stroke-width="3" opacity=".9"></path><circle cx="270" cy="185" r="7" fill="#18844A"></circle><text x="270" y="169" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">Led a team of 11</text><circle cx="505" cy="185" r="7" fill="#18844A"></circle><text x="505" y="169" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">15 years coaching</text><circle cx="740" cy="185" r="7" fill="#18844A"></circle><text x="740" y="169" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">ESTA: 248 juniors, 9 venues</text><text x="150" y="305" text-anchor="end" font-family="Geist Mono, monospace" font-size="12" letter-spacing="2" fill="#0E9F8E">AI</text><path class="draw" d="M170 300 H800 C900 300 930 300 1026 300" fill="none" stroke="#0E9F8E" stroke-width="3" opacity=".9"></path><circle cx="270" cy="300" r="7" fill="#0E9F8E"></circle><text x="270" y="284" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">LangChain LLM course</text><circle cx="505" cy="300" r="7" fill="#0E9F8E"></circle><text x="505" y="284" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">AI compliance checker</text><circle cx="740" cy="300" r="7" fill="#0E9F8E"></circle><text x="740" y="284" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">AI search for clinics</text><text x="150" y="420" text-anchor="end" font-family="Geist Mono, monospace" font-size="12" letter-spacing="2" fill="#C9871A">SECURITY</text><path class="draw" d="M170 415 H800 C900 415 930 300 1026 300" fill="none" stroke="#C9871A" stroke-width="3" opacity=".9"></path><circle cx="270" cy="415" r="7" fill="#C9871A"></circle><text x="270" y="399" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">CyberAssist security tools</text><circle cx="505" cy="415" r="7" fill="#C9871A"></circle><text x="505" y="399" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">Redaction before AI</text><circle cx="740" cy="415" r="7" fill="#C9871A"></circle><text x="740" y="399" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">Least-access client setups</text><text x="150" y="535" text-anchor="end" font-family="Geist Mono, monospace" font-size="12" letter-spacing="2" fill="#7B5CD6">DESIGN</text><path class="draw" d="M170 530 H800 C900 530 930 300 1026 300" fill="none" stroke="#7B5CD6" stroke-width="3" opacity=".9"></path><circle cx="270" cy="530" r="7" fill="#7B5CD6"></circle><text x="270" y="514" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">Hackathon brand + identity</text><circle cx="505" cy="530" r="7" fill="#7B5CD6"></circle><text x="505" y="514" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">Google UX design</text><circle cx="740" cy="530" r="7" fill="#7B5CD6"></circle><text x="740" y="514" text-anchor="middle" font-family="Geist, sans-serif" font-size="15" fill="#10201A">11 client brands + sites</text><circle cx="1060" cy="300" r="34" fill="#112B1E"></circle><circle cx="1060" cy="300" r="11" fill="#45D98A"></circle><text x="1060" y="366" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="22" fill="#10201A">Bastien</text><text x="1060" y="386" text-anchor="middle" font-family="Geist Mono, monospace" font-size="11" fill="#18844A">one person, end to end</text></svg><div class="lane-mob"><div style="--c:#2F6FD6"><b>ENGINEERING</b><ul><li>GA software bootcamp</li><li>Hazumi co-founder</li><li>Tennis Network + CourtDesk</li></ul></div><div style="--c:#18844A"><b>COMMUNICATION</b><ul><li>Led a team of 11</li><li>15 years coaching</li><li>ESTA: 248 juniors, 9 venues</li></ul></div><div style="--c:#0E9F8E"><b>AI</b><ul><li>LangChain LLM course</li><li>AI compliance checker</li><li>AI search for clinics</li></ul></div><div style="--c:#C9871A"><b>SECURITY</b><ul><li>CyberAssist security tools</li><li>Redaction before AI</li><li>Least-access client setups</li></ul></div><div style="--c:#7B5CD6"><b>DESIGN</b><ul><li>Hackathon brand + identity</li><li>Google UX design</li><li>11 client brands + sites</li></ul></div><div class="end"><b>WHERE THEY MEET</b><ul><li><strong>Bastien</strong> · one person, end to end</li></ul></div></div></div>
+  </div>
+</section>
+
+
 
 <section class="north dark" id="north">
   <div class="wrap">
     <div class="north-head reveal">
-      <div class="eyebrow">Where I’m going</div>
-      <h2 class="sec-h">Two foundations, one north <span class="em">star</span></h2>
-      <p>The front door to care is now digital. People search, compare and book long before they walk in, and many never do. I want to understand that journey inside out, then build the places it leads to.</p>
+      <div class="eyebrow">Where I take your business</div>
+      <h2 class="sec-h">Three corners, one north <span class="em">star</span></h2>
+      <p>AI search gets you found. AI security keeps you safe. AI building puts it to work. Together they get your business ahead of the wave.</p>
     </div>
     <div class="ns-stage reveal-tri">
       <div class="ns-lbl ns-north t-north">
-        <span class="ns-k">North star</span>
-        <h3>Community health centres</h3>
-        <p>Physios, psychologists, coaches, courts, classes and events under one roof, so no one has to figure out their health alone.</p>
+        <span class="ns-k">AI builder</span>
+        <h3>Products, automations and agents</h3>
+        <p>Prototypes and tools built around how your business actually runs, so your people get time back.</p>
       </div>
       <div class="ns-fig">
-        <svg viewBox="0 0 800 620" role="img" aria-label="Triangle: Tech and Health at the base lead up to the north star at the apex">
+        <svg viewBox="0 0 800 620" role="img" aria-label="Triangle: AI search and AI security at the base lead up to AI builder at the apex">
           <defs>
             <linearGradient id="nsFill" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#45D98A" stop-opacity=".02"></stop><stop offset="1" stop-color="#45D98A" stop-opacity=".14"></stop></linearGradient>
             <radialGradient id="nsGlow"><stop offset="0" stop-color="#45D98A" stop-opacity=".55"></stop><stop offset="1" stop-color="#45D98A" stop-opacity="0"></stop></radialGradient>
@@ -953,27 +1362,41 @@ a.client:hover .c-url{color:var(--green-dk)}
           <circle class="t-health" cx="720" cy="560" r="11" fill="#112B1E" stroke="#7FE0A8" stroke-width="3"></circle>
           <g class="t-north ns-star"><circle cx="400" cy="48" r="46" fill="url(#nsGlow)"></circle><circle cx="400" cy="48" r="13" fill="#45D98A"></circle></g>
           <g class="ns-svg-lbl" font-family="Geist Mono, monospace" font-size="26" letter-spacing="2" fill="#7FE0A8">
-            <text class="t-north" x="400" y="-6" text-anchor="middle">NORTH STAR</text>
-            <text class="t-tech" x="80" y="612" text-anchor="middle">TECH</text>
-            <text class="t-health" x="720" y="612" text-anchor="middle">HEALTH</text>
+            <text class="t-north" x="400" y="-6" text-anchor="middle">AI BUILDER</text>
+            <text class="t-tech" x="80" y="612" text-anchor="middle">AI SEARCH</text>
+            <text class="t-health" x="720" y="612" text-anchor="middle">AI SECURITY</text>
           </g>
         </svg>
-        <div class="ns-ms ns-ms1 t-next" tabindex="0"><span>Next · Step 1</span><b>Product manager, health tech</b><em>Learn how health organisations work, and how they use and protect data.</em></div><div class="ns-ms ns-ms2 t-next" tabindex="0"><span>Step 2</span><b>Senior AI product manager</b><em>AI features built on health data, with privacy built in from the start.</em></div><div class="ns-ms ns-ms3 t-next" tabindex="0"><span>Step 3</span><b>Lead product, preventative health</b><em>Lead the products that keep people well before they need treatment.</em></div>
+        <div class="ns-ms ns-ms1 t-next" tabindex="0"><span>Step 1</span><b>Get found</b><em>AI tools recommend you, with facts you control.</em></div><div class="ns-ms ns-ms2 t-next" tabindex="0"><span>Step 2</span><b>Stay safe</b><em>Your data stays yours, with the right access for each person.</em></div><div class="ns-ms ns-ms3 t-next" tabindex="0"><span>Step 3</span><b>Ahead of the wave</b><em>AI does the busywork, your team does the work that matters.</em></div>
       </div>
       <div class="ns-base">
         <div class="ns-lbl t-tech">
-          <span class="ns-k">Tech</span>
-          <h3>Product, data &amp; engineering</h3>
-          <p>Four products shipped end to end. Discovery, data, AI and systems that feel seamless. <a href="#work">See them ↗</a></p>
+          <span class="ns-k">AI search</span>
+          <h3>Get recommended by AI</h3>
+          <p>Clear, specific pages and profiles that ChatGPT, Gemini and Google’s AI can quote. <a href="#services">How it works ↗</a></p>
         </div>
         <div class="ns-lbl t-health">
-          <span class="ns-k">Health</span>
-          <h3>15 years in health &amp; performance</h3>
-          <p>Coaching movement, strength &amp; conditioning, nutrition, breathwork and mindset, plus digital work for physio, psychology and wellness clinics. <a href="#clients">See clients ↗</a></p>
+          <span class="ns-k">AI security</span>
+          <h3>Use AI without the risk</h3>
+          <p>Redaction, least-access logins and a human on every decision that matters. <a href="#services">How it works ↗</a></p>
         </div>
       </div>
-      <ol class="ns-list t-next" aria-label="Path to the north star"><li><span><i>1</i><em>Next</em></span><b>Product manager, health tech</b><p>Learn how health organisations work, and how they use and protect data.</p></li><li><span><i>2</i></span><b>Senior AI product manager</b><p>AI features built on health data, with privacy built in from the start.</p></li><li><span><i>3</i></span><b>Lead product, preventative health</b><p>Lead the products that keep people well before they need treatment.</p></li></ol>
-      <div class="ns-cta t-north"><p>I’ve built a lot on my own. Now I want a team that will challenge me, show me my blind spots and help me build better products for the people who use them.</p><a class="btn btn-green" href="#contact">Hiring in health tech? Let’s talk →</a></div>
+      <ol class="ns-list t-next" aria-label="The path"><li><span><i>1</i><em>Start</em></span><b>Get found</b><p>AI tools recommend you, with facts you control.</p></li><li><span><i>2</i></span><b>Stay safe</b><p>Your data stays yours, with the right access for each person.</p></li><li><span><i>3</i></span><b>Ahead of the wave</b><p>AI does the busywork, your team does the work that matters.</p></li></ol>
+      <div class="ns-cta t-north"><p>Most businesses start with one corner. The best results come when all three work together.</p><a class="btn btn-green" href="#contact">Be ahead of the AI wave →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="faq-l reveal"><div class="eyebrow">FAQ</div><h2 class="sec-h">Before you <span class="em">ask</span></h2><p>Anything else, message me on WhatsApp.</p></div>
+    <div class="faq-list reveal" style="--d:.1s">
+      <details><summary>Do I need to be technical?</summary><p>No. Most of my clients aren’t. I explain everything in plain English, and you sign off on every change before it goes live.</p></details>
+      <details><summary>What does it cost?</summary><p>Every project starts with a free 30-minute call. After that you get a fixed-scope proposal, so you know the price before any work starts.</p></details>
+      <details><summary>Who do you work with?</summary><p>Mostly owner-led health, fitness and sport businesses (clinics, gyms, martial arts academies, clubs), plus startups that need a product built and taken to market.</p></details>
+      <details><summary>What is AI search, and why does it matter?</summary><p>People now ask ChatGPT, Gemini and Google’s AI who to call. Those tools recommend businesses they can find clear, trustworthy facts about. I make sure that’s you, then track what they say every month.</p></details>
+      <details><summary>Is it safe to use AI with our customer data?</summary><p>It can be. I map where your data goes, keep sensitive details out of AI tools, give each person only the access they need, and keep a human reviewing the decisions that matter.</p></details>
+      <details><summary>What happens after the project?</summary><p>You own everything: accounts, code and content. You get a playbook so your team can run it, and I’m on WhatsApp if you need me.</p></details>
     </div>
   </div>
 </section>
@@ -1003,13 +1426,31 @@ a.client:hover .c-url{color:var(--green-dk)}
   </div>
 </section>
 
+<section class="pill-cta mx" id="pill" aria-label="Take the green pill">
+  <canvas class="rain" aria-hidden="true"></canvas>
+  <div class="wrap reveal">
+    <div class="eyebrow">Take the green pill</div>
+    <h2>Be ahead of the <span class="em">AI wave</span></h2>
+    <p>Modernise your business and your strategy. Get found by AI, cut the busywork, and keep your data safe.</p>
+    <a class="btn btn-pill" href="#contact">Take the green pill →</a>
+    <span class="small">FREE 30-MINUTE CALL · NO COMMITMENT</span>
+  </div>
+</section>
+
 <section class="contact dark" id="contact">
   <div class="wrap">
     <div class="c-left" data-stagger="140">
       <div class="eyebrow">Let’s talk</div>
-      <h2>Building something people <span class="em">need?</span></h2>
-      <p class="c-sub">I’m quickest on WhatsApp. Coffee in Sydney works too.</p>
-      <a class="btn btn-green cv-btn" href="assets/cv/Bastien-Durand-CV.pdf" download="Bastien-Durand-CV.pdf">Download CV <span aria-hidden="true">↓</span></a>
+      <h2>Ready to get ahead of the <span class="em">wave?</span></h2>
+      <p class="c-sub">Tell me what’s going on. I’m quickest on WhatsApp, and coffee in Sydney works too.</p>
+      <form class="cform" id="cform" novalidate>
+        <div class="row"><label>Your name<input name="name" required autocomplete="name"></label><label>Business<input name="biz" autocomplete="organization"></label></div>
+        <div class="row"><label>Email or phone<input name="reply" required></label><label>I need help with<select name="svc"><option>Not sure yet</option><option>AI search</option><option>Website build</option><option>Custom software</option><option>Security</option><option>AI-native modernisation</option><option>Product</option></select></label></div>
+        <label>What’s going on?<textarea name="msg" placeholder="A sentence or two is plenty"></textarea></label>
+        <div class="acts"><button class="btn btn-pill" type="submit">Send on WhatsApp →</button><a class="btn btn-ghost-dk" id="cform-mail" href="mailto:bastien.web3@gmail.com">Send by email</a></div>
+        <span class="note">I reply within one business day.</span>
+        <div class="ok" id="cform-ok"></div>
+      </form>
     </div>
     <div class="c-right" data-stagger="120">
       <a class="c-card" href="https://wa.me/61451604063" target="_blank" rel="noopener"><span><small>WhatsApp</small><span>0451 604 063</span></span><span class="arrow">→</span></a>
@@ -1041,22 +1482,22 @@ a.client:hover .c-url{color:var(--green-dk)}
 })();
 (function(){
   var products=[
-    {kicker:'SAAS · 2026',name:'CourtDesk',line:'One dashboard for independent coaches, replacing WhatsApp threads and spreadsheets.',
+    {kicker:'CLUB GROWTH · 2021–2025',name:'Coogee Beach Tennis',line:'A busy club with no digital engine. I rebuilt the junior program page, set up enquiry-to-enrolment funnels and ran the social content.',
+      why:'Every term, a flood of near-identical enquiry emails buried the coaches. The fix was a clearer page and a funnel that answered questions before they were asked.',
+      url:'https://cbtennis.com.au',host:'cbtennis.com.au',img:'assets/sites/coogee-beach-tennis.jpg',
+      stats:[['Enquiry emails per term','300 → ','60',''],['Social following','','685%','↑'],['New customers onboarded','','450','']]},
+    {kicker:'CONSULTING · IN PROGRESS',name:'Get Active Physiotherapy',line:'A two-clinic physio practice spending on ads that didn’t feel like they converted. A six-week turnaround across ads, website and local search.',
+      why:'The goal: know which spend actually brings patients in, cut the rest, and get the clinic found for the injuries people search for.',
+      url:'https://getactivephysio.com.au/',host:'getactivephysio.com.au',result:true,
+      stats:[['Ad-spend cut','','~50%',' target'],['Clinics','','2',''],['Engagement','','6 weeks','']]},
+    {kicker:'BRAND + WEB',name:'Healing Flow',line:'A new energy-healing practice with no brand or site. I built the identity, the website and the local SEO, and still look after it.',
+      why:'A personal, trust-based service needs to feel calm and credible from the first screen, and make contacting the practitioner effortless.',
+      url:'https://healingflow.care',host:'healingflow.care',img:'assets/sites/healing-flow.jpg',
+      stats:[['Scope','','Brand, site, SEO',''],['Status','','Live + ongoing care','']]},
+    {kicker:'MY PRODUCT · SAAS · 2026',name:'CourtDesk',line:'One dashboard for independent coaches, replacing WhatsApp threads and spreadsheets.',
       why:'Coaches were running their whole business across chats, spreadsheets and bank apps, and losing hours to admin every week.',
       url:'https://www.tennisnetwork.com.au/courtdesk',host:'tennisnetwork.com.au/courtdesk',img:'assets/courtdesk.jpg',bare:true,
-      stats:[['Discovery interviews','16','+',''],['Founding coaches','','8','↑'],['Apps replaced','4 → ','1','']]},
-    {kicker:'PLATFORM · 2025',name:'Tennis Network',line:'Sydney platform connecting players to courts, coaches and community. Cut a multi-venue court search from 20+ clicks to about 2.',
-      why:'Finding a free court meant checking 20+ separate booking pages. Now it’s one search.',
-      url:'https://www.tennisnetwork.com.au',host:'tennisnetwork.com.au',img:'assets/tennis-network.jpg?v=2',
-      stats:[['Clicks to find a court','20+ → ','2',''],['Venues','','12',''],['Courts','','73+','']]},
-    {kicker:'AI PROTOTYPE · 2026',name:'AI Compliance Checker',line:'AI compliance review prototype for financial services. Checks documents against compliance checklists with page-level evidence, and a person reviews every flag.',
-      why:'Internal teams spend a large share of their week manually reviewing documents. I built a prototype to test a faster way, with sensitive data redacted before it reaches the AI.',
-      url:'',host:'compliance-checker · prototype',img:'assets/ai-checker.jpg?v=2',
-      stats:[['Model','','Claude Haiku',''],['Privacy','','Redacted + chunked',''],['Human in the loop','','Every flag','']]},
-    {kicker:'COACHING BUSINESS · 2023',name:'Systema Tennis',line:'Biomechanics-led, whole-person coaching across 4 Eastern Suburbs venues, run like a product, with video analysis and player progress dashboards.',
-      why:'Players had no source of truth to track progress, and most clubs had no digital strategy. I built SEO front doors with Tennis Network that fill my programs and pass extra leads to independent coaches for a finder’s fee.',
-      url:'https://systematennis.com.au',host:'systematennis.com.au',img:'assets/systema.jpg?v=2',phone:true,
-      stats:[['Programs','','5',''],['Google ranking','','Page 2 in 3 mo',''],['Overflow leads','','Referred to coaches','']]}
+      stats:[['Discovery interviews','16','+',''],['Founding coaches','','8','↑'],['Apps replaced','4 → ','1','']]}
   ];
   function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
   var tabs=document.querySelectorAll('.tab'),panel=document.getElementById('product');
@@ -1072,15 +1513,193 @@ a.client:hover .c-url{color:var(--green-dk)}
     var link=document.getElementById('p-link');
     if(p.url){link.hidden=false;link.href=p.url}else{link.hidden=true}
     var v=document.getElementById('p-visual');
-    if(p.phone){v.className='p-visual phone';v.innerHTML='<div class="phone-frame"><img src="'+p.img+'" alt="'+esc(p.name)+' website on mobile"></div>'}
+    if(p.result){v.className='p-visual result';v.innerHTML='<div class="res-card"><span class="k">ENGAGEMENT SCOPE</span><b>Own the data, cut the waste, get found</b><div class="res-row">Google Ads audit + relaunch<em class="wip">in progress</em></div><div class="res-row">Tracking you can read yourself<em class="wip">in progress</em></div><div class="res-row">Website ↔ Google profile consistency<em class="wip">in progress</em></div><div class="res-row">Injury-specific AI search pages<em class="wip">in progress</em></div></div>'}
+    else if(p.phone){v.className='p-visual phone';v.innerHTML='<div class="phone-frame"><img src="'+p.img+'" alt="'+esc(p.name)+' website on mobile"></div>'}
     else if(p.bare){v.className='p-visual bare';v.innerHTML='<img src="'+p.img+'" alt="'+esc(p.name)+' dashboard">'}
     else{v.className='p-visual framed';v.innerHTML='<div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>'+esc(p.host)+'</span></div>'+(p.img?'<img src="'+p.img+'" alt="'+esc(p.name)+' screenshot">':'<div class="placeholder">'+esc(p.placeholder)+'</div>')+'</div>'}
     panel.classList.remove('swap');void panel.offsetWidth;panel.classList.add('swap');
   }
   tabs.forEach(function(t){t.addEventListener('click',function(){show(+t.dataset.i)})});
+  if(panel)show(0);
   var btn=document.getElementById('menu-btn'),menu=document.getElementById('mobile-menu');
   btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.setAttribute('aria-expanded',String(o));btn.setAttribute('aria-label',o?'Close menu':'Open menu')});
   menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false')})});
+})();
+</script>
+<script>
+/* ===== Consultant additions ===== */
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+  var tri='<path d="M4 6 H36 L20 34 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>';
+  var ICONS={
+    product:'<svg viewBox="0 0 40 40">'+tri+'<circle cx="20" cy="15" r="4" fill="currentColor"/></svg>',
+    search:'<svg viewBox="0 0 40 40">'+tri+'<circle cx="19" cy="14" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M23 18 L27 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
+    web:'<svg viewBox="0 0 40 40">'+tri+'<path d="M11 12 H29" stroke="currentColor" stroke-width="2.2"/><path d="M14 17 H26" stroke="currentColor" stroke-width="2.2"/></svg>',
+    software:'<svg viewBox="0 0 40 40">'+tri+'<path d="M16 11 L12 14 L16 17 M24 11 L28 14 L24 17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    security:'<svg viewBox="0 0 40 40">'+tri+'<rect x="15" y="12" width="10" height="8" rx="1.5" fill="currentColor"/><path d="M17 12 V10 a3 3 0 0 1 6 0 V12" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+    ai:'<svg viewBox="0 0 40 40">'+tri+'<path d="M20 9 L21.6 13 L25.5 14 L21.6 15.2 L20 19 L18.4 15.2 L14.5 14 L18.4 13 Z" fill="currentColor"/></svg>'
+  };
+  var SVC=[
+    {id:'product',name:'Product',sub:'Discovery to delivery',
+     title:'Find the right thing, then build it',
+     prob:'You know something is broken, but not what to build first.',
+     does:['Talk to your customers and team to find the real problem','Map every task and pain point, then cut to the few that matter','Ship a working version you can click, not a deck','Measure it with real users and keep improving'],
+     who:'Founders · owner-led businesses',
+     proof:{k:'CASE · COURTDESK',b:'One dashboard for independent coaches',p:'Coaches ran their business across chats, spreadsheets and bank apps. Discovery found the four jobs that mattered.',n:[['16+','discovery interviews'],['8','founding coaches'],['4 → 1','apps replaced']],a:['See CourtDesk ↗','https://www.tennisnetwork.com.au/courtdesk']}},
+    {id:'search',name:'AI search',sub:'Get found by AI',
+     title:'Get recommended by AI, not just ranked on Google',
+     prob:'Customers now ask ChatGPT, Gemini and Google’s AI who to call. If AI can’t find clear facts about you, it recommends someone else.',
+     does:['Check what each AI says about you today','Write clear, specific pages AI can quote','Fix your Google profile, structured data and the facts others publish about you','Re-test every month and refresh what faded'],
+     who:'Clinics · gyms · clubs · local services',
+     proof:{k:'CASE · SYSTEMA + TENNIS NETWORK',b:'Search front doors that fill programs',p:'Built niche, local pages for my own coaching business and the Tennis Network platform, then passed overflow leads to other coaches.',n:[['Page 2','on Google in 3 months'],['12 venues','73+ courts, one search']],a:['See Systema Tennis ↗','https://systematennis.com.au']}},
+    {id:'web',name:'Website builds',sub:'Brand, UX and build',
+     title:'Websites that turn visitors into bookings',
+     prob:'Your site looks fine, but people still call, email or leave instead of booking.',
+     does:['Brand and design that feels like you','UX built around the one action that matters: book, enquire or buy','Fast, AI-search-ready pages from day one','A handover so you can edit it yourself'],
+     who:'Small businesses · practitioners · clubs',
+     proof:{k:'CLIENT WORK',b:'11 businesses, from clinics to tennis programs',p:'Healing Flow, Kim Freebairn Tennis, Coogee Beach Tennis, Youth Living Skills, Modified Driving and more.',n:[['11','client builds'],['80%','fewer enquiry emails after one UX rebuild']],a:['See client work ↓','#clients']}},
+    {id:'software',name:'Custom software',sub:'Prototypes, tools, automation',
+     title:'Software shaped around how you actually work',
+     prob:'Your team runs on spreadsheets, group chats and copy-paste between tools.',
+     does:['Clickable prototype first, so you can test the idea cheaply','Automations between the tools you already pay for','Dashboards that show what’s happening without asking','Production builds when the prototype proves itself'],
+     who:'Operators · startups · sport organisations',
+     proof:{k:'CASE · ESTA JUNIOR COMPETITION',b:'A two-day tournament, automated',p:'Scheduling, reserves and escalations, automated, across a two-day junior competition.',n:[['248','juniors'],['9','venues'],['20+ → 2','clicks to find a court (Tennis Network)']],a:['See Tennis Network ↗','https://www.tennisnetwork.com.au']}},
+    {id:'security',name:'Security',sub:'Safe AI and data',
+     title:'Use AI without handing over your data',
+     prob:'You want AI in the business, but not your customers’ details inside someone else’s model.',
+     does:['Map where your data goes, and who can see it','Strip sensitive details before anything reaches an AI','Give each person their own login with only the access they need','Keep a human reviewing every decision that matters'],
+     who:'Health · finance · anyone holding personal data',
+     proof:{k:'CASE · AI COMPLIANCE CHECKER',b:'Document review for financial services',p:'An AI prototype that checks documents against compliance checklists, with page-level evidence.',n:[['Redacted','before data reaches AI'],['Every flag','reviewed by a person']],a:['See it in my work ↑','#work']}},
+    {id:'ai',name:'AI-native',sub:'Modernise and optimise',
+     title:'Bring your business up to speed with AI',
+     prob:'You feel behind on AI, and your team loses hours every week to admin.',
+     does:['Audit your workflows, tools and spend','Pick the right AI for each job, light or heavy','Automate the repetitive work first','Train your team and leave a playbook they can run'],
+     who:'Owner-led businesses that feel behind',
+     proof:{k:'CASE · GET ACTIVE PHYSIOTHERAPY',b:'A clinic turnaround, in progress',p:'Ad-spend audit, trust-led redesign and injury-specific local content, plus a playbook the in-house team can run.',n:[['Ad spend','audited'],['Playbook','for the team']],a:['See the clinic ↗','https://getactivephysio.com.au/']}}
+  ];
+  var list=document.getElementById('svc-list'),panel=document.getElementById('svc-panel');
+  var ART={product:'many voices → one focus',search:'you, found first',web:'blocks become a page',software:'tools, connected',security:'scanned, locked, safe',ai:'busywork → flow'};
+  var mode='product';
+  if(list&&panel){
+    list.innerHTML=SVC.map(function(s,i){return '<li><button role="tab" type="button" id="svc-'+s.id+'" data-i="'+i+'" aria-selected="'+(i===0)+'"><span class="i">0'+(i+1)+'</span><span class="n">'+esc(s.name)+'</span><span class="s">'+esc(s.sub)+'</span></button></li>'}).join('');
+    var btns=list.querySelectorAll('button');
+    window.showService=function(i,scroll){
+      var s=SVC[i];mode=s.id;btns.forEach(function(b){b.setAttribute('aria-selected',String(+b.dataset.i===i))});
+      document.getElementById('svc-art-lbl').textContent=ART[s.id].toUpperCase();
+      var ext=/^http/.test(s.proof.a[1]);
+      panel.innerHTML='<h3>'+esc(s.title)+'</h3><p class="prob">'+esc(s.prob)+'</p><ol>'+s.does.map(function(d){return '<li>'+esc(d)+'</li>'}).join('')+'</ol><div class="svc2-proof"><b>PROOF</b>'+s.proof.n.slice(0,2).map(function(n){return '<span><strong>'+esc(n[0])+'</strong>'+esc(n[1])+'</span>'}).join('')+'<a href="'+s.proof.a[1]+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+esc(s.proof.a[0])+'</a></div>';
+      panel.classList.remove('swap');void panel.offsetWidth;panel.classList.add('swap');
+      if(scroll){document.getElementById('services').scrollIntoView({behavior:reduce?'auto':'smooth'})}
+    };
+    btns.forEach(function(b){b.addEventListener('click',function(){showService(+b.dataset.i)});b.addEventListener('mouseenter',function(){if(window.matchMedia('(hover:hover)').matches)showService(+b.dataset.i)})});
+    showService(0);
+    /* generative art */
+    var cv=document.getElementById('svc-art'),cx=cv.getContext('2d'),W=0,Hh=0,t0=performance.now();
+    function sz(){var r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);cv.width=r.width*d;cv.height=r.height*d;cx.setTransform(d,0,0,d,0,0);W=r.width;Hh=r.height}
+    sz();addEventListener('resize',sz);
+    var R=[];for(var k=0;k<90;k++)R.push([Math.random(),Math.random(),Math.random()]);
+    var G='#45D98A',M='#7FE0A8',D='rgba(127,224,168,.22)';
+    function dot(x,y,r,c){cx.fillStyle=c;cx.beginPath();cx.arc(x,y,r,0,7);cx.fill()}
+    var DRAW={
+      product:function(t){var cxp=W*.5,cyp=Hh*.5,ph=(Math.sin(t*.0006)+1)/2;R.forEach(function(p,i){var x=p[0]*W,y=p[1]*Hh,k=Math.pow(ph,1.5);dot(x+(cxp-x)*k*.92,y+(cyp-y)*k*.92,2.2,i%9?D:M)});dot(cxp,cyp,6+ph*6,G)},
+      search:function(t){var c=[W*.5,Hh*.52];for(var j=0;j<5;j++){var rr=((t*.04+j*60)%300);cx.strokeStyle='rgba(127,224,168,'+(1-rr/300)*.6+')';cx.lineWidth=1.5;cx.beginPath();cx.arc(c[0],c[1],rr,0,7);cx.stroke()}R.slice(0,40).forEach(function(p){dot(p[0]*W,p[1]*Hh,2,D)});dot(c[0],c[1],9,G)},
+      web:function(t){var ph=(t*.0004)%1,n=Math.floor(ph*7),x0=W*.18,y0=Hh*.14,w=W*.64,h=Hh*.72;var B=[[0,0,1,.1],[0,.16,.62,.3],[.66,.16,.34,.3],[0,.52,.31,.22],[.345,.52,.31,.22],[.69,.52,.31,.22],[0,.8,1,.2]];cx.strokeStyle=D;cx.lineWidth=1;cx.strokeRect(x0,y0,w,h);B.forEach(function(b,i){if(i>n)return;cx.fillStyle=i===n?'rgba(69,217,138,.55)':'rgba(127,224,168,.16)';cx.fillRect(x0+b[0]*w+4,y0+b[1]*h+4,b[2]*w-8,b[3]*h-8)})},
+      software:function(t){var N=[[.15,.3],[.35,.18],[.55,.35],[.8,.22],[.25,.7],[.5,.65],[.75,.72],[.88,.5]],E=[[0,1],[1,2],[2,3],[0,4],[4,5],[5,2],[5,6],[6,7],[3,7],[2,6]];cx.lineWidth=1.2;E.forEach(function(e,i){var a=N[e[0]],b=N[e[1]];cx.strokeStyle=D;cx.beginPath();cx.moveTo(a[0]*W,a[1]*Hh);cx.lineTo(b[0]*W,b[1]*Hh);cx.stroke();var q=((t*.0005+i*.17)%1);dot((a[0]+(b[0]-a[0])*q)*W,(a[1]+(b[1]-a[1])*q)*Hh,3,G)});N.forEach(function(n){dot(n[0]*W,n[1]*Hh,7,'#112B1E');cx.strokeStyle=M;cx.lineWidth=2;cx.beginPath();cx.arc(n[0]*W,n[1]*Hh,7,0,7);cx.stroke()})},
+      security:function(t){var cols=14,rows=9,sx=W/(cols+1),sy=Hh/(rows+1),scan=((t*.00025)%1.2)*W;for(var i=1;i<=cols;i++)for(var j=1;j<=rows;j++){var x=i*sx,y=j*sy,done=x<scan;if(done){cx.fillStyle='rgba(69,217,138,.85)';cx.fillRect(x-4,y-4,8,8)}else dot(x,y,2.2,D)}cx.fillStyle='rgba(69,217,138,.25)';cx.fillRect(scan-2,0,3,Hh)},
+      ai:function(t){for(var l=0;l<5;l++){cx.strokeStyle=l===2?G:'rgba(127,224,168,'+(.15+l*.08)+')';cx.lineWidth=l===2?2.5:1.2;cx.beginPath();for(var x=0;x<=W;x+=6){var calm=x/W,amp=(1-calm)*Hh*.22*Math.sin(x*.05+l)+calm*Hh*.04;var y=Hh*.5+Math.sin(x*.018+t*.002+l*.7)*amp;x?cx.lineTo(x,y):cx.moveTo(x,y)}cx.stroke()}}
+    };
+    var vis=false;new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(cv);
+    (function loop(t){requestAnimationFrame(loop);if(!vis||!W)return;cx.clearRect(0,0,W,Hh);DRAW[mode](reduce?2000:t-t0)})(t0);
+  }
+
+  /* business brain */
+  var KEYS={search:['found by ai','get found','chatgpt','perplexity','gemini','seo','geo','visib','search','google','rank','cited','recommend','marketing','leads'],
+    ai:['admin','drown','time','manual','automat','behind','ai wave','modern','process','spreadsheet','workflow','team','busy','efficien'],
+    web:['website','site','convert','booking','bookings','landing','design','brand','page'],
+    software:['app','idea','software','tool','prototype','build','dashboard','system','mvp','platform'],
+    security:['safe','secur','data','privacy','private','password','compliance','risk','leak'],
+    product:['customer','users','what to build','product','priorit','roadmap','problem','discover']};
+  var REPLY={search:"That’s an AI search problem, and partly a marketing one. AI tools recommend businesses they can find clear, trustworthy facts about. I’d start by checking what ChatGPT, Gemini and Google’s AI say about you today, then build the pages they’ll quote.",
+    ai:"That’s a modernisation problem. I’d audit where the hours go, automate the repetitive work first with the right-sized AI, then train your team so it sticks.",
+    web:"That sounds like a conversion problem, not a design one. I’d rebuild the site around the one action that matters, book, enquire or buy, and make it AI-search-ready at the same time.",
+    software:"Let’s test it before you spend big. I’d build a clickable prototype first, put it in front of real users, then build it properly once it proves itself.",
+    security:"It can be safe. I’d map where your data goes, strip sensitive details before anything reaches an AI, give each person only the access they need, and keep a human on the decisions that matter.",
+    product:"Then the first step is talking to the people with the problem. I’d run short discovery conversations, map what they told us, and cut it down to the one thing worth building first.",
+    none:"Good question. Every business is different, so the fastest way is a free 30-minute call. Tell me a bit more, or tap one of the options below."};
+  var IDX={product:0,search:1,web:2,software:3,security:4,ai:5};
+  function classify(t){t=t.toLowerCase();var best='none',score=0;Object.keys(KEYS).forEach(function(k){var s=0;KEYS[k].forEach(function(w){if(t.indexOf(w)>-1)s++});if(s>score){score=s;best=k}});return best}
+  var body=document.getElementById('term-body'),form=document.getElementById('term-form'),inp=document.getElementById('term-in');
+  function ask(text){
+    if(!text.trim())return;var k=classify(text);
+    var old=body.querySelector('.cursor');if(old)old.remove();
+    var q=document.createElement('div');q.className='q';q.textContent=text;body.appendChild(q);
+    var a=document.createElement('div');a.className='a';body.appendChild(a);
+    var msg=REPLY[k],i=0;
+    var link=k==='none'?'<a href="https://wa.me/61451604063?text='+encodeURIComponent('Hi Bastien, '+text)+'" target="_blank" rel="noopener">Book a free call →</a>':'<a href="#services" data-svc="'+IDX[k]+'">Open '+esc(SVC[IDX[k]].name)+' →</a>';
+    function done(){a.innerHTML=esc(msg)+' '+link+' <span class="cursor"></span>';body.scrollTop=body.scrollHeight;
+      var l=a.querySelector('[data-svc]');if(l)l.addEventListener('click',function(e){e.preventDefault();showService(+l.dataset.svc,true)})}
+    if(reduce){done();return}
+    (function type(){i+=3;a.textContent=msg.slice(0,i);body.scrollTop=body.scrollHeight;if(i<msg.length)setTimeout(type,16);else done()})();
+  }
+  if(form){
+    form.addEventListener('submit',function(e){e.preventDefault();ask(inp.value);inp.value=''});
+    document.querySelectorAll('.term-chips button').forEach(function(b){b.addEventListener('click',function(){ask(b.textContent)})});
+  }
+
+  /* matrix rain: triangles + binary, only while on screen */
+  if(reduce)return;
+  document.querySelectorAll('canvas.rain').forEach(function(cv){
+    var ctx=cv.getContext('2d'),cols=[],fs=16,run=false,raf;
+    var chars='01▲▼△▽01';
+    function size(){var r=cv.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);cv.width=r.width*d;cv.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);cols=[];for(var x=0;x<r.width/fs;x++)cols.push(Math.random()*-40)}
+    var last=0;
+    function draw(t){raf=requestAnimationFrame(draw);if(t-last<70)return;last=t;
+      var w=cv.width,h=cv.height;ctx.fillStyle='rgba(5,14,9,.18)';ctx.fillRect(0,0,w,h);
+      ctx.font='500 '+fs+'px "Geist Mono", monospace';
+      for(var i=0;i<cols.length;i++){var y=cols[i]*fs;ctx.fillStyle=Math.random()<.04?'#C8F5DA':'#45D98A';ctx.fillText(chars[(Math.random()*chars.length)|0],i*fs,y);
+        if(y>h/(window.devicePixelRatio||1)&&Math.random()>.97)cols[i]=0;cols[i]+=1}}
+    size();window.addEventListener('resize',size);
+    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!run){run=true;raf=requestAnimationFrame(draw)}else if(!e.isIntersecting&&run){run=false;cancelAnimationFrame(raf)}})}).observe(cv);
+  });
+})();
+
+(function(){var f=document.getElementById('cform');if(!f)return;
+  function text(){var d=new FormData(f);return 'Hi Bastien, I\'m '+(d.get('name')||'')+(d.get('biz')?' from '+d.get('biz'):'')+'. I need help with: '+d.get('svc')+'. '+(d.get('msg')||'')+' Reach me at: '+(d.get('reply')||'')}
+  var mail=document.getElementById('cform-mail');
+  f.addEventListener('input',function(){mail.href='mailto:bastien.web3@gmail.com?subject='+encodeURIComponent('Enquiry from bastienbuilds.com')+'&body='+encodeURIComponent(text())});
+  f.addEventListener('submit',function(e){e.preventDefault();
+    if(!f.name.value.trim()||!f.reply.value.trim()){f.reportValidity();return}
+    var url='https://wa.me/61451604063?text='+encodeURIComponent(text());
+    var ok=document.getElementById('cform-ok');ok.style.display='block';
+    ok.innerHTML='Your message is ready in WhatsApp. If it didn’t open, <a href="'+url+'" target="_blank" rel="noopener">tap here</a> or message 0451 604 063.';
+    window.open(url,'_blank','noopener');});
+})();
+
+(function(){
+  var JS=document.documentElement.classList.contains('js');
+  function prog(el){var r=el.getBoundingClientRect(),h=r.height-innerHeight;return h>0?Math.min(1,Math.max(0,-r.top/h)):0}
+  var os=document.getElementById('open-scroll'),cards=os?os.querySelectorAll('.ob'):[],dots=os?os.querySelectorAll('.open-dots i'):[],loopEl=os?os.querySelector('.open-loop'):null;
+  var vs=document.getElementById('vscroll'),steps=vs?vs.querySelectorAll('.vsteps li'):[],svg=document.getElementById('vart'),cap=document.getElementById('vcap');
+  var NS='http://www.w3.org/2000/svg',C=[],N=36,seed=7;function rnd(){seed=(seed*9301+49297)%233280;return seed/233280}
+  var S0=[],S1=[],S2=[],S3=[];for(var i=0;i<N;i++)S0.push([70+rnd()*340,70+rnd()*340]);
+  var rows=[12,10,8,6],k=0;rows.forEach(function(n,r){for(var j=0;j<n;j++){S1.push([96+j*26,150+r*60]);k++}});
+  for(var r2=0;r2<6;r2++)for(var c2=0;c2<6;c2++){var x=110+c2*52,y=110+r2*52;if(r2===0)y=104;S2.push([x,y])}
+  for(var q=0;q<N;q++){var tt=q/(N-1);S3.push([80+tt*320,380-Math.pow(tt,1.7)*270+Math.sin(q*1.3)*6])}
+  var FILL=[ '#B9C7BF','#18844A','#112B1E','#45D98A'],CAPS=['the mess, mapped','ranked by impact','built and live','tracked, owned, yours'];
+  if(svg){for(var d=0;d<N;d++){var c=document.createElementNS(NS,'circle');c.setAttribute('r',d%7===0?7:5);c.style.transitionDelay=(d*12)+'ms';svg.appendChild(c);C.push(c)}
+    document.getElementById('v-line').setAttribute('d','M'+S3.map(function(p){return p[0]+' '+p[1]}).join(' L'))}
+  var lastV=-1;
+  if(!JS){setTimeout(function(){setV(3)},0)}
+  function setV(i){if(i===lastV)return;lastV=i;var S=[S0,S1,S2,S3][i];C.forEach(function(c,j){c.style.transform='translate('+S[j][0]+'px,'+S[j][1]+'px)';c.style.fill=(i===1&&j<12)?'#45D98A':FILL[i]});
+    steps.forEach(function(l,j){l.classList.toggle('on',j===i)});cap.textContent=CAPS[i];
+    document.getElementById('v-frame').style.opacity=i===2?1:0;document.getElementById('v-line').style.opacity=i===3?.6:0}
+  function tick(){
+    if(os){var p=prog(os),idx=Math.min(3,Math.floor(p*4.4));cards.forEach(function(c,j){c.classList.toggle('seen',j<=idx);c.classList.toggle('active',j===idx)});dots.forEach(function(d,j){d.classList.toggle('on',j<=idx)});if(loopEl)loopEl.classList.toggle('on',p>.8)}
+    if(vs&&svg){var pv=prog(vs);setV(Math.min(3,Math.floor(pv*4.2)))}
+  }
+  if(!JS)return;
+  addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
 })();
 </script>
 
