@@ -1435,6 +1435,7 @@ a.client:hover .c-shot img{transform:scale(1.04)}
 @media (max-width:900px){.pyr .tile.wide{width:auto}}
 .pill-acts{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 @media (max-width:600px){.pill-acts{flex-direction:column;align-items:stretch;width:100%}.hero .ctas{flex-wrap:wrap}}
+.cform .ok.err{color:#FFB4A8}
 </style>
 
 </head>
@@ -1922,7 +1923,7 @@ a.client:hover .c-shot img{transform:scale(1.04)}
       <form class="cform" id="cform" novalidate>
         <div class="row"><label>Your name<input name="name" required autocomplete="name"></label><label>Business<input name="biz" autocomplete="organization"></label><label>Email or phone<input name="reply" required></label></div>
         <div class="row two"><label>I need help with<select name="svc"><option>Not sure yet</option><option>Digital audit</option><option>AI search</option><option>Website build</option><option>Custom software</option><option>Security audit</option><option>AI-native modernisation</option><option>Product</option></select></label><label>What’s going on?<textarea name="msg" placeholder="A sentence or two is plenty"></textarea></label></div>
-        <div class="acts"><button class="btn btn-pill" type="submit">Send on WhatsApp →</button><a class="btn btn-ghost-dk" id="cform-mail" href="mailto:bastien.web3@gmail.com">Send by email</a></div>
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true"><div class="acts"><button class="btn btn-pill" type="submit" id="cform-send">Send message →</button><button class="btn btn-ghost-dk" type="button" id="cform-wa">Send on WhatsApp</button></div>
         <span class="note">I reply within one business day.</span>
         <div class="ok" id="cform-ok"></div>
       </form>
@@ -2163,15 +2164,19 @@ a.client:hover .c-shot img{transform:scale(1.04)}
 })();
 
 (function(){var f=document.getElementById('cform');if(!f)return;
+  var ok=document.getElementById('cform-ok'),send=document.getElementById('cform-send'),wa=document.getElementById('cform-wa');
   function text(){var d=new FormData(f);return 'Hi Bastien, I\'m '+(d.get('name')||'')+(d.get('biz')?' from '+d.get('biz'):'')+'. I need help with: '+d.get('svc')+'. '+(d.get('msg')||'')+' Reach me at: '+(d.get('reply')||'')}
-  var mail=document.getElementById('cform-mail');
-  f.addEventListener('input',function(){mail.href='mailto:bastien.web3@gmail.com?subject='+encodeURIComponent('Enquiry from bastienbuilds.com')+'&body='+encodeURIComponent(text())});
-  f.addEventListener('submit',function(e){e.preventDefault();
-    if(!f.name.value.trim()||!f.reply.value.trim()){f.reportValidity();return}
-    var url='https://wa.me/61451604063?text='+encodeURIComponent(text());
-    var ok=document.getElementById('cform-ok');ok.style.display='block';
-    ok.innerHTML='Your message is ready in WhatsApp. If it didn’t open, <a href="'+url+'" target="_blank" rel="noopener">tap here</a> or message 0451 604 063.';
-    var w=window.open(url,'_blank','noopener');if(!w)location.href=url;});
+  function valid(){if(!f.name.value.trim()||!f.reply.value.trim()){f.reportValidity();return false}return true}
+  function show(h,err){ok.style.display='block';ok.classList.toggle('err',!!err);ok.innerHTML=h}
+  f.addEventListener('submit',function(e){e.preventDefault();if(!valid())return;if(f._honey.value)return;
+    var d=new FormData(f);send.disabled=true;send.textContent='Sending…';
+    fetch('https://formsubmit.co/ajax/bastien.web3@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({_subject:'New enquiry from bastienbuilds.com — '+(d.get('name')||''),_template:'table',_captcha:'false',Name:d.get('name'),Business:d.get('biz')||'',Contact:d.get('reply'),'Needs help with':d.get('svc'),Message:d.get('msg')||''})})
+    .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw new Error(j.message||'failed');})})
+    .then(function(){f.reset();show('Thanks, your message is in. I reply within one business day.');send.textContent='Sent ✓'})
+    .catch(function(){var url='https://wa.me/61451604063?text='+encodeURIComponent(text());show('That didn’t send. <a href="'+url+'" target="_blank" rel="noopener">Send it on WhatsApp instead</a> or call 0451 604 063.',1);send.disabled=false;send.textContent='Send message →'});});
+  wa.addEventListener('click',function(){if(!valid())return;var url='https://wa.me/61451604063?text='+encodeURIComponent(text());
+    show('Your message is ready in WhatsApp. If it didn’t open, <a href="'+url+'" target="_blank" rel="noopener">tap here</a>.');var w=window.open(url,'_blank','noopener');if(!w)location.href=url;});
 })();
 
 (function(){
