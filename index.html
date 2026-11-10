@@ -1233,6 +1233,15 @@ a.client:hover .c-shot img{transform:scale(1.04)}
   .svc-dots i{width:28px;height:3px;border-radius:2px;background:var(--line);transition:background .3s}
   .svc-dots i.on{background:var(--green)}
 }
+
+/* services: steady heights, light swap, green active */
+.svc2-detail h3 .hl{color:var(--green)}
+.svc2-list button[aria-selected="true"] .n{color:var(--green)}
+.svc2-detail.swap{animation:svcIn .45s ease both}
+.svc2-art.swap canvas{animation:svcArt .5s ease both}
+@keyframes svcIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes svcArt{from{opacity:.25}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.svc2-detail.swap,.svc2-art.swap canvas{animation:none}}
 </style>
 
 </head>
@@ -1277,10 +1286,10 @@ a.client:hover .c-shot img{transform:scale(1.04)}
       <div class="ctas"><a class="btn btn-green" href="https://wa.me/61451604063?text=Hi%20Bastien%2C%20I%27d%20like%20to%20book%20a%20free%2030-minute%20call." target="_blank" rel="noopener">Book a free call →</a><a class="btn btn-ghost" href="#services">What I do</a></div>
     </div>
     <div class="hero-visual" aria-hidden="false">
-      <div class="ph glitching" title="Click me"><img src="assets/bastien.jpg" alt="Bastien Durand"><span class="gl a"></span><span class="gl b"></span><canvas class="shat" aria-hidden="true"></canvas><span class="ph-hint">CLICK ME</span></div>
+      <div class="ph glitching" title="Tap me"><img src="assets/bastien.jpg" alt="Bastien Durand"><span class="gl a"></span><span class="gl b"></span><canvas class="shat" aria-hidden="true"></canvas><span class="ph-hint">TAP ME</span></div>
     </div>
     <div class="hero-mobile">
-      <div class="photo ph glitching"><img src="assets/bastien.jpg" alt="Bastien Durand"><span class="gl a"></span><span class="gl b"></span><canvas class="shat" aria-hidden="true"></canvas><span class="ph-hint">CLICK ME</span></div>
+      <div class="photo ph glitching"><img src="assets/bastien.jpg" alt="Bastien Durand"><span class="gl a"></span><span class="gl b"></span><canvas class="shat" aria-hidden="true"></canvas><span class="ph-hint">TAP ME</span></div>
     </div>
   </div>
 </section>
@@ -1896,7 +1905,7 @@ a.client:hover .c-shot img{transform:scale(1.04)}
      who:'Clinics · clubs · owner-led businesses',
      proof:{k:'CASE · GET ACTIVE PHYSIOTHERAPY',b:'A clinic audit, line by line',p:'Ads, website, tracking and local search, audited and ranked.',n:[['Ad spend','audited line by line'],['~50%','ad-spend cut targeted']],a:['See the case study ↓','#work']}},
     {id:'search',name:'AI search',sub:'Get found by AI',
-     title:'Get recommended by AI, not just ranked on Google',
+     title:'Get recommended by AI',
      prob:'Customers now ask ChatGPT, Gemini and Google’s AI who to call. If AI can’t find clear facts about you, it recommends someone else.',
      does:['Check what each AI says about you today','Write clear, specific pages AI can quote','Fix your Google profile, structured data and the facts others publish about you','Re-test every month and refresh what faded'],
      who:'Clinics · gyms · clubs · local services',
@@ -1932,15 +1941,20 @@ a.client:hover .c-shot img{transform:scale(1.04)}
   if(list&&panel){
     list.innerHTML=SVC.map(function(s,i){return '<li><button role="tab" type="button" id="svc-'+s.id+'" data-i="'+i+'" aria-selected="'+(i===0)+'"><span class="i">0'+(i+1)+'</span><span class="n">'+esc(s.name)+'</span><span class="s">'+esc(s.sub)+'</span></button></li>'}).join('');
     var btns=list.querySelectorAll('button');
+    var HL=['clearly','recommended','convert','how you actually work','data','speed with AI'];
+    function hlT(t){t=esc(t);for(var k=0;k<HL.length;k++){var j=t.indexOf(HL[k]);if(j>=0)return t.slice(0,j)+'<span class="hl">'+HL[k]+'</span>'+t.slice(j+HL[k].length)}return t}
+    function fixH(){panel.style.minHeight='';if(!window.matchMedia('(min-width:1001px)').matches)return;var keep=panel.innerHTML,m=0;
+      SVC.forEach(function(s){panel.innerHTML='<h3>'+hlT(s.title)+'</h3><p class="prob">'+esc(s.prob)+'</p><ol>'+s.does.map(function(d){return '<li>'+esc(d)+'</li>'}).join('')+'</ol>';m=Math.max(m,panel.offsetHeight)});
+      panel.innerHTML=keep;panel.style.minHeight=m+'px'}
     window.showService=function(i,scroll){
       var s=SVC[i];mode=s.id;btns.forEach(function(b){b.setAttribute('aria-selected',String(+b.dataset.i===i))});
       document.getElementById('svc-art-lbl').textContent=ART[s.id].toUpperCase();
       var ext=/^http/.test(s.proof.a[1]);
-      panel.innerHTML='<h3>'+esc(s.title)+'</h3><p class="prob">'+esc(s.prob)+'</p><ol>'+s.does.map(function(d){return '<li>'+esc(d)+'</li>'}).join('')+'</ol>';
+      panel.innerHTML='<h3>'+hlT(s.title)+'</h3><p class="prob">'+esc(s.prob)+'</p><ol>'+s.does.map(function(d){return '<li>'+esc(d)+'</li>'}).join('')+'</ol>';
       var pw=document.querySelector('.svc2-panel'),home=document.querySelector('.svc2');
       if(window.matchMedia('(max-width:1000px)').matches){var li=btns[i].parentNode;list.querySelectorAll('li.has-panel').forEach(function(x){x.classList.remove('has-panel')});li.classList.add('has-panel');li.appendChild(pw);if(sz)setTimeout(sz,0)}
       else if(pw.parentNode!==home){list.querySelectorAll('li.has-panel').forEach(function(x){x.classList.remove('has-panel')});home.appendChild(pw);if(sz)setTimeout(sz,0)}
-      panel.classList.remove('swap');void panel.offsetWidth;panel.classList.add('swap');
+      panel.classList.remove('swap');void panel.offsetWidth;panel.classList.add('swap');var ar=document.querySelector('.svc2-art');ar.classList.remove('swap');void ar.offsetWidth;ar.classList.add('swap');
       if(scroll){if(window.svcPinned&&svcPinned())svcToIdx(i);else document.getElementById('services').scrollIntoView({behavior:reduce?'auto':'smooth'})}
     };
     var ss=document.getElementById('svc-scroll'),cur=0;
@@ -1951,7 +1965,7 @@ a.client:hover .c-shot img{transform:scale(1.04)}
     var dots=document.querySelectorAll('.svc-dots i');
     function stick(){if(!pinned())return;var r=ss.getBoundingClientRect(),h=ss.offsetHeight-innerHeight,p=h>0?Math.min(1,Math.max(0,-r.top/h)):0,i=Math.min(SVC.length-1,Math.floor(p*SVC.length));if(i!==cur){cur=i;showService(i)}dots.forEach(function(d,j){d.classList.toggle('on',j===i)})}
     addEventListener('scroll',stick,{passive:true});addEventListener('resize',stick);
-    showService(0);
+    showService(0);fixH();addEventListener('resize',fixH);if(document.fonts)document.fonts.ready.then(fixH);
     /* generative art */
     var cv=document.getElementById('svc-art'),cx=cv.getContext('2d'),W=0,Hh=0,t0=performance.now();
     sz=function(){var r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);cv.width=r.width*d;cv.height=r.height*d;cx.setTransform(d,0,0,d,0,0);W=r.width;Hh=r.height};
