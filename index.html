@@ -1323,6 +1323,16 @@ a.client:hover .c-shot img{transform:scale(1.04)}
   #term-in,.cform input,.cform select,.cform textarea{font-size:16px}
   .c-ov .ct{font-size:10px!important;padding:4px 7px!important}
 }
+
+/* mobile: smaller brain, hide beyond, sticky CTA */
+.m-cta{display:none}
+@media (max-width:900px){
+  .nbrain{max-width:220px;margin:4px auto 0}
+  .beyond{display:none}
+  .m-cta{display:flex;position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:60;justify-content:center;align-items:center;min-height:54px;border-radius:999px;background:var(--green-hi);color:var(--forest);font:600 16px var(--body);text-decoration:none;box-shadow:0 12px 30px -10px rgba(11,31,21,.55),0 0 0 1px rgba(17,43,30,.08);transform:translateY(140%);opacity:0;transition:transform .35s ease,opacity .35s ease;pointer-events:none}
+  .m-cta.on{transform:none;opacity:1;pointer-events:auto}
+  .contact .foot{padding-bottom:72px}
+}
 </style>
 
 </head>
@@ -1543,55 +1553,6 @@ a.client:hover .c-shot img{transform:scale(1.04)}
   </div></div>
 </section>
 
-<section class="north dark" id="north">
-  <div class="wrap">
-    <div class="north-head reveal">
-      <div class="eyebrow">Where I take your business</div>
-      <h2 class="sec-h">Three <span class="em">corners</span></h2>
-      <p>Get found. Stay safe. Build what saves time.</p>
-    </div>
-    <div class="ns-stage reveal-tri">
-      <div class="ns-lbl ns-north t-north">
-        <span class="ns-k">AI builder</span>
-        <h3>Build what saves time</h3>
-      </div>
-      <div class="ns-fig">
-        <svg viewBox="0 0 800 620" role="img" aria-label="Triangle: AI search and AI security at the base lead up to AI builder at the apex">
-          <defs>
-            <linearGradient id="nsFill" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#45D98A" stop-opacity=".02"></stop><stop offset="1" stop-color="#45D98A" stop-opacity=".14"></stop></linearGradient>
-            <radialGradient id="nsGlow"><stop offset="0" stop-color="#45D98A" stop-opacity=".55"></stop><stop offset="1" stop-color="#45D98A" stop-opacity="0"></stop></radialGradient>
-          </defs>
-          <path class="ns-fill" d="M80 560 L400 48 L720 560 Z" fill="url(#nsFill)"></path>
-          <path class="ns-tier" d="M400 470 V70" stroke="#3E6E53" stroke-width="2" stroke-dasharray="6 8" fill="none"></path>
-          <g class="ns-dots t-next" fill="#112B1E" stroke="#7FE0A8" stroke-width="3"><circle cx="400" cy="470" r="9" fill="#7FE0A8"></circle><circle cx="400" cy="335" r="8"></circle><circle cx="400" cy="205" r="8"></circle></g>
-          <path class="ns-edge ns-base-line" pathLength="1" d="M80 560 L720 560" stroke="#7FE0A8" stroke-width="3" fill="none" stroke-linecap="round"></path>
-          <path class="ns-edge ns-side-l" pathLength="1" d="M80 560 L400 48" stroke="#7FE0A8" stroke-width="3" fill="none" stroke-linecap="round"></path>
-          <path class="ns-edge ns-side-r" pathLength="1" d="M720 560 L400 48" stroke="#7FE0A8" stroke-width="3" fill="none" stroke-linecap="round"></path>
-          <circle class="t-tech" cx="80" cy="560" r="11" fill="#112B1E" stroke="#7FE0A8" stroke-width="3"></circle>
-          <circle class="t-health" cx="720" cy="560" r="11" fill="#112B1E" stroke="#7FE0A8" stroke-width="3"></circle>
-          <g class="t-north ns-star"><circle cx="400" cy="48" r="46" fill="url(#nsGlow)"></circle><circle cx="400" cy="48" r="13" fill="#45D98A"></circle></g>
-          <g class="ns-svg-lbl" font-family="Geist Mono, monospace" font-size="26" letter-spacing="2" fill="#7FE0A8">
-            <text class="t-north" x="400" y="-6" text-anchor="middle">AI BUILDER</text>
-            <text class="t-tech" x="80" y="612" text-anchor="middle">AI SEARCH</text>
-            <text class="t-health" x="720" y="612" text-anchor="middle">AI SECURITY</text>
-          </g>
-        </svg>
-        <div class="ns-ms ns-ms1 t-next" tabindex="0"><span>Step 1</span><b>Get found</b><em>AI tools recommend you, with facts you control.</em></div><div class="ns-ms ns-ms2 t-next" tabindex="0"><span>Step 2</span><b>Stay safe</b><em>Your data stays yours, with the right access for each person.</em></div><div class="ns-ms ns-ms3 t-next" tabindex="0"><span>Step 3</span><b>Ahead of the wave</b><em>AI does the busywork, your team does the work that matters.</em></div>
-      </div>
-      <div class="ns-base">
-        <div class="ns-lbl t-tech">
-          <span class="ns-k">AI search</span>
-          <h3>Get recommended by AI</h3>
-        </div>
-        <div class="ns-lbl t-health">
-          <span class="ns-k">AI security</span>
-          <h3>Use AI without the risk</h3>
-        </div>
-      </div>
-      <div class="ns-cta t-north"><a class="btn btn-green" href="https://wa.me/61451604063?text=Hi%20Bastien%2C%20I%27d%20like%20to%20book%20a%20free%2030-minute%20call." target="_blank" rel="noopener">Book a free call →</a></div>
-    </div>
-  </div>
-</section>
 
 <section class="trust" id="trust" aria-label="Who you’ll work with">
   <div class="wrap">
@@ -1886,6 +1847,7 @@ a.client:hover .c-shot img{transform:scale(1.04)}
   </div>
 </section>
 </main>
+<a class="m-cta" id="m-cta" href="https://wa.me/61451604063?text=Hi%20Bastien%2C%20I%27d%20like%20to%20book%20a%20free%2030-minute%20call." target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">Book a free call →</a>
 
 <script>
 (function(){
@@ -2243,6 +2205,13 @@ a.client:hover .c-shot img{transform:scale(1.04)}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){var was=run;run=e.isIntersecting;if(run&&!was){last=0;if(!t0s){t0=performance.now();t0s=1}requestAnimationFrame(draw)}})});var t0s=0;io.observe(cv);
   if(reduce)draw(performance.now());
 })();
+</script>
+
+<script>
+(function(){var c=document.getElementById('m-cta');if(!c)return;var hero=document.querySelector('.hero'),hide=[document.getElementById('contact'),document.querySelector('#brain .term'),document.querySelector('.cta-big'),document.getElementById('pill')].filter(Boolean),inv=new Set(),past=false;
+function upd(){var on=past&&inv.size===0;c.classList.toggle('on',on);c.setAttribute('aria-hidden',String(!on));c.tabIndex=on?0:-1}
+new IntersectionObserver(function(es){es.forEach(function(e){past=!e.isIntersecting&&e.boundingClientRect.top<0});upd()}).observe(hero);
+var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?inv.add(e.target):inv.delete(e.target)});upd()});hide.forEach(function(h){io.observe(h)});})();
 </script>
 </body>
 </html>
