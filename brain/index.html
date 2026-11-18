@@ -5,32 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="How Bastien Builds turns messy data into structure people and AI can act on.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Noise to structure · Bastien Builds">
+<meta property="og:title" content="Aggregate → Structure · Bastien Builds">
 <meta property="og:description" content="How I turn messy data into structure people and AI can act on.">
 <meta property="og:image" content="https://bastienbuilds.com/assets/og-v6.jpg">
 <meta property="og:url" content="https://bastienbuilds.com/brain/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg">
-<title>Noise to structure — Bastien Builds</title>
+<title>Aggregate → Structure — Bastien Builds</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Geist:wght@400;500&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-  html,body{margin:0;background:#F3EBDD;color:#2B2320;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-  .bb-flow{max-width:720px;margin:0 auto;padding:24px 16px 32px}
-  .bb-flow canvas{width:100%;height:clamp(380px,62vw,520px);display:block;border-radius:14px;cursor:pointer}
-  .bb-stages{display:flex;justify-content:space-between;font:12px ui-monospace,Menlo,monospace;padding:10px 4px 0}
+  html,body{margin:0;background:#F4F7F5;color:#10201A;font-family:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif}
+  .bb-flow{max-width:720px;margin:0 auto;padding:28px 16px 32px}
+  .bb-title{font-family:"Space Grotesk","Helvetica Neue",Arial,sans-serif;font-size:clamp(24px,4vw,34px);font-weight:500;line-height:1.2;margin:0 2px 16px}
+  .bb-title span{color:#18844A}
+  .bb-card{background:#FFFFFF;border:1px solid #E1E9E4;border-radius:16px;padding:12px}
+  .bb-flow canvas{width:100%;height:clamp(380px,62vw,520px);display:block;border-radius:10px;cursor:pointer}
+  .bb-stages{display:flex;justify-content:space-between;font:500 12px "Geist Mono",ui-monospace,Menlo,monospace;color:#58695F;padding:10px 4px 0}
   .bb-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;padding:10px 4px 0}
   .bb-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-  .bb-sig{font-size:12px;color:#5A4E46;padding:14px 4px 0;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-  .bb-sig a{color:#2B2320}
+  .bb-sig{font-size:12px;color:#58695F;padding:16px 4px 0;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .bb-sig a{color:#18844A;text-decoration:none;font-weight:500}
 </style>
 </head>
 <body>
 <div class="bb-flow">
-  <canvas id="bb-c" aria-label="Animation: scattered data passes through a curation lens into B, which sends it into three coloured lanes that fill structured grids in sync."></canvas>
-  <div class="bb-stages"><span>noise</span><span>curation</span><span>B</span><span>structure</span></div>
-  <div class="bb-legend">
-    <span><i style="background:#E0317E"></i>legible to humans</span>
-    <span><i style="background:#139DC0"></i>legible to machines</span>
-    <span><i style="background:#E8950C"></i>trusted</span>
+  <h1 class="bb-title">Aggregate <span>→</span> <span>Structure</span></h1>
+  <div class="bb-card">
+    <canvas id="bb-c" aria-label="Animation: scattered data passes through a curation lens into B, which sends it into three green lanes that fill structured grids in sync."></canvas>
+    <div class="bb-stages"><span>noise</span><span>curation</span><span>B</span><span>structure</span></div>
+    <div class="bb-legend">
+      <span><i style="background:#45D98A"></i>legible to humans</span>
+      <span><i style="background:#18844A"></i>legible to machines</span>
+      <span><i style="background:#112B1E"></i>trusted</span>
+    </div>
   </div>
   <div class="bb-sig"><span>Tap to throw in raw data.</span><a href="https://bastienbuilds.com">bastienbuilds.com</a></div>
 </div>
@@ -41,47 +48,49 @@ let W,H;
 function rs(){const d=window.devicePixelRatio||1;W=cv.clientWidth;H=cv.clientHeight;cv.width=W*d;cv.height=H*d;x.setTransform(d,0,0,d,0,0)}
 rs();window.addEventListener('resize',rs);
 const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const C=['#E0317E','#139DC0','#E8950C'],G='#B9AC9A',INK='#2B2320',BG='#F3EBDD';
+const C=['#45D98A','#18844A','#112B1E'],G='#A9BDB1',INK='#112B1E',BG='#FFFFFF',MINT='#7FE0A8';
 const P=[],O=[];
 const COLS=6,ROWS=3,TOTAL=COLS*ROWS,STEP=9,HOLD=40;
 let fillN=reduce?TOTAL:0,hold=0,flash=0,f=0;
-function spawn(n,bx,by){for(let i=0;i<n;i++)P.push({x:bx??Math.random()*W*0.2,y:by??Math.random()*H,vx:0.35+Math.random()*0.5,vy:(Math.random()-0.5)*1.6,lane:Math.floor(Math.random()*3),s:2+Math.random()*2.5,shape:Math.floor(Math.random()*3),t:0})}
+function spawn(n,bx,by){for(let i=0;i<n;i++)P.push({x:bx??Math.random()*W*0.2,y:by??Math.random()*H,vx:0.35+Math.random()*0.5,vy:(Math.random()-0.5)*1.6,lane:Math.floor(Math.random()*3),s:2.5+Math.random()*2.5,t:Math.random()*6})}
 spawn(90);
 cv.addEventListener('click',e=>{const r=cv.getBoundingClientRect();spawn(35,e.clientX-r.left,e.clientY-r.top)});
 function rr(px,py,w,h,r){x.beginPath();if(x.roundRect)x.roundRect(px,py,w,h,r);else x.rect(px,py,w,h);x.fill()}
+function tri(px,py,s,rot){x.save();x.translate(px,py);x.rotate(rot);x.beginPath();x.moveTo(0,-s*1.2);x.lineTo(s*1.1,s*0.8);x.lineTo(-s*1.1,s*0.8);x.closePath();x.fill();x.restore()}
 function inLaneY(l,px,lx,ax){const k=Math.min(1,Math.max(0,(px-lx)/(ax-lx)));const base=H*(0.3+l*0.2);return base+(H*0.5-base)*k*k}
 function outLaneY(l){return H*(0.2+l*0.3)}
 function cellPos(l,col,row){const gx=W*0.74,gw=W*0.24,cw=gw/COLS,ch=Math.max(11,H*0.024);const gy=outLaneY(l)-(ROWS*ch+(ROWS-1)*3)/2;return{x:gx+col*cw,y:gy+row*(ch+3),w:cw-3,h:ch}}
 function draw(){
 f++;x.fillStyle=BG;x.fillRect(0,0,W,H);
+x.strokeStyle='#EEF2EF';x.lineWidth=1;
+for(let gx0=0;gx0<W;gx0+=32){x.beginPath();x.moveTo(gx0+.5,0);x.lineTo(gx0+.5,H);x.stroke()}
+for(let gy0=0;gy0<H;gy0+=32){x.beginPath();x.moveTo(0,gy0+.5);x.lineTo(W,gy0+.5);x.stroke()}
 const lx=W*0.3,ly=H*0.5,ax=W*0.58,gx=W*0.74;
 if(!reduce){if(hold>0){hold--;if(hold==0)fillN=0}else if(f%STEP==0){fillN++;if(fillN>=TOTAL){fillN=TOTAL;hold=HOLD;flash=HOLD}}}
-x.lineWidth=1;
-for(let l=0;l<3;l++){x.strokeStyle=C[l]+'40';x.beginPath();for(let px=lx;px<=ax;px+=4){const py=inLaneY(l,px,lx,ax);px===lx?x.moveTo(px,py):x.lineTo(px,py)}x.stroke();
-x.strokeStyle=C[l]+'66';x.lineWidth=1.2;x.beginPath();x.moveTo(ax,ly);x.bezierCurveTo(ax+(gx-ax)*0.5,ly,ax+(gx-ax)*0.5,outLaneY(l),gx-4,outLaneY(l));x.stroke();x.lineWidth=1}
-for(let i=0;i<4;i++){const r=Math.min(W,H)*0.055+i*10+Math.sin(f/30+i)*3;x.strokeStyle=INK+(i==0?'cc':'33');x.lineWidth=i==0?1.5:0.8;x.beginPath();for(let k=0;k<=6;k++){const a=k/6*Math.PI*2+f/(200+i*60)*(i%2?1:-1);const px=lx+Math.cos(a)*r,py=ly+Math.sin(a)*r;k?x.lineTo(px,py):x.moveTo(px,py)}x.stroke()}
+for(let l=0;l<3;l++){x.strokeStyle=C[l]+'55';x.lineWidth=1;x.setLineDash([3,4]);x.beginPath();for(let px=lx;px<=ax;px+=4){const py=inLaneY(l,px,lx,ax);px===lx?x.moveTo(px,py):x.lineTo(px,py)}x.stroke();x.setLineDash([]);
+x.strokeStyle=C[l]+'88';x.lineWidth=1.2;x.beginPath();x.moveTo(ax,ly);x.bezierCurveTo(ax+(gx-ax)*0.5,ly,ax+(gx-ax)*0.5,outLaneY(l),gx-4,outLaneY(l));x.stroke()}
+const base=Math.min(W,H)*0.065;
+for(let i=0;i<3;i++){const r=base+i*13+Math.sin(f/30+i)*2.5;x.strokeStyle=i==0?INK:'#18844A55';x.lineWidth=i==0?1.5:0.9;x.beginPath();for(let k=0;k<=3;k++){const a=k/3*Math.PI*2-Math.PI/2+f/(220+i*70)*(i%2?1:-1);const px=lx+Math.cos(a)*r,py=ly+Math.sin(a)*r;k?x.lineTo(px,py):x.moveTo(px,py)}x.stroke()}
 for(let l=0;l<3;l++){
 for(let col=0;col<COLS;col++)for(let row=0;row<ROWS;row++){const c=cellPos(l,col,row);const idx=col*ROWS+row;const on=idx<fillN;const justOn=on&&idx==fillN-1&&hold==0&&!reduce;
-x.fillStyle=on?C[l]:C[l]+'1f';if(justOn){rr(c.x-1.5,c.y-1.5,c.w+3,c.h+3,3)}else rr(c.x,c.y,c.w,c.h,3)}
-if(flash>0){x.strokeStyle=C[l];x.lineWidth=2;const a=cellPos(l,0,0),b=cellPos(l,COLS-1,ROWS-1);x.globalAlpha=flash/HOLD;x.strokeRect(a.x-4,a.y-4,b.x+b.w-a.x+8,b.y+b.h-a.y+8);x.globalAlpha=1}}
+x.fillStyle=on?C[l]:'#E7F4EC';if(justOn){rr(c.x-1.5,c.y-1.5,c.w+3,c.h+3,2)}else rr(c.x,c.y,c.w,c.h,2)}
+if(flash>0){x.strokeStyle=C[l];x.lineWidth=1.5;const a=cellPos(l,0,0),b=cellPos(l,COLS-1,ROWS-1);x.globalAlpha=flash/HOLD;x.strokeRect(a.x-4,a.y-4,b.x+b.w-a.x+8,b.y+b.h-a.y+8);x.globalAlpha=1}}
 if(flash>0)flash--;
 for(let i=P.length-1;i>=0;i--){const p=P[i];
-if(p.x<lx-24){p.vy+=(Math.random()-0.5)*0.5;p.vy*=0.96;p.x+=p.vx;p.y+=p.vy;if(p.x>W*0.12)p.y+=(ly-p.y)*0.025;if(p.y<4||p.y>H-4)p.vy*=-1;
-x.fillStyle=G;x.save();x.translate(p.x,p.y);x.rotate(p.t+=0.05);
-if(p.shape==0)x.fillRect(-p.s,-p.s,p.s*2,p.s*2);else if(p.shape==1){x.beginPath();x.arc(0,0,p.s,0,7);x.fill()}else{x.beginPath();x.moveTo(0,-p.s*1.3);x.lineTo(p.s*1.2,p.s);x.lineTo(-p.s*1.2,p.s);x.fill()}
-x.restore()}
-else{p.x+=1.4;const ty=inLaneY(p.lane,p.x,lx,ax);p.y+=(ty-p.y)*0.15;x.fillStyle=C[p.lane];rr(p.x-3.5,p.y-2,7,4,2);if(p.x>ax)P.splice(i,1)}}
+if(p.x<lx-28){p.vy+=(Math.random()-0.5)*0.5;p.vy*=0.96;p.x+=p.vx;p.y+=p.vy;if(p.x>W*0.12)p.y+=(ly-p.y)*0.025;if(p.y<4||p.y>H-4)p.vy*=-1;
+x.fillStyle=G;tri(p.x,p.y,p.s,p.t+=0.04)}
+else{p.x+=1.4;const ty=inLaneY(p.lane,p.x,lx,ax);p.y+=(ty-p.y)*0.15;x.fillStyle=C[p.lane];tri(p.x,p.y,3.2,Math.PI/2);if(p.x>ax)P.splice(i,1)}}
 if(!reduce&&f%STEP==0&&hold==0){for(let l=0;l<3;l++)O.push({l,k:0})}
 for(let i=O.length-1;i>=0;i--){const o=O[i];o.k+=0.03;if(o.k>=1){O.splice(i,1);continue}
 const t=o.k,y1=ly,y2=outLaneY(o.l),cx=ax+(gx-ax)*0.5;
 const px=(1-t)**3*ax+3*(1-t)**2*t*cx+3*(1-t)*t*t*cx+t**3*(gx-4);
 const py=(1-t)**3*y1+3*(1-t)**2*t*y1+3*(1-t)*t*t*y2+t**3*y2;
-x.fillStyle=C[o.l];rr(px-4,py-2.5,8,5,2)}
+x.fillStyle=C[o.l];rr(px-4,py-2.5,8,5,1.5)}
 if(P.length<110&&f%3==0)spawn(1);
-const pr=Math.min(W,H)*0.03+Math.sin(f/12)*1.5;
-x.strokeStyle=INK+'44';x.lineWidth=1;x.beginPath();x.arc(ax,ly,pr+6+(f%60)/4,0,7);x.stroke();
-x.fillStyle=INK;rr(ax-pr,ly-pr,pr*2,pr*2,6);
-x.fillStyle=BG;x.font='500 '+Math.round(pr*1.1)+'px ui-sans-serif,system-ui,sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('B',ax,ly+0.5);
+const pr=Math.max(13,Math.min(W,H)*0.034);
+x.strokeStyle=MINT;x.lineWidth=1.2;x.globalAlpha=1-(f%60)/60;x.beginPath();x.arc(ax,ly,pr+4+(f%60)/3,0,7);x.stroke();x.globalAlpha=1;
+x.fillStyle=INK;rr(ax-pr,ly-pr,pr*2,pr*2,4);
+x.fillStyle=MINT;x.font="600 "+Math.round(pr*1.15)+"px 'Space Grotesk',sans-serif";x.textAlign='center';x.textBaseline='middle';x.fillText('B',ax,ly+1);
 if(!reduce)requestAnimationFrame(draw)}
 draw();
 })();
